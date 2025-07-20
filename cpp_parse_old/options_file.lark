@@ -1,0 +1,4 @@
+option: option_bool
+      | option_u8
+      | option_trick
+      | option_location

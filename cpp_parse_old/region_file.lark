@@ -1,0 +1,42 @@
+list{entry}: (entry ("," entry)*)?
+
+dungeon_func_call: "ctx->GetDungeon(Rando::" ident ")." ident "()"
+%extend value dungeon_func_call
+trick_func_call: "ctx->GetTrickOption(" ident ")"
+%extend value trick_func_call
+helper_call: "logic->" ident "("list{expr}")"
+%extend value helper_call
+event_check: "logic->" ident
+%extend value event_check
+logic_val_check: "GetInLogic(" ident ")"
+%extend value logic_val_check
+
+
+
+?lambda: "[]{return"expr";}"
+entrance: "Entrance(" ident ","lambda)" //ident is region id
+event: "EventAccess(&logic->" ident ","lambda")"
+location: "LOCATION(" ident ","expr")"
+
+//                          region id          pretty name   scene name     area ids?       day/night cycle     
+region_entry : "areaTable[" ident "] = Region("ESCAPED_STRING","ESCAPED_STRING","list{ident}"," ident ",""{"list{event}"},""{"list{location}"},""{"list{entrance}"});"
+?region_id: ident
+?region_name: ESCAPED_STRING
+?region_scene: ESCAPED_STRING
+?area_id: ident
+?day_night_cycle: ident
+
+region_set : (region_entry";")+
+
+region_init_func : "void " ident "(){" region_set+ "}"
+
+%import .cpp_ops
+%import ESCAPED_STRING
+%import WS
+%ignore WS
+%ignore /[\r\n\t]/
+%ignore /#include .*$/
+%ignore /#pragma .*$/
+%ignore /using .*;$/
+//%ignore /\/\/.*$/
+//%ignore /\/\*.*\*\//s

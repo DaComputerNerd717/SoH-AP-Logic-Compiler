@@ -1,0 +1,80 @@
+?expr : expr_tern
+
+?expr_tern  : ternary
+            | expr_or
+
+?expr_or    : or
+            | expr_and
+
+?expr_and   : and
+            | expr_eq
+
+?expr_eq    : eq
+            | ne
+            | expr_comp
+
+?expr_comp  : greater
+            | less
+            | le
+            | ge
+            | expr_shift
+
+?expr_shift : leftshift
+            | rightshift
+            | expr_pm
+
+?expr_pm    : add
+            | sub
+            | expr_md
+
+?expr_md    : mul
+            | div
+            | mod
+            | expr_not
+
+?expr_not   : not
+            | value
+
+?value  : "("expr")"
+        | bool
+        | int -> integer
+        | float -> number
+        | ESCAPED_STRING -> string
+
+?bool   : "true" -> true
+        | "false" -> false
+
+?int: /[+-]?\d+/ -> integer
+    | /0x[0-9A-F]+/ -> hex_num
+    | /0b[01]+/ -> bin_num
+
+?float: /[+-]?\d*\.\d+/ -> number
+
+//args: (arg(/, */arg)*)?
+//arg: expr("="expr)?
+
+?ident : /[A-Za-z_][A-Za-z0-9_-]*[A-Za-z0-9_]?/
+
+or  : expr_and("||" /expr_and)+ -> op_or
+and : expr_eq("&&"expr_eq)+ -> op_and
+not : "!"value -> op_not
+ne: expr_comp"!="expr_comp
+eq: expr_comp"=="expr_comp
+ge : expr_shift">="expr_shift
+le : expr_shift"<="expr_shift
+less: expr_shift"<"expr_shift
+greater: expr_shift">"expr_shift
+add: expr_md"+"expr_pm
+sub: expr_pm"-"expr_md
+mul: expr_not("\*"expr_not)+
+div: expr_md"\/"expr_not
+mod: expr_md"%"expr_not
+leftshift: expr_shift"<<"expr_pm
+rightshift: expr_shift">>"expr_pm
+ternary: expr_or"?"expr_or":"expr_or
+
+%import WS
+%ignore WS
+%ignore /\t/
+%ignore /\/\/.*$/
+%ignore /\/\*.*?\*\//s

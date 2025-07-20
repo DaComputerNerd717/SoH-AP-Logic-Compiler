@@ -1,0 +1,83 @@
+?expr_tern  : ternary
+            | expr_or
+
+?expr_or    : or
+            | expr_and
+
+?expr_and   : and
+            | expr_eq
+
+?expr_eq    : eq
+            | ne
+            | expr_comp
+
+?expr_comp  : greater
+            | less
+            | le
+            | ge
+            | expr_shift
+
+?expr_shift : leftshift
+            | rightshift
+            | expr_pm
+
+?expr_pm    : add
+            | sub
+            | expr_md
+
+?expr_md    : mul
+            | div
+            | mod
+            | expr_not
+
+?expr_not   : not
+            | value
+
+
+
+?value  : /options?\./keyword("."keyword)+ -> option
+        | /helpers?\./keyword"("args")" -> helper //helper.name(args)
+        | /args?\./keyword -> arg_access
+        | /logicvals?\./keyword -> logic_val
+        | ("canReachLocation"|"can_reach_location")"("ESCAPED_STRING")" -> location_check
+        | ("canReachEntrance"|"can_reach_entrance")"("ESCAPED_STRING")" -> entrance_check
+        | ("canReachRegion"|"can_reach_region")"("ESCAPED_STRING")" -> region_check
+        | ("hasItem"|"has_item")"("ESCAPED_STRING")" -> has_item
+        | ("countItem"|"count_item")"("ESCAPED_STRING")" -> count_item
+        | /events?\./keyword -> event
+        | "("expr_tern")"
+        | "true" -> true
+        | "false" -> false
+        | SIGNED_NUMBER -> number
+        | ESCAPED_STRING -> string
+        | "floor("expr_tern")" -> floor_op
+        | "ceil("expr_tern")" -> ceil_op
+
+args: (arg(/, ?/arg)*)?
+?arg: (keyword"=")?expr_tern
+
+keyword : /[A-Za-z_][A-Za-z0-9_-]*[A-Za-z0-9_]?/
+
+or  : expr_and((" or "|"||")expr_and)+ -> op_or
+and : expr_eq((" and "|"&&")expr_eq)+ -> op_and
+not : ("not "|"!")value -> op_not
+ne: expr_comp"!="expr_comp
+eq: expr_comp"==?"expr_comp
+ge : expr_shift">="expr_shift
+le : expr_shift"<="expr_shift
+less: expr_shift"<"expr_shift
+greater: expr_shift">"expr_shift
+add: expr_md("+"expr_md)+
+sub: expr_pm"-"expr_md
+mul: expr_not("*"expr_not)+
+div: expr_md"/"expr_not
+mod: expr_md"%"expr_not
+leftshift: expr_shift"<<"expr_pm
+rightshift: expr_shift">>"expr_pm
+ternary: expr_or"?"expr_or":"expr_or
+
+%import common.ESCAPED_STRING
+%import common.SIGNED_NUMBER
+%import common.WS
+%ignore WS
+%ignore /[\r\n\t]/

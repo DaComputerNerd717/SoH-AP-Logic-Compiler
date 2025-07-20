@@ -1,0 +1,24 @@
+//                              RG id                RG id again     English,         French,          German            ItemType  GetItem ID    Adv     LogicVal  Hint Key  Item ID  Object ID  Draw ID    Text ID      field   chest anim  category  ModIndex    progressive     price
+item_table_entry : "itemTable[" ident"]" "=" "Item(" ident"," "Text{"ESCAPED_STRING","ESCAPED_STRING","ESCAPED_STRING"}," ident "," text_id ","  bool, "," ident "," ident "," (ident "," ident "," ident "," text_id "," hex_num "," ident "," ident "," ident)? ("," bool "," int)? ");"
+?text_id : ident
+         | int
+
+draw_func : "itemTable[" ident "].setCustomDrawFunc(" ident ");"
+
+//All entries start with itemTable, so nonentries do not
+non_entry : /(?!itemTable).*/
+
+?line: entry
+     | non_entry
+     | draw_func
+
+file: line+
+
+%import .cpp_ops
+%import ESCAPED_STRING
+
+%import WS
+%ignore WS
+%ignore /#include .*$/
+%ignore /#pragma .*$/
+%ignore /using .*;$/

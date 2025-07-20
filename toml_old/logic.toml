@@ -1,0 +1,603 @@
+[items]
+
+[regions]
+	name = "Bottom Of The Well Entryway"
+	id = "RR_BOTTOM_OF_THE_WELL_ENTRYWAY"
+	[regions.events]
+
+	[regions.locations]
+
+	[regions.entrances."BotW_Vanilla_Perimeter"]
+		name = "Bottom of the Well Perimeter"
+		connected_to = "RR_BOTTOM_OF_THE_WELL_PERIMETER"
+		access_rule = '!isDungeonMQ("BOTTOM_OF_THE_WELL") and events.isChild and helpers.canPassEnemy("RE_BIG_SKULLTULA")' 
+	[regions.entrances.BotW_MQ_Perimeter]
+		name = "Bottom Of The Well MQ Perimeter"
+		connected_to = "RR_BOTTOM_OF_THE_WELL_PERIMETER"
+		access_rule = 'isDungeonMQ("BOTTOM_OF_THE_WELL") and events.isChild'
+[helpers.canKillEnemy]
+	args = ["enemy", 'distance="CLOSE"', "wallOrFloor=true", "quantity=1", "timer=false", "inWater=false"]
+	[helpers.canKillEnemy.definition]
+		switch = 'args.enemy'
+		[helpers.canKillEnemy.definition.cases]
+			RE_GOHMA_LARVA = 'helpers.canAttack()'
+			RE_MAD_SCRUB = 'helpers.canAttack()'
+			RE_DEKU_BABA = 'helpers.canAttack()'
+			RE_DODONGO = '''helpers.canUseSword() or helpers.canUse("RG_MEGATON_HAMMER") or (args.quantity <= 5 and helpers.canUse("RG_STICKS")) 
+							or helpers.hasExplosives() or helpers.canUse("RG_FAIRY_SLINGSHOT") or helpers.canUse("RG_FAIRY_BOW")'''
+			RE_LIZALFOS = 'helpers.canJumpslash() or helpers.hasExplosives() or helpers.canUse("RG_FAIRY_SLINGSHOT") or helpers.canUse("RG_FAIRY_BOW")'
+			RE_BLUE_BUBBLE = '''helpers.blastOrSmash() || helpers.canUse("RG_FAIRY_BOW") ||
+					((helpers.canJumpslashExceptHammer() || helpers.canUse("RG_FAIRY_SLINGSHOT")) &&
+						(helpers.canUse("RG_NUTS") || helpers.hookshotOrBoomerang() || helpers.canStandingShield()))'''
+			RE_DEAD_HAND = 'helpers.canUseSword() or (helpers.canUse("RG_STICKS") and options.enabled_tricks.RT_BOTW_CHILD_DEADHAND)'
+			RE_WITHERED_DEKU_BABA = 'helpers.canUseSword() or helpers.canUse("RG_BOOMERANG")'
+			RE_LIKELIKE = 'helpers.canDamage()'
+			RE_FLOORMASTER = 'helpers.canDamage()'
+			RE_IRON_KNUCKLE = 'helpers.canUseSword() or helpers.canUse("RG_MEGATON_HAMMER") or helpers.hasExplosives()'
+			RE_FLARE_DANCER = '''helpers.canUse("RG_MEGATON_HAMMER") or helpers.canUse("RG_HOOKSHOT") or (helpers.hasExplosives() and (helpers.canJumpslashExceptHammer() 
+					or helpers.canUse("RG_FAIRY_BOW" or helpers.canUse("RG_HOOKSHOT") or helpers.canUse("RG_BOOMERANG")))'''
+			RE_WOLFOS = '''helpers.canJumpslash() or helpers.canUse("RG_FAIRY_BOW") or helpers.canUse("RG_FAIRY_SLINGSHOT") or helpers.canUse("RG_BOMBCHU_5") or 
+					helpers.canUse("RG_DINS_FIRE") or (helpers.canUse("RG_BOMB_BAG") and (helpers.canUse("RG_NUTS") or helpers.canUse("RG_HOOKSHOT") or helpers.canUse("RG_BOOMERANG")'''
+			RE_WHITE_WOLFOS = '''helpers.canJumpslash() or helpers.canUse("RG_FAIRY_BOW") or helpers.canUse("RG_FAIRY_SLINGSHOT") or helpers.canUse("RG_BOMBCHU_5") or 
+					helpers.canUse("RG_DINS_FIRE") or (helpers.canUse("RG_BOMB_BAG") and (helpers.canUse("RG_NUTS") or helpers.canUse("RG_HOOKSHOT") or helpers.canUse("RG_BOOMERANG")'''
+			RE_WALLMASTER = '''helpers.canJumpslash() or helpers.canUse("RG_FAIRY_BOW") or helpers.canUse("RG_FAIRY_SLINGSHOT") or helpers.canUse("RG_BOMBCHU_5") or 
+					helpers.canUse("RG_DINS_FIRE") or (helpers.canUse("RG_BOMB_BAG") and (helpers.canUse("RG_NUTS") or helpers.canUse("RG_HOOKSHOT") or helpers.canUse("RG_BOOMERANG")'''
+			RE_GERUDO_WARRIOR = '''helpers.canJumpslash() or helpers.canUse("RG_FAIRY_BOW") or (options.enabled_tricks.RT_GF_WARRIOR_WITH_DIFFICULT_WEAPON and 
+					(helpers.canUse("RG_FAIRY_SLINGSHOT") or helpers.canUse("RG_BOMBCHU_5")))'''
+			RE_GIBDO = 'helpers.canJumpslash() or helpers.canUse("RG_DINS_FIRE")'
+			RE_REDEAD = 'helpers.canJumpslash() or helpers.canUse("RG_DINS_FIRE")'
+			RE_MEG = 'helpers.canUse("RG_FAIRY_BOW") or helpers.canUse("RG_HOOKSHOT") or helpers.hasExplosives()'
+			RE_ARMOS = '''helpers.blastOrSmash() or helpers.canUse("RG_MASTER_SWORD") or helpers.canUse("RG_BIGGORON_SWORD") or helpers.canUse("RG_STICKS") or 
+						helpers.canUse("RG_FAIRY_BOW") or ((helpers.canUse("RG_NUTS") or helpers.canUse("RG_HOOKSHOT") or helpers.canUse("RG_BOOMERANG")) and 
+						(helpers.canUse("RG_KOKIRI_SWORD") or helpers.canUse("RG_FAIRY_SLINGSHOT")))'''
+			RE_GREEN_BUBBLE = 'helpers.canJumpslash() or helpers.canUse("RG_FAIRY_BOW") or helpers.canUse("RG_FAIRY_SLINGSHOT") or helpers.hasExplosives()'
+			RE_DINOLFOS = 'helpers.canJumpslash() or helpers.hasExplosives() or helpers.canUse("RG_FAIRY_BOW") or (!args.timer and helpers.canUse("RG_BOMBCHU_5"))'
+			RE_TORCH_SLUG = 'helpers.canJumpslash() or helpers.hasExplosives() or helpers.canUse("RG_FAIRY_BOW")'
+			RE_FREEZARD = '''
+			helpers.canUse("RG_MASTER_SWORD") or helpers.canUse("RG_BIGGORON_SWORD") or helpers.canUse("RG_MEGATON_HAMMER") or helpers.canUse("RG_STICKS") or 
+			helpers.hasExplosives() or helpers.canUse("RG_HOOKSHOT") or helpers.canUse("RG_DINS_FIRE") or helpers.canUse("RG_FIRE_ARROWS") 
+			'''
+			RE_SHELL_BLADE = 'helpers.canJumpslash() or helpers.hasExplosives() or helpers.canUse("RG_HOOKSHOT") or helpers.canUse("RG_FAIRY_BOW") or helpers.canUse("RG_DINS_FIRE")'
+			RE_SPIKE = '''
+			helpers.canUse("RG_MASTER_SWORD") or helpers.canUse("RG_BIGGORON_SWORD") or helpers.canUse("RG_MEGATON_HAMMER") or helpers.canUse("RG_STICKS") or helpers.hasExplosives() or 
+			helpers.canUse("RG_HOOKSHOT") or helpers.canUse("RG_FAIRY_BOW") or helpers.canUse("RG_DINS_FIRE")
+			'''
+			RE_BIG_OCTO = 'helpers.canUse("RG_KOKIRI_SWORD") or helpers.canUse("RG_STICKS") or helpers.canUse("RG_MASTER_SWORD")'
+			RE_GOHMA = '''helpers.hasBossSoul("RG_GOHMA_SOUL") and helpers.canJumpslash() and (helpers.canUse("RG_NUTS") or helpers.canUse("RG_FAIRY_SLINGSHOT") or 
+					helpers.canUse("RG_FAIRY_BOW") or helpers.hookshotOrBoomerang())'''
+			RE_KING_DODONGO = 'helpers.hasBossSoul("RG_KING_DODONGO_SOUL") and helpers.canJumpslash() and (helpers.canUse("RG_BOMB_BAG") or hasItem("RG_GORONS_BRACELET")'
+			RE_BARINADE = 'helpers.hasBossSoul("RG_BARINADE_SOUL") and helpers.canUse("RG_BOOMERANG") and helpers.canJumpslashExceptHammer()'
+			RE_PHANTOM_GANON = '''helpers.HasBossSoul("RG_PHANTOM_GANON_SOUL") and helpers.canUseSword() and (helpers.canUse("RG_HOOKSHOT") or 
+					helpers.canUse("RG_FAIRY_BOW") or helpers.canUse("RG_FAIRY_SLINGSHOT")'''
+			RE_VOLVAGIA = 'helpers.hasBossSoul("RG_VOLVAGIA_SOUL") and helpers.canUse("RG_MEGATON_HAMMER")'
+			RE_MORPHA = 'helpers.hasBossSoul("RG_MORPHA_SOUL") and helpers.canUse("RG_HOOKSHOT") and (helpers.canUseSword() or helpers.canUse("RG_MEGATON_HAMMER"))'
+			RE_BONGO_BONGO = '''
+					helpers.hasBossSoul("RG_BONGO_BONGO_SOUL") and (helpers.canUse("RG_LENS_OF_TRUTH") or options.enabled_tricks.RT_LENS_BONGO) and 
+					helpers.canUseSword() and (helpers.canUse("RG_HOOKSHOT") or helpers.canUse("RG_FAIRY_BOW") or helpers.canUse("RG_FAIRY_SLINGSHOT") or 
+					options.enabled_tricks.RT_SHADOW_BONGO)
+			'''
+			RE_TWINROVA = 'helpers.hasBossSoul("RG_TWINROVA_SOUL") and helpers.canUse("RG_MIRROR_SHIELD") and (helpers.canUseSword() or helpers.canUse("RG_MEGATON_HAMMER"))'
+			RE_GANONDORF = 'helpers.hasBossSoul("RG_GANON_SOUL") and helpers.canUse("RG_LIGHT_ARROWS") and helpers.canUseSword()'
+			RE_GANON = 'helpers.hasBossSoul("RG_GANON_SOUL") and helpers.canUse("RG_MASTER_SWORD")'
+			RE_DARK_LINK = 'helpers.canJumpslash() or helpers.canUse("RG_FAIRY_BOW")'
+			RE_ANUBIS = 'helpers.hasFireSource()'
+			RE_BEAMOS = 'helpers.hasExplosives()'
+			RE_PURPLE_LEEVER = 'helpers.canUse("RG_MASTER_SWORD") or helpers.canUse("RG_BIGGORON_SWORD")'
+			RE_TENTACLE = 'helpers.canUse("RG_BOOMERANG")'
+			RE_BARI = '''helpers.hookshotOrBoomerang() or helpers.canUse("RG_FAIRY_BOW") or helpers.hasExplosives() or helpers.canUse("RG_MEGATON_HAMMER") or 
+					helpers.canUse("RG_STICKS") or helpers.canUse("RG_DINS_FIRE") or (helpers.takeDamage() and helpers.canUseSword())'''
+			RE_SHABOM = 'helpers.canUse("RG_BOOMERANG") or helpers.canUse("RG_NUTS") or helpers.canJumpslash() or helpers.canUse("RG_DINS_FIRE") or helpers.canUse("RG_ICE_ARROWS")'
+			RE_OCTOROK = '''helpers.canReflectNuts() or helpers.hookshotOrBoomerang() or helpers.canUse("RG_FAIRY_BOW") or helpers.canUse("RG_FAIRY_SLINGSHOT") or 
+					helpers.canUse("RG_BOMB_BAG") or (args.wallOrFloor and helpers.canUse("RG_BOMBCHU_5"))'''
+			[helpers.canKillEnemy.definition.cases.RE_GOLD_SKULLTULA]
+				switch = 'args.distance'
+				fallthrough = true
+				[[helpers.canKillEnemy.definition.cases.RE_GOLD_SKULLTULA.cases]]
+					case = "CLOSE"
+					value = 'helpers.canUse("RG_MEGATON_HAMMER)'
+				[[helpers.canKillEnemy.definition.cases.RE_GOLD_SKULLTULA.cases]]
+					case = "SHORT_JUMPSLASH"
+					value = 'helpers.canUse("RG_KOKIRI_SWORD")'
+				[[helpers.canKillEnemy.definition.cases.RE_GOLD_SKULLTULA.cases]]
+					case = "MASTER_SWORD_JUMPSLASH"
+					value = 'helpers.canUse("RG_MASTER_SWORD")'
+				[[helpers.canKillEnemy.definition.cases.RE_GOLD_SKULLTULA.cases]]
+					case = "LONG_JUMPSLASH"
+					value = 'helpers.canUse("RG_BIGGORON_SWORD") or helpers.canUse("RG_STICKS")'
+				[[helpers.canKillEnemy.definition.cases.RE_GOLD_SKULLTULA.cases]]
+					case = "BOMB_THROW"
+					value = 'helpers.canUse("RG_BOMB_BAG")'
+				[[helpers.canKillEnemy.definition.cases.RE_GOLD_SKULLTULA.cases]]
+					case = "BOOMERANG"
+					value = 'helpers.canUse("RG_BOOMERANG") or helpers.canUse("RG_DINS_FIRE")'
+				[[helpers.canKillEnemy.definition.cases.RE_GOLD_SKULLTULA.cases]]
+					case = "HOOKSHOT"
+					value = 'helpers.canUse("RG_HOOKSHOT")'
+				[[helpers.canKillEnemy.definition.cases.RE_GOLD_SKULLTULA.cases]]
+					case = "LONGSHOT"
+					value = 'helpers.canUse(RG_LONGSHOT") or (args.wallOrFloor and helpers.canUse("RG_BOMBCHU_5"))'
+				[[helpers.canKillEnemy.definition.cases.RE_GOLD_SKULLTULA.cases]]
+					case = "FAR"
+					value = 'helpers.canUse("RG_FAIRY_SLINGSHOT") or helpers.canUse("RG_FAIRY_BOW")'
+			[helpers.canKillEnemy.definition.cases.RE_BIG_SKULLTULA]
+				switch = 'args.distance'
+				fallthrough = true
+				[[helpers.canKillEnemy.definition.cases.RE_BIG_SKULLTULA.cases]]
+					case = "CLOSE"
+					value = 'helpers.canUse("RG_MEGATON_HAMMER)'
+				[[helpers.canKillEnemy.definition.cases.RE_BIG_SKULLTULA.cases]]
+					case = "SHORT_JUMPSLASH"
+					value = 'helpers.canUse("RG_KOKIRI_SWORD")'
+				[[helpers.canKillEnemy.definition.cases.RE_BIG_SKULLTULA.cases]]
+					case = "MASTER_SWORD_JUMPSLASH"
+					value = 'helpers.canUse("RG_MASTER_SWORD")'
+				[[helpers.canKillEnemy.definition.cases.RE_BIG_SKULLTULA.cases]]
+					case = "LONG_JUMPSLASH"
+					value = 'helpers.canUse("RG_BIGGORON_SWORD") or helpers.canUse("RG_STICKS")'
+				[[helpers.canKillEnemy.definition.cases.RE_BIG_SKULLTULA.cases]]
+					case = "BOMB_THROW"
+					value = 'helpers.canUse("RG_BOMB_BAG")'
+				[[helpers.canKillEnemy.definition.cases.RE_BIG_SKULLTULA.cases]]
+					case = "BOOMERANG"
+					value = 'helpers.canUse("RG_DINS_FIRE")'
+				[[helpers.canKillEnemy.definition.cases.RE_BIG_SKULLTULA.cases]]
+					case = "HOOKSHOT"
+					value = 'helpers.canUse("RG_HOOKSHOT") or (args.wallOrFloor and helpers.canUse("RG_BOMBCHU_5"))'
+				[[helpers.canKillEnemy.definition.cases.RE_BIG_SKULLTULA.cases]]
+					case = "LONGSHOT"
+					value = 'helpers.canUse(RG_LONGSHOT")'
+				[[helpers.canKillEnemy.definition.cases.RE_BIG_SKULLTULA.cases]]
+					case = "FAR"
+					value = 'helpers.canUse("RG_FAIRY_SLINGSHOT") or helpers.canUse("RG_FAIRY_BOW")'
+			[helpers.canKillEnemy.definition.cases.RE_KEESE]
+				switch = 'args.distance'
+				fallthrough = true
+				[[helpers.canKillEnemy.definition.cases.RE_KEESE.cases]]
+					case = "CLOSE" 
+				[[helpers.canKillEnemy.definition.cases.RE_KEESE.cases]]
+					case = "SHORT_JUMPSLASH"
+					value = 'helpers.canUse("RG_MEGATON_HAMMER") or helpers.canUse("RG_KOKIRI_SWORD")'
+				[[helpers.canKillEnemy.definition.cases.RE_KEESE.cases]]
+					case = "MASTER_SWORD_JUMPSLASH"
+					value = 'helpers.canUse("RG_MASTER_SWORD")'
+				[[helpers.canKillEnemy.definition.cases.RE_KEESE.cases]]
+					case = "LONG_JUMPSLASH"
+					value = 'helpers.canUse("RG_BIGGORON_SWORD") or helpers.canUse("RG_STICKS")'
+				[[helpers.canKillEnemy.definition.cases.RE_KEESE.cases]]
+					case = "BOMB_THROW"
+					value = '!args.inWater and helpers.canUse("RG_BOMB_BAG")'
+				[[helpers.canKillEnemy.definition.cases.RE_KEESE.cases]]
+					case = "BOOMERANG"
+					value = 'helpers.canUse("RG_BOOMERANG")'
+				[[helpers.canKillEnemy.definition.cases.RE_KEESE.cases]]
+					case = "HOOKSHOT"
+					value = 'helpers.canUse("RG_HOOKSHOT") or (args.wallOrFloor and helpers.canUse("RG_BOMBCHU_5")'
+				[[helpers.canKillEnemy.definition.cases.RE_KEESE.cases]]
+					case = "LONGSHOT"
+					value = 'helpers.canUse("RG_LONGSHOT")'
+				[[helpers.canKillEnemy.definition.cases.RE_KEESE.cases]]
+					case = "FAR"
+					value = 'helpers.canUse("RG_FAIRY_SLINGSHOT") or helpers.canUse("RG_FAIRY_BOW")'
+			[helpers.canKillEnemy.definition.cases.RE_FIRE_KEESE]
+				switch = 'args.distance'
+				fallthrough = true
+				[[helpers.canKillEnemy.definition.cases.RE_FIRE_KEESE.cases]]
+					case = "CLOSE"
+				[[helpers.canKillEnemy.definition.cases.RE_FIRE_KEESE.cases]]
+					case = "SHORT_JUMPSLASH"
+					value = 'helpers.canUse("RG_MEGATON_HAMMER") or helpers.canUse("RG_KOKIRI_SWORD")'
+				[[helpers.canKillEnemy.definition.cases.RE_FIRE_KEESE.cases]]
+					case = "MASTER_SWORD_JUMPSLASH"
+					value = 'helpers.canUse("RG_MASTER_SWORD")'
+				[[helpers.canKillEnemy.definition.cases.RE_FIRE_KEESE.cases]]
+					case = "LONG_JUMPSLASH"
+					value = 'helpers.canUse("RG_BIGGORON_SWORD") or helpers.canUse("RG_STICKS")'
+				[[helpers.canKillEnemy.definition.cases.RE_FIRE_KEESE.cases]]
+					case = "BOMB_THROW"
+					value = '!args.inWater and helpers.canUse("RG_BOMB_BAG")'
+				[[helpers.canKillEnemy.definition.cases.RE_FIRE_KEESE.cases]]
+					case = "BOOMERANG"
+					value = 'helpers.canUse("RG_BOOMERANG")'
+				[[helpers.canKillEnemy.definition.cases.RE_FIRE_KEESE.cases]]
+					case = "HOOKSHOT"
+					value = 'helpers.canUse("RG_HOOKSHOT") or (args.wallOrFloor and helpers.canUse("RG_BOMBCHU_5")'
+				[[helpers.canKillEnemy.definition.cases.RE_FIRE_KEESE.cases]]
+					case = "LONGSHOT"
+					value = 'helpers.canUse("RG_LONGSHOT")'
+				[[helpers.canKillEnemy.definition.cases.RE_FIRE_KEESE.cases]]
+					case = "FAR"
+					value = 'helpers.canUse("RG_FAIRY_SLINGSHOT") or helpers.canUse("RG_FAIRY_BOW")'
+			[helpers.canKillEnemy.definition.cases.RE_STALFOS]
+				switch = 'args.distance'
+				fallthrough = true
+				[[helpers.canKillEnemy.definition.cases.RE_STALFOS.cases]]
+					case = "CLOSE"
+				[[helpers.canKillEnemy.definition.cases.RE_STALFOS.cases]]
+					case = "SHORT_JUMPSLASH"
+					value = 'helpers.canUse("RG_MEGATON_HAMMER") or helpers.canUse("RG_KOKIRI_SWORD")'
+				[[helpers.canKillEnemy.definition.cases.RE_STALFOS.cases]]
+					case = "MASTER_SWORD_JUMPSLASH"
+					value = 'helpers.canUse("RG_MASTER_SWORD")'
+				[[helpers.canKillEnemy.definition.cases.RE_STALFOS.cases]]
+					case = "LONG_JUMPSLASH"
+					value = 'helpers.canUse("RG_BIGGORON_SWORD") or (args.quantity <= 1 and helpers.canUse("RG_STICKS"))'
+				[[helpers.canKillEnemy.definition.cases.RE_STALFOS.cases]]
+					case = "BOMB_THROW"
+					value = '(args.quantity <= 2 and !args.timer and !args.inWater and (helpers.canUse("RG_NUTS") or helpers.hookshotOrBoomerang()) and helpers.canUse("RG_BOMB_BAG")'
+				[[helpers.canKillEnemy.definition.cases.RE_STALFOS.cases]]
+					case = "BOOMERANG"
+				[[helpers.canKillEnemy.definition.cases.RE_STALFOS.cases]]
+					case = "HOOKSHOT"
+					value = '(args.wallOrFloor and helpers.canUse("RG_BOMBCHU_5")'
+				[[helpers.canKillEnemy.definition.cases.RE_STALFOS.cases]]
+					case = "LONGSHOT"
+				[[helpers.canKillEnemy.definition.cases.RE_STALFOS.cases]]
+					case = "FAR"
+					value = 'helpers.canUse("RG_FAIRY_BOW")'
+			[helpers.canKillEnemy.definition.cases.RE_STINGER]
+				switch = 'args.distance'
+				fallthrough = true
+				[[helpers.canKillEnemy.definition.cases.RE_STINGER.cases]]
+					case = "CLOSE"
+				[[helpers.canKillEnemy.definition.cases.RE_STINGER.cases]]
+					case = "SHORT_JUMPSLASH"
+					value = 'helpers.canUse("RG_MEGATON_HAMMER") or helpers.canUse("RG_KOKIRI_SWORD")'
+				[[helpers.canKillEnemy.definition.cases.RE_STINGER.cases]]
+					case = "MASTER_SWORD_JUMPSLASH"
+					value = 'helpers.canUse("RG_MASTER_SWORD")'
+				[[helpers.canKillEnemy.definition.cases.RE_STINGER.cases]]
+					case = "LONG_JUMPSLASH"
+					value = 'helpers.canUse("RG_BIGGORON_SWORD") or helpers.canUse("RG_STICKS")'
+				[[helpers.canKillEnemy.definition.cases.RE_STINGER.cases]]
+					case = "BOMB_THROW"
+					value = '!inWater and helpers.canUse("RG_BOMB_BAG")'
+				[[helpers.canKillEnemy.definition.cases.RE_STINGER.cases]]
+					case = "BOOMERANG"
+				[[helpers.canKillEnemy.definition.cases.RE_STINGER.cases]]
+					case = "HOOKSHOT"
+					value = 'helpers.canUse("RG_HOOKSHOT") or (args.wallOrFloor and helpers.canUse("RG_BOMBCHU_5"))'
+				[[helpers.canKillEnemy.definition.cases.RE_STINGER.cases]]
+					case = "LONGSHOT"
+					value = 'helpers.canUse("RG_LONGSHOT")'
+				[[helpers.canKillEnemy.definition.cases.RE_STINGER.cases]]
+					case = "FAR"
+					value = 'helpers.canUse("RG_FAIRY_SLINGSHOT") or helpers.canUse("RG_FAIRY_BOW")'
+[helpers.canPassEnemy]
+	args = ["enemy, distance, wallOrFloor"]
+	definition = 'helpers.canKillEnemy(args.enemy, args.distance, args.wallOrFloor) or helpers._canPassEnemy_switch(args.enemy, args.distance, args.wallOrFloor)'
+[helpers._canPassEnemy_switch] #Just here to simplify canPassEnemy
+	args = ["enemy", "distance", "wallOrFloor"]
+	[helpers._canPassEnemy_switch.definition]
+		switch = 'args.enemy'
+		[helpers._canPassEnemy_switch.definitions.cases]
+			RE_GOLD_SKULLTULA = true
+			RE_GOHMA_LARVA = true
+			RE_LIZALFOS = true
+			RE_DODONGO = true
+			RE_MAD_SCRUB = true
+			RE_KEESE = true
+			RE_FIRE_KEESE = true
+			RE_BLUE_BUBBLE = true
+			RE_DEAD_HAND = true
+			RE_DEKU_BABA = true
+			RE_WITHERED_DEKU_BABA = true
+			RE_STALFOS = true
+			RE_FLARE_DANCER = true
+			RE_WOLFOS = true
+			RE_WHITE_WOLFOS = true
+			RE_FLOORMASTER = true
+			RE_MEG = true
+			RE_ARMOS = true
+			RE_FREEZARD = true
+			RE_SPIKE = true
+			RE_DARK_LINK = true
+			RE_ANUBIS = true
+			RE_WALLMASTER = true
+			RE_PURPLE_LEEVER = true
+			RE_OCTOROK = true
+			RE_BIG_SKULLTULA = 'helpers.canUse("RG_NUTS") or helpers.canUse("RG_BOOMERANG")'
+			RE_LIKE_LIKE = 'helpers.canUse("RG_HOOKSHOT") or helpers.canUse("RG_BOOMERANG")'
+			RE_GIBDO = 'helpers.canUse("RG_HOOKSHOT") or helpers.canUse("RG_SUNS_SONG")'
+			RE_REDEAD = 'helpers.canUse("RG_HOOKSHOT") or helpers.canUse("RG_SUNS_SONG")'
+			RE_IRON_KNUCKLE = false
+			RE_BIG_OCTO = false
+			RE_GREEN_BUBBLE = 'helpers.takeDamage() or helpers.canUse("RG_NUTS") or helpers.canUse("RG_BOOMERANG") or helpers.canUse("RG_HOOKSHOT")'
+[helpers.canAvoidEnemy]
+	args = ["enemy", "grounded", "quantity"]
+	definition = 'helpers.canKillEnemy(args.enemy, "CLOSE", true, args.quantity) or helpers._canAvoidEnemy_switch(args.enemy, args.grounded, args.quantity)'
+[helpers._canAvoidEnemy_switch] #Simplifies canAvoidEnemy
+	args = ["enemy", "grounded", "quantity"]
+	[helpers._canAvoidEnemy_switch.definition]
+		switch = "args.enemy"
+		[helpers._canAvoidEnemy_switch.definition.cases]
+			RE_GOLD_SKULLTULA = true
+			RE_GOHMA_LARVA = true
+			RE_LIZALFOS = true
+			RE_DODONGO = true
+			RE_BIG_SKULLTULA = true
+			RE_DEAD_HAND = true
+			RE_DEKU_BABA = true
+			RE_WITHERED_DEKU_BABA = true
+			RE_LIKE_LIKE = true
+			RE_STALFOS = true
+			RE_IRON_KNUCKLE = true
+			RE_FLARE_DANCER = true
+			RE_WOLFOS = true
+			RE_WHITE_WOLFOS = true
+			RE_FLOORMASTER = true
+			RE_REDEAD = true
+			RE_MEG = true
+			RE_ARMOS = true
+			RE_GREEN_BUBBLE = true
+			RE_FREEZARD = true
+			RE_SHELL_BLADE = true
+			RE_SPIKE = true
+			RE_BIG_OCTO = true
+			RE_GIBDO = true
+			RE_DARK_LINK = true
+			RE_WALLMASTER = true
+			RE_ANUBIS = true
+			RE_PURPLE_LEEVER = true
+			RE_BEAMOS = '!args.grounded or helpers.canUse("RG_NUTS") or (quantity == 1 and (helpers.canUse("RG_FAIRY_BOW") or heelper.canUse("RG_FAIRY_SLINGSHOT"))'
+			RE_MAD_SCRUB = '!args.grounded or helpers.canUse("RG_NUTS")'
+			RE_KEESE = 'helpers.canUse("RG_NUTS")'
+			RE_FIRE_KEESE = 'helpers.canUse("RG_NUTS")'
+			RE_BLUE_BUBBLE = '!args.grounded or helpers.canUse("RG_NUTS") or helpers.hookshotOrBoomerang() or helpers.canStandingShield()'
+[helpers.canGetEnemyDrop]
+	args = ["enemy, distance, aboveLink"]
+	definition = 'helpers.canKillEnemy(args.enemy, args.distance) and helpers._canGetEnemyDrop_switch(args.enemy, args.disatnce. args.aboveLink)'
+[helpers._canGetEnemyDrop_switch] #Simplifies canGetEnemyDrop
+	args = ["enemy", "distance", "aboveLink"]
+	[helpers._canGetEnemyDrop_switch.definition]
+		switch = 'args.enemy'
+		fallthrough = true
+		[helpers._canGetEnemyDrop_switch.definition.cases]
+			RE_KEESE = true
+			RE_FIRE_KEESE = true
+			default = '''args.aboveLink or (
+				(args.distance == CLOSE or args.distance == SHORT_JUMPSLASH or args.distance == MASTER_SWORD_JUMPSLASH or args.distance == BOMB_THROW or args.distance == BOOMERANG)
+				and helpers.canUse("RG_BOOMERANG"))'''
+			[helpers._canGetEnemyDrop_switch.definition.cases.RE_GOLD_SKULLTULA]
+				switch = 'args.distance'
+				[helpers._canGetEnemyDrop_switch.definition.cases.RE_GOLD_SKULLTULA.cases]
+					CLOSE = false
+					SHORT_JUMPSLASH = false
+					MASTER_SWORD_JUMPSLASH = false
+					LONG_JUMPSLASH = false
+					BOMB_THROW = false
+					BOOMERANG = 'helpers.canUse("RG_BOOMERANG")'
+					HOOKSHOT = 'helpers.canUse("RG_HOOKSHOT")'
+					LONGSHOT = 'helpers.canUse("RG_LONGSHOT")'
+					FAR = false
+[helpers.canAttack]
+	definition = 'helpers.canDamage() or helpers.canUse("RG_BOOMERANG") or hellper.canUse("RG_HOOKSHOT")'
+[helpers.canUseSword]
+	definition = 'helpers.canUse("RG_KOKIRI_SWORD") or helpers.canUse("RG_MASTER_SWORD") or helpers.canUse("RG_BIGGORON_SWORD")'
+[helpers.canJumpslash]
+	definition = 'helpers.canJumpslashExceptHammer() or helpers.canUse("RG_MEGATON_HAMMER")'
+[helpers.canJumpslashExceptHammer]
+	definition = 'helpers.canUse("RG_STICKS") or helpers.canUseSword()'
+[helpers.hasExplosives]
+	definition = 'helpers.canUse("RG_BOMB_BAG") or helpers.canUse("RG_BOMBCHU_5")'
+[helpers.blastOrSmash]
+	definition = 'helpers.hasExplosives() or helpers.canUse("RG_MEGATON_HAMMER")'
+[helperes.hookshotOrBoomerang]
+	definition = 'helpers.canUse("RG_HOOKSHOT") or helpers.canUse("RG_BOOMERANG")'
+[helpers.canStandingShield]
+	definition = 'helpers.canUse("RG_MIRROR_SHIELD") or (events.isAdult and hasItem("RG_HYLIAN_SHIELD")) or helpers.canUse("RG_DEKU_SHIELD")'
+[helpers.canDamage]
+	definition = 'helpers.canUse("RG_FAIRY_SLINGSHOT") or helpers.canJumpslash() or helpers.hasExplosives() or helpers.canUse("RG_DINS_FIRE") or helpers.canUse("RG_FAIRY_BOW")'
+[helpers.takeDamage]
+	definition = 'helpers.canUse("RG_BOTTLE_WITH_FAIRY") or helpers.effectiveHealth() != 1 or helpers.canUse("RG_NAYRUS_LOVE")'
+[helpers.effectiveHealth]
+	definition = '''((helpers.hearts() << (2 + hasItem("RG_DOUBLE_DEFENSE"))) >> helpers._damageMultiplier) + ((helpers.hearts() << (2 + hasItem("RG_DOUBLE_DEFENSE")))
+	 % (1 << helpers._damageMultiplier()) > 0)'''
+[helpers.hearts]
+	definition = 'countItem("RG_HEART_CONTAINER") + (countItem("RG_PIECE_OF_HEART") / 4) + options.startingHearts'
+[helpers._damageMultiplier]
+	definition = '1' 	# '(options.damageMultiplier < 6) ? options.damageMultiplier : 10'
+[helpers.hasBossSoul]
+	args = ["soul"]
+	definition = 'options.shuffle_boss_souls == "option_off" or (args.soul == "RG_GANON_SOUL" and options.shuffle_ganon_soul != "option_with_ganon") or hasItem(args.soul)'
+[helpers.hasFireSource]
+	definition = 'helpers.canUse("RG_DINS_FIRE") or helpers.canUse("RG_FIRE_ARROWS")'
+#Shows an example of using part of an AST to combine a switch into a structure
+[helpers.canUse]
+	args = ["item"]
+	#hasItem and whichever switch case; this avoids needing a second helper to implement the switch block
+	[helpers.canUse.definition]
+		op = "and"
+		[[helpers.canUse.definition.operands]]
+			#invoke hasItem
+			op = 'has_item'
+			operands = ['args.item']
+			fallthrough = true
+		[[helpers.canUse.definition.operands]]
+			switch = 'args.item'
+			fallthrough = true
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_MAGIC_SINGLE"
+				value = 'event.AmmoCanDrop or (helpers.hasBottle() and logicval.LOGIC_BUY_MAGIC_POTION)'
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_DINS_FIRE"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_FARORES_WIND"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_NAYRUS_LOVE"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_LENS_OF_TRUTH"
+				value = 'helpers.canUse("RG_MAGIC_SINGLE")'
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_FIRE_ARROWS"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_ICE_ARROWS"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_LIGHT_ARROWS"
+				value = 'helpers.canUse("RG_MAGIC_SINGLE") && helpers.canUse("RG_FAIRY_BOW")'
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_FAIRY_BOW"
+				value = 'events.isAdult && (events.AmmoCanDrop || logicval.LOGIC_BUY_ARROW)' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_MEGATON_HAMMER"
+				value = 'events.isAdult' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_IRON_BOOTS"
+				value = 'events.isAdult' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_HOVER_BOOTS"
+				value = 'events.isAdult' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_HOOKSHOT"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_LONGSHOT"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_SCARECROW"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_DISTANT_SCARECROW"
+				value = 'events.isAdult' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_GORON_TUNIC"
+				value = 'events.isAdult' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_ZORA_TUNIC"
+				value = 'events.isAdult' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_MIRROR_SHIELD"
+				value = 'events.isAdult' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_MASTER_SWORD"
+				value = 'events.isAdult' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_BIGGORON_SWORD"
+				value = 'events.isAdult' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_SILVER_GAUNTLETS"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_GOLDEN_GAUNTLETS"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_POCKET_EGG"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_COJIRO"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_ODD_MUSHROOM"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_ODD_POTION"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_POACHERS_SAW"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_BROKEN_SWORD"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_PRESCRIPTION"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_EYEBALL_FROG"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_EYEDROPS"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_CLAIM_CHECK"
+				value = 'events.isAdult'
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_FAIRY_SLINGSHOT"
+				value = 'events.isChild && (AmmoCanDrop || GetInLogic(LOGIC_BUY_SEED))' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_BOOMERANG"
+				value = 'events.isChild' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_KOKIRI_SWORD"
+				value = 'events.isChild' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_NUTS"
+				value = '(NutPot || NutCrate || DekuBabaNuts) && AmmoCanDrop' 				
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_STICKS"
+				value = 'events.isChild && (StickPot || DekuBabaSticks)'
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_DEKU_SHIELD"
+				value = 'events.isChild' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_PROGRESSIVE_BOMB_BAG"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_BOMB_BAG"
+				value = 'AmmoCanDrop || GetInLogic(LOGIC_BUY_BOMB)'
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_PROGRESSIVE_BOMBCHUS"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_BOMBCHU_5"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_BOMBCHU_10"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_BOMBCHU_20"
+				value = 'BombchuRefill() && BombchusEnabled()'
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_WEIRD_EGG"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_RUTOS_LETTER"
+				value = 'events.isChild'
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_MAGIC_BEAN"
+				value = 'events.isChild'
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_ZELDAS_LULLABY"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_EPONAS_SONG"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_PRELUDE_OF_LIGHT"
+				value = '''HasItem(RG_FAIRY_OCARINA) && HasItem(RG_OCARINA_C_LEFT_BUTTON) &&
+						HasItem(RG_OCARINA_C_RIGHT_BUTTON) && HasItem(RG_OCARINA_C_UP_BUTTON)'''
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_SARIAS_SONG"
+				value = '''HasItem(RG_FAIRY_OCARINA) && HasItem(RG_OCARINA_C_LEFT_BUTTON) &&
+						HasItem(RG_OCARINA_C_RIGHT_BUTTON) && HasItem(RG_OCARINA_C_DOWN_BUTTON)'''
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_SUNS_SONG"
+				value = '''HasItem(RG_FAIRY_OCARINA) && HasItem(RG_OCARINA_C_RIGHT_BUTTON) && HasItem(RG_OCARINA_C_UP_BUTTON) &&
+						HasItem(RG_OCARINA_C_DOWN_BUTTON)'''
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_SONG_OF_TIME"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_BOLERO_OF_FIRE"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_REQUIEM_OF_SPIRIT"
+				value = '''HasItem(RG_FAIRY_OCARINA) && HasItem(RG_OCARINA_A_BUTTON) && HasItem(RG_OCARINA_C_RIGHT_BUTTON) &&
+						HasItem(RG_OCARINA_C_DOWN_BUTTON)'''
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_SONG_OF_STORMS"
+				value = '''HasItem(RG_FAIRY_OCARINA) && HasItem(RG_OCARINA_A_BUTTON) && HasItem(RG_OCARINA_C_UP_BUTTON) &&
+						HasItem(RG_OCARINA_C_DOWN_BUTTON)'''
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_MINUET_OF_FOREST"
+				value = '''HasItem(RG_FAIRY_OCARINA) && HasItem(RG_OCARINA_A_BUTTON) && HasItem(RG_OCARINA_C_LEFT_BUTTON) &&
+						HasItem(RG_OCARINA_C_RIGHT_BUTTON) && HasItem(RG_OCARINA_C_UP_BUTTON)'''
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_SERENADE_OF_WATER"
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_NOCTURNE_OF_SHADOW"
+				value = '''HasItem(RG_FAIRY_OCARINA) && HasItem(RG_OCARINA_A_BUTTON) && HasItem(RG_OCARINA_C_LEFT_BUTTON) &&
+						HasItem(RG_OCARINA_C_RIGHT_BUTTON) && HasItem(RG_OCARINA_C_DOWN_BUTTON)'''
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_FISHING_POLE"
+				value = 'HasItem(RG_CHILD_WALLET)' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_EPONA"
+				value = 'events.isAdult && CanUse(RG_EPONAS_SONG)'
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_BOTTLE_WITH_BUGS"
+				value = 'BugShrub || WanderingBugs || BugRock || GetInLogic(LOGIC_BUGS_ACCESS)'
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_BOTTLE_WITH_FISH"
+				value = '''LoneFish || FishGroup ||
+						GetInLogic(LOGIC_FISH_ACCESS)''' 
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_BOTTLE_WITH_BLUE_FIRE"            
+				value = 'BlueFireAccess || GetInLogic(LOGIC_BLUE_FIRE_ACCESS)'
+			[[helpers.canUse.definition.operands.cases]]
+				case = "RG_BOTTLE_WITH_FAIRY"
+				value = '''FairyPot || GossipStoneFairy || BeanPlantFairy || ButterflyFairy || FreeFairies || FairyPond ||
+						GetInLogic(LOGIC_FAIRY_ACCESS)'''
+
+
+[helper.hasBottle]
+
+
+#TODO add to list of base functions:
+# isDungeonMQ
+# GetInLogic and the LogicVal system

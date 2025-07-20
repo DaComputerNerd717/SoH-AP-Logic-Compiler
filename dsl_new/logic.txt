@@ -1,0 +1,830 @@
+logic: {
+    region RR_BOTTOM_OF_THE_WELL_ENTRYWAY: {
+        name: "Bottom of the Well Entryway"
+        entrance BOTW_PERIMETER_ENTRANCE_VANILLA: {
+            destination_id: RR_BOTTOM_OF_THE_WELL_PERIMETER
+            rule: helper.canPassEnemy("Enemy:BIG_SKULLTULA", args.age)
+            present_when: !isDungeonMQ(BOTTOM_OF_THE_WELL) //access rule will incorporate this
+            adult_cant_cross //the access rule should incorporate this, perhaps, but this is a complex condition for access
+        }
+        entrance: BOTW_PERIMETER_ENTRANCE_MQ{ //access rule assumed to be true by default
+            destination_id: RR_BOTTOM_OF_THE_WELL_MQ_PERIMETER
+            present_when: isDungeonMQ(BOTTOM_OF_THE_WELL)
+            adult_cant_cross
+        }
+        entrance BOTW_EXIT_KAK_WELL: {
+            destination_id: RR_KAK_WELL
+        }
+    }
+    region RR_BOTTOM_OF_THE_WELL_PERIMETER: {
+
+    }
+    helper canPassEnemy(enemy, distance = EnemyDistance:CLOSE, wallOrFloor = true, age=Age:EITHER): {
+        helper.canKillEnemy(args.enemy, args.distance, args.wallOrFloor, args.age) ||
+        switch args.enemy fallthrough{
+            case Enemy:GOLD_SKULLTULA:
+            case Enemy:GOHMA_LARVA:
+            case Enemy:LIZALFOS:
+            case Enemy:DODONGO: // RANDOTODO do dodongos block the way in tight corridors?
+            case Enemy:MAD_SCRUB:
+            case Enemy:KEESE:
+            case Enemy:FIRE_KEESE:
+            case Enemy:BLUE_BUBBLE:
+            case Enemy:DEAD_HAND:
+            case Enemy:DEKU_BABA:
+            case Enemy:WITHERED_DEKU_BABA:
+            case Enemy:STALFOS:
+            case Enemy:FLARE_DANCER:
+            case Enemy:WOLFOS:
+            case Enemy:WHITE_WOLFOS:
+            case Enemy:FLOORMASTER:
+            case Enemy:MEG:
+            case Enemy:ARMOS:
+            case Enemy:FREEZARD:
+            case Enemy:SPIKE:
+            case Enemy:DARK_LINK:
+            case Enemy:ANUBIS:
+            case Enemy:WALLMASTER:
+            case Enemy:PURPLE_LEEVER:
+            case Enemy:OCTOROK:
+                true
+            case Enemy:BIG_SKULLTULA:
+                // hammer jumpslash can pass, but only on flat land where you can kill with hammer swing
+                helper.canUse(RG_NUTS, args.age) || helper.canUse(RG_BOOMERANG, args.age)
+            case Enemy:LIKE_LIKE:
+                helper.canUse(RG_HOOKSHOT, args.age) || helper.canUse(RG_BOOMERANG, args.age)
+            case Enemy:GIBDO:
+            case Enemy:REDEAD:
+                // we need a way to check if suns won't force a reload
+                helper.canUse(RG_HOOKSHOT, args.age) || helper.canUse(RG_SUNS_SONG, args.age)
+            case Enemy:IRON_KNUCKLE:
+            case Enemy:BIG_OCTO:
+                false
+            case Enemy:GREEN_BUBBLE:
+                helper.takeDamage(args.age) || helper.canUse(RG_NUTS, args.age) || helper.canUse(RG_BOOMERANG, args.age) || helper.canUse(RG_HOOKSHOT, args.age)
+            default:
+                false //shouldn't happen
+        }
+    }
+    helper canKillEnemy(enemy, distance = EnemyDistance:CLOSE, wallOrFloor = true, quantity = 1, timer = false, inWater = false, age=Age:EITHER): {
+        switch args.enemy fallthrough {
+            case Enemy:GOLD_SKULLTULA:
+                switch args.distance fallthrough yields true {
+                    case EnemyDistance:CLOSE:                   helper.canUse(RG_MEGATON_HAMMER, args.age)
+                    case EnemyDistance:SHORT_JUMPSLASH:         helper.canUse(RG_KOKIRI_SWORD, args.age)
+                    case EnemyDistance:MASTER_SWORD_JUMPSLASH:  helper.canUse(RG_MASTER_SWORD, args.age)
+                    case EnemyDistance:LONG_JUMPSLASH:          helper.canUse(RG_BIGGORON_SWORD, args.age) || helper.canUse(RG_STICKS, args.age)
+                    case EnemyDistance:BOMB_THROW:              helper.canUse(RG_BOMB_BAG, args.age)
+                    case EnemyDistance:BOOMERANG:               helper.canUse(RG_BOOMERANG, args.age) || helper.canUse(RG_DINS_FIRE, args.age)
+                    case EnemyDistance:HOOKSHOT:                helper.canUse(RG_HOOKSHOT, args.age)
+                    case EnemyDistance:LONGSHOT:                helper.canUse(RG_LONGSHOT, args.age)
+                    case EnemyDistance:FAR:                     helper.canUse(RG_FAIRY_SLINGSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age)
+                }
+            case Enemy:GOHMA_LARVA:
+            case Enemy:MAD_SCRUB:
+            case Enemy:DEKU_BABA:
+                helper.canAttack(args.age)
+            case Enemy:BIG_SKULLTULA:
+                switch args.distance fallthrough yields true {
+                    case EnemyDistance:CLOSE:
+                        // hammer jumpslash cannot damage these, but hammer swing can
+                        helper.canUse(RG_MEGATON_HAMMER, args.age)
+                    case EnemyDistance:SHORT_JUMPSLASH:
+                        helper.canUse(RG_KOKIRI_SWORD, args.age)
+                    case EnemyDistance:MASTER_SWORD_JUMPSLASH:
+                        helper.canUse(RG_MASTER_SWORD, args.age)
+                    case EnemyDistance:LONG_JUMPSLASH:
+                        helper.canUse(RG_BIGGORON_SWORD, args.age) || helper.canUse(RG_STICKS, args.age)
+                    case EnemyDistance:BOMB_THROW:
+                        helper.canUse(RG_BOMB_BAG, args.age)
+                    case EnemyDistance:BOOMERANG:
+                        // RANDOTODO test dins and chu range in a practical example
+                        helper.canUse(RG_DINS_FIRE, args.age)
+                    case EnemyDistance:HOOKSHOT:
+                        // RANDOTODO test dins and chu range in a practical example
+                        helper.canUse(RG_HOOKSHOT, args.age) || (args.wallOrFloor && helper.canUse(RG_BOMBCHU_5, args.age))
+                    case EnemyDistance:LONGSHOT:
+                        helper.canUse(RG_LONGSHOT, args.age)
+                    case EnemyDistance:FAR:
+                        helper.canUse(RG_FAIRY_SLINGSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age)
+                }
+            case Enemy:DODONGO:
+                helper.canUseSword(args.age) || helper.canUse(RG_MEGATON_HAMMER, args.age) || (args.quantity <= 5 && helper.canUse(RG_STICKS, args.age)) ||
+                    helper.hasExplosives(args.age) || helper.canUse(RG_FAIRY_SLINGSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age)
+            case Enemy:LIZALFOS:
+                helper.canJumpslash(args.age) || helper.hasExplosives(args.age) || helper.canUse(RG_FAIRY_SLINGSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age)
+            case Enemy:KEESE:
+            case Enemy:FIRE_KEESE:
+                switch distance fallthrough yields true{
+                    case EnemyDistance:CLOSE:
+                    case EnemyDistance:SHORT_JUMPSLASH:
+                        helper.canUse(RG_MEGATON_HAMMER, args.age) || helper.canUse(RG_KOKIRI_SWORD, args.age)
+                    case EnemyDistance:MASTER_SWORD_JUMPSLASH:
+                        helper.canUse(RG_MASTER_SWORD, args.age)
+                    case EnemyDistance:LONG_JUMPSLASH:
+                        helper.canUse(RG_BIGGORON_SWORD, args.age) || helper.canUse(RG_STICKS, args.age)
+                    case EnemyDistance:BOMB_THROW:
+                        // RANDOTODO test dins and chu range in a practical example
+                        !args.inWater && helper.canUse(RG_BOMB_BAG, args.age)
+                    case EnemyDistance:BOOMERANG:
+                        // RANDOTODO test dins and chu range in a practical example
+                        helper.canUse(RG_BOOMERANG, args.age)
+                    case EnemyDistance:HOOKSHOT:
+                        // RANDOTODO test dins, bomb and chu range in a practical example
+                        helper.canUse(RG_HOOKSHOT, args.age) || (wallOrFloor && helper.canUse(RG_BOMBCHU_5, args.age))
+                    case EnemyDistance:LONGSHOT:
+                        helper.canUse(RG_LONGSHOT, args.age)
+                    case EnemyDistance:FAR:
+                        helper.canUse(RG_FAIRY_SLINGSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age)
+                }
+            case Enemy:BLUE_BUBBLE:
+                // RANDOTODO Trick to use shield hylian shield as child to stun these guys
+                // RANDOTODO check hammer damage
+                helper.blastOrSmash(args.age) || helper.canUse(RG_FAIRY_BOW, args.age) ||
+                    ((helper.canJumpslashExceptHammer(args.age) || helper.canUse(RG_FAIRY_SLINGSHOT, args.age)) &&
+                        (helper.canUse(RG_NUTS, args.age) || helper.hookshotOrBoomerang(args.age) || helper.canStandingShield(args.age)))
+            case Enemy:DEAD_HAND:
+                // RANDOTODO change Dead Hand trick to be sticks Dead Hand
+                helper.canUseSword(args.age) || (helper.canUse(RG_STICKS, args.age) && options.RT_BOTW_CHILD_DEADHAND)
+            case Enemy:WITHERED_DEKU_BABA:
+                helper.canUseSword(args.age) || helper.canUse(RG_BOOMERANG, args.age)
+            case Enemy:LIKE_LIKE:
+            case Enemy:FLOORMASTER:
+                helper.canDamage(args.age)
+            case Enemy:STALFOS:
+                // RANDOTODO Add trick to kill stalfos with sticks, and a second one for bombs without stunning. Higher ammo
+                // logic for bombs is also plausible
+                switch args.distance fallthrough yields true {
+                    case EnemyDistance:CLOSE:
+                    case EnemyDistance:SHORT_JUMPSLASH:
+                        helper.canUse(RG_MEGATON_HAMMER, args.age) || helper.canUse(RG_KOKIRI_SWORD, args.age)
+                    case EnemyDistance:MASTER_SWORD_JUMPSLASH:
+                        helper.canUse(RG_MASTER_SWORD, args.age)
+                    case EnemyDistance:LONG_JUMPSLASH:
+                        helper.canUse(RG_BIGGORON_SWORD, args.age) || (args.quantity <= 1 && helper.canUse(RG_STICKS, args.age))
+                    case EnemyDistance:BOMB_THROW:
+                        args.quantity <= 2 && !args.timer && !args.inWater &&
+                                            (helper.canUse(RG_NUTS, args.age) || helper.hookshotOrBoomerang(args.age)) && helper.canUse(RG_BOMB_BAG, args.age)
+                    case EnemyDistance:BOOMERANG:
+                    case EnemyDistance:HOOKSHOT:
+                        // RANDOTODO test dins and chu range in a practical example
+                        args.wallOrFloor && helper.canUse(RG_BOMBCHU_5, args.age)
+                    case EnemyDistance:LONGSHOT:
+                    case EnemyDistance:FAR:
+                        helper.canUse(RG_FAIRY_BOW, args.age)
+                }
+            // Needs 16 bombs, but is in default logic in N64, probably because getting the hits is quite easy.
+            // bow and sling can wake them and damage after they shed their armour, so could reduce ammo requirements for
+            // explosives to 10. requires 8 sticks to kill so would be a trick unless we apply higher stick bag logic
+            case Enemy:IRON_KNUCKLE:
+                helper.canUseSword(args.age) || helper.canUse(RG_MEGATON_HAMMER, args.age) || helper.hasExplosives(args.age)
+            // To stun flare dancer with chus, you have to hit the flame under it while it is spinning. It should eventually
+            // return to spinning after dashing for a while if you miss the window it is possible to damage the core with
+            // explosives, but difficult to get all 4 hits in even with chus, and if it reconstructs the core heals, so it
+            // would be a trick. the core takes damage from hookshot even if it doesn't show Dins killing isn't hard, but is
+            // obscure and tight on single magic, so is a trick
+            case Enemy:FLARE_DANCER:
+                helper.canUse(RG_MEGATON_HAMMER, args.age) || helper.canUse(RG_HOOKSHOT, args.age) ||
+                    (helper.hasExplosives(args.age) && (helper.canJumpslashExceptHammer(args.age) || helper.canUse(RG_FAIRY_BOW, args.age) ||
+                                            helper.canUse(RG_FAIRY_SLINGSHOT, args.age) || helper.canUse(RG_BOOMERANG, args.age)))
+            case Enemy:WOLFOS:
+            case Enemy:WHITE_WOLFOS:
+            case Enemy:WALLMASTER:
+                helper.canJumpslash(args.age) || helper.canUse(RG_FAIRY_BOW, args.age) || helper.canUse(RG_FAIRY_SLINGSHOT, args.age) || helper.canUse(RG_BOMBCHU_5, args.age) ||
+                    helper.canUse(RG_DINS_FIRE, args.age) ||
+                    (helper.canUse(RG_BOMB_BAG, args.age) && (helper.canUse(RG_NUTS, args.age) || helper.canUse(RG_HOOKSHOT, args.age) || helper.canUse(RG_BOOMERANG, args.age)))
+            case Enemy:GERUDO_WARRIOR:
+                helper.canJumpslash(args.age) || helper.canUse(RG_FAIRY_BOW, args.age) ||
+                    (options.RT_GF_WARRIOR_WITH_DIFFICULT_WEAPON &&
+                        (helper.canUse(RG_FAIRY_SLINGSHOT, args.age) || helper.canUse(RG_BOMBCHU_5, args.age)))
+            case Enemy:GIBDO:
+            case Enemy:REDEAD:
+                helper.canJumpslash(args.age) || helper.canUse(RG_DINS_FIRE, args.age)
+            case Enemy:MEG:
+                helper.canUse(RG_FAIRY_BOW, args.age) || helper.canUse(RG_HOOKSHOT, args.age) || helper.hasExplosives(args.age)
+            case Enemy:ARMOS:
+                helper.blastOrSmash(args.age) || helper.canUse(RG_MASTER_SWORD, args.age) || helper.canUse(RG_BIGGORON_SWORD, args.age) || helper.canUse(RG_STICKS, args.age) ||
+                    helper.canUse(RG_FAIRY_BOW, args.age) || ((helper.canUse(RG_NUTS, args.age) || helper.canUse(RG_HOOKSHOT, args.age) || helper.canUse(RG_BOOMERANG, args.age)) &&
+                        (helper.canUse(RG_KOKIRI_SWORD, args.age) || helper.canUse(RG_FAIRY_SLINGSHOT, args.age)))
+            case Enemy:GREEN_BUBBLE:
+                // does not technically need to be stunned to kill with dins, but the flame must be off and timing it is
+                // awkward Also they don't trigger the kill room in ganons MQ if they die from dins? Vanilla bug?
+                helper.canJumpslash(args.age) || helper.canUse(RG_FAIRY_BOW, args.age) || helper.canUse(RG_FAIRY_SLINGSHOT, args.age) ||
+                    helper.hasExplosives(args.age) /* || (helper.canUse(RG_DINS_FIRE, args.age) && (helper.canUse(RG_NUTS, args.age) || helper.canUse(RG_HOOKSHOT, args.age) ||
+                                        helper.canUse(RG_BOOMERANG, args.age)))*/
+                    
+            case Enemy:DINOLFOS:
+                // stunning + bombs is possible but painful, as it loves to dodge the bombs and hookshot. it also dodges
+                // chus but if you cook it so it detonates under the dodge it usually gets caught on landing
+                helper.canJumpslash(args.age) || helper.canUse(RG_FAIRY_BOW, args.age) || helper.canUse(RG_FAIRY_SLINGSHOT, args.age) ||
+                    (!args.timer && helper.canUse(RG_BOMBCHU_5, args.age))
+            case Enemy:TORCH_SLUG:
+                helper.canJumpslash(args.age) || helper.hasExplosives(args.age) || helper.canUse(RG_FAIRY_BOW, args.age)
+            case Enemy:FREEZARD:
+                canUse(RG_MASTER_SWORD) || helper.canUse(RG_BIGGORON_SWORD, args.age) || helper.canUse(RG_MEGATON_HAMMER, args.age) ||
+                    helper.canUse(RG_STICKS, args.age) || helper.hasExplosives(args.age) || helper.canUse(RG_HOOKSHOT, args.age) || helper.canUse(RG_DINS_FIRE, args.age) ||
+                    helper.canUse(RG_FIRE_ARROWS, args.age)
+            case Enemy:SHELL_BLADE:
+                helper.canJumpslash(args.age) || helper.hasExplosives(args.age) || helper.canUse(RG_HOOKSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age) ||
+                    helper.canUse(RG_DINS_FIRE, args.age)
+            case Enemy:SPIKE:
+                helper.canUse(RG_MASTER_SWORD, args.age) || helper.canUse(RG_BIGGORON_SWORD, args.age) || helper.canUse(RG_MEGATON_HAMMER, args.age) ||
+                    helper.canUse(RG_STICKS, args.age) || helper.hasExplosives(args.age) || helper.canUse(RG_HOOKSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age) ||
+                    helper.canUse(RG_DINS_FIRE, args.age)
+            case Enemy:STINGER:
+                switch distance fallthrough yields true {
+                    case EnemyDistance:CLOSE:
+                    case EnemyDistance:SHORT_JUMPSLASH:
+                        helper.canUse(RG_MEGATON_HAMMER, args.age) || helper.canUse(RG_KOKIRI_SWORD, args.age)
+                    case EnemyDistance:MASTER_SWORD_JUMPSLASH:
+                        helper.canUse(RG_MASTER_SWORD, args.age)
+                    case EnemyDistance:LONG_JUMPSLASH:
+                        helper.canUse(RG_BIGGORON_SWORD, args.age) || helper.canUse(RG_STICKS, args.age)
+                    case EnemyDistance:BOMB_THROW:
+                        // RANDOTODO test dins and chu range in a practical example
+                        !args.inWater && helper.canUse(RG_BOMB_BAG, args.age)
+                    case EnemyDistance:BOOMERANG:
+                    case EnemyDistance:HOOKSHOT:
+                        // RANDOTODO test dins, bomb and chu range in a practical example
+                        helper.canUse(RG_HOOKSHOT, args.age) || (args.wallOrFloor && helper.canUse(RG_BOMBCHU_5, args.age))
+                    case EnemyDistance:LONGSHOT:
+                        helper.canUse(RG_LONGSHOT, args.age)
+                    case EnemyDistance:FAR:
+                        helper.canUse(RG_FAIRY_SLINGSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age)
+                }
+            case Enemy:BIG_OCTO:
+                // If chasing octo is annoying but with rolls you can catch him, and you need rang to get into this room
+                // without shenanigans anyway. Bunny makes it free
+                helper.canUse(RG_KOKIRI_SWORD, args.age) || helper.canUse(RG_STICKS, args.age) || helper.canUse(RG_MASTER_SWORD, args.age)
+            case Enemy:GOHMA:
+                helper.hasBossSoul(RG_GOHMA_SOUL, args.age) && helper.canJumpslash(args.age) &&
+                    (helper.canUse(RG_NUTS, args.age) || helper.canUse(RG_FAIRY_SLINGSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age) || helper.hookshotOrBoomerang(args.age))
+            case Enemy:KING_DODONGO:
+                helper.hasBossSoul(RG_KING_DODONGO_SOUL, args.age) && helper.canJumpslash(args.age) &&
+                    (helper.canUse(RG_BOMB_BAG, args.age) || HasItem(RG_GORONS_BRACELET))
+            case Enemy:BARINADE:
+                helper.hasBossSoul(RG_BARINADE_SOUL, args.age) && helper.canUse(RG_BOOMERANG, args.age) && helper.canJumpslashExceptHammer(args.age)
+            case Enemy:PHANTOM_GANON:
+                helper.hasBossSoul(RG_PHANTOM_GANON_SOUL, args.age) && helper.canUseSword(args.age) &&
+                    (helper.canUse(RG_HOOKSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age) || helper.canUse(RG_FAIRY_SLINGSHOT, args.age))
+            case Enemy:VOLVAGIA:
+                helper.hasBossSoul(RG_VOLVAGIA_SOUL, args.age) && helper.canUse(RG_MEGATON_HAMMER, args.age)
+            case Enemy:MORPHA:
+                helper.hasBossSoul(RG_MORPHA_SOUL, args.age) && helper.canUse(RG_HOOKSHOT, args.age) && (helper.canUseSword(args.age) || helper.canUse(RG_MEGATON_HAMMER, args.age))
+            case Enemy:BONGO_BONGO:
+                helper.hasBossSoul(RG_BONGO_BONGO_SOUL, args.age) &&
+                    (helper.canUse(RG_LENS_OF_TRUTH, args.age) || option.RT_LENS_BONGO) && helper.canUseSword(args.age) &&
+                    (helper.canUse(RG_HOOKSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age) || helper.canUse(RG_FAIRY_SLINGSHOT, args.age) ||
+                        option.RT_SHADOW_BONGO)
+            case Enemy:TWINROVA:
+                helper.hasBossSoul(RG_TWINROVA_SOUL, args.age) && helper.canUse(RG_MIRROR_SHIELD, args.age) &&
+                    (helper.canUseSword(args.age) || helper.canUse(RG_MEGATON_HAMMER, args.age))
+            case Enemy:GANONDORF:
+                // RANDOTODO: Trick to use hammer (no jumpslash) or stick (only jumpslash) instead of a sword to reflect the
+                // energy ball and either of them regardless of jumpslashing to damage and kill ganondorf
+
+                // Bottle is not taken into account since a sword, hammer or stick are required
+                // for killing ganondorf and all of those can reflect the energy ball
+                // This will not be the case once ammo logic in taken into account as
+                // sticks are limited and using a bottle might become a requirement in that case
+                return helper.hasBossSoul(RG_GANON_SOUL, args.age) && helper.canUse(RG_LIGHT_ARROWS, args.age) && helper.canUseSword(args.age)
+            case Enemy:GANON:
+                helper.hasBossSoul(RG_GANON_SOUL, args.age) && helper.canUse(RG_MASTER_SWORD, args.age)
+            case Enemy:DARK_LINK:
+                // RANDOTODO Dark link is buggy right now, retest when he is not
+                helper.canJumpslash(args.age) || helper.canUse(RG_FAIRY_BOW, args.age)
+            case Enemy:ANUBIS:
+                // there's a restoration that allows beating them with mirror shield + some way to trigger their attack
+                helper.hasFireSource(args.age)
+            case Enemy:BEAMOS:
+                helper.hasExplosives(args.age)
+            case Enemy:PURPLE_LEEVER:
+                // dies on it's own, so this is the conditions to spawn it (killing 10 normal leevers)
+                // Sticks and Ice arrows work but will need ammo capacity logic
+                // other methods can damage them but not kill them, and they run when hit, making them impractical
+                helper.canUse(RG_MASTER_SWORD, args.age) || helper.canUse(RG_BIGGORON_SWORD, args.age)
+            case Enemy:TENTACLE:
+                helper.canUse(RG_BOOMERANG, args.age)
+            case Enemy:BARI:
+                helper.hookshotOrBoomerang(args.age) || helper.canUse(RG_FAIRY_BOW, args.age) || helper.hasExplosives(args.age) || helper.canUse(RG_MEGATON_HAMMER, args.age) ||
+                    helper.canUse(RG_STICKS, args.age) || helper.canUse(RG_DINS_FIRE, args.age) || (helper.takeDamage(args.age) && helper.canUseSword(args.age))
+            case Enemy:SHABOM:
+                // RANDOTODO when you add better damage logic, you can kill this by taking hits
+                helper.canUse(RG_BOOMERANG, args.age) || helper.canUse(RG_NUTS, args.age) || helper.canJumpslash(args.age) || helper.canUse(RG_DINS_FIRE, args.age) ||
+                    helper.canUse(RG_ICE_ARROWS, args.age)
+            case Enemy:OCTOROK:
+                helper.canReflectNuts(args.age) || helper.hookshotOrBoomerang(args.age) || helper.canUse(RG_FAIRY_BOW, args.age) || helper.canUse(RG_FAIRY_SLINGSHOT, args.age) ||
+                    helper.canUse(RG_BOMB_BAG, args.age) || (args.wallOrFloor && helper.canUse(RG_BOMBCHU_5, args.age))
+            default: false
+        }
+    }
+    helper takeDamage(age=Age:EITHER):{
+        helper.canUse(RG_BOTTLE_WITH_FAIRY, args.age) || helper.effectiveHealth(args.age) != 1 || helper.canUse(RG_NAYRUS_LOVE, args.age)
+    }
+    helper effectiveHealth(age=Age:EITHER):{
+        helper.hearts(args.age) * (helper.hasItem(RG_DOUBLE_DEFENSE) ? 2 : 1) //RANDOTODO consider damage multiplier
+    }
+    helper hearts(age=Age:EITHER):{
+        option.startingHearts + countItem(RG_HEART_CONTAINER) + floor(countItem(RG_HEART_PIECE)/4)
+    }
+    helper canAttack(age=Age:EITHER):{
+        helper.canDamage(args.age) || helper.canUse(RG_BOOMERANG, args.age) || helper.canUse(RG_HOOKSHOT, args.age)
+    }
+    helper canUseSword(age=Age:EITHER):{
+        helper.canUse(RG_KOKIRI_SWORD, args.age) || helper.canUse(RG_MASTER_SWORD, args.age) || helper.canUse(RG_BIGGORON_SWORD, args.age)
+    }
+    helper hasExplosives(age = Age:EITHER):{
+        helper.canUse(RG_BOMB_BAG, args.age) || helper.canUse(RG_BOMBCHU_5, args.age)
+    }
+    helper canJumpslash(age=Age:EITHER):{
+        helper.canUse(RG_MEGATON_HAMMER, args.age) || helper.canJumpslashExceptHammer(args.age)
+    }
+    helper canJumpslashExceptHammer(age=Age:EITHER):{
+        helper.canUse(RG_STICKS, args.age) || helper.canUseSword(args.age)
+    }
+    helper blastOrSmash(age=Age:EITHER): {
+        helper.canUse(RG_MEGATON_HAMMER, args.age) || helper.hasExplosives(args.age)
+    }
+    helper hookshotOrBoomerang(age=Age:EITHER):{
+        helper.canUse(RG_HOOKSHOT) || helper.canUse(RG_BOOMERANG)
+    }
+    helper canStandingShield(age=Age:EITHER): {
+        helper.canUse(RG_MIRROR_SHIELD, args.age) || ((args.age == Age:EITHER || args.age == Age:ADULT) && helper.hasItem(RG_HYLIAN_SHIELD)) || helper.canUse(RG_DEKU_SHIELD, args.age)
+    }
+    helper canDamage(age=Age:EITHER): {
+        helper.canUse(RG_FAIRY_SLINGSHOT, args.age) || helper.canJumpslash(args.age) || helper.hasExplosives(args.age) || 
+            helper.canUse(RG_DINS_FIRE, args.age) || helper.canUse(RG_FAIRY_BOW, args.age)
+    }
+    helper hasBossSoul(soul, age=Age:EITHER):{
+        option.RSK_SHUFFLE_BOSS_SOULS == "disabled" || 
+            switch soul {
+                case RG_GOHMA_SOUL:
+                case RG_KING_DODONGO_SOUL:
+                case RG_BARINADE_SOUL:
+                case RG_PHANTOM_GANON_SOUL:
+                case RG_VOLVAGIA_SOUL:
+                case RG_MORPHA_SOUL:
+                case RG_BONGO_BONGO_SOUL:
+                case RG_TWINROVA_SOUL:
+                    return helper.hasItem(itemName);
+                case RG_GANON_SOUL:
+                    return option.RSK_SHUFFLE_BOSS_SOULS == "enabled" ? helper.hasItem(RG_GANON_SOUL, args.age) : true
+                default:
+                    return false
+        }
+    }
+    helper hasFireSource(age=Age:EITHER):{
+        helper.canUse(RG_DINS_FIRE, args.age) || helper.canUse(RG_FIRE_ARROWS, args.age)
+    }
+    helper canReflectNuts(age=Age:EITHER):{
+        helper.canUse(RG_DEKU_SHIELD, args.age) || (args.age != Age:CHILD && helper.hasItem(RG_HYLIAN_SHIELD))
+    }
+    helper canUse(item, age=Age:EITHER):{ 
+        helper.hasItem(itemName) &&
+        switch itemName fallthrough {
+            // Magic items
+            case RG_MAGIC_SINGLE:
+                events.AmmoCanDrop || (helper.hasBottle(args.age) && logicvals.LOGIC_BUY_MAGIC_POTION)
+            case RG_DINS_FIRE:
+            case RG_FARORES_WIND:
+            case RG_NAYRUS_LOVE:
+            case RG_LENS_OF_TRUTH:
+                helper.canUse(RG_MAGIC_SINGLE)
+            case RG_FIRE_ARROWS:
+            case RG_ICE_ARROWS:
+            case RG_LIGHT_ARROWS:
+                helper.canUse(RG_MAGIC_SINGLE) && helper.canUse(RG_FAIRY_BOW, args.age)
+            // Adult items
+            // TODO: Uncomment those if we ever implement more item usability settings
+            case RG_FAIRY_BOW:
+                args.age != Age:CHILD && (events.AmmoCanDrop || logicvals.LOGIC_BUY_ARROW) // || BowAsChild;
+            case RG_MEGATON_HAMMER:
+                args.age != Age:CHILD // || HammerAsChild;
+            case RG_IRON_BOOTS:
+                args.age != Age:CHILD // || IronBootsAsChild;
+            case RG_HOVER_BOOTS:
+                args.age != Age:CHILD // || HoverBootsAsChild;
+            case RG_HOOKSHOT:
+            case RG_LONGSHOT:
+            case RG_SCARECROW:
+            case RG_DISTANT_SCARECROW:
+                return args.age != Age:CHILD // || HookshotAsChild;
+            case RG_GORON_TUNIC:
+                args.age != Age:CHILD // || GoronTunicAsChild;
+            case RG_ZORA_TUNIC:
+                args.age != Age:CHILD // || ZoraTunicAsChild;
+            case RG_MIRROR_SHIELD:
+                args.age != Age:CHILD // || MirrorShieldAsChild;
+            case RG_MASTER_SWORD:
+                args.age != Age:CHILD // || MasterSwordAsChild;
+            case RG_BIGGORON_SWORD:
+                args.age != Age:CHILD // || BiggoronSwordAsChild;
+            case RG_SILVER_GAUNTLETS:
+            case RG_GOLDEN_GAUNTLETS:
+            // Adult Trade
+            case RG_POCKET_EGG:
+            case RG_COJIRO:
+            case RG_ODD_MUSHROOM:
+            case RG_ODD_POTION:
+            case RG_POACHERS_SAW:
+            case RG_BROKEN_SWORD:
+            case RG_PRESCRIPTION:
+            case RG_EYEBALL_FROG:
+            case RG_EYEDROPS:
+            case RG_CLAIM_CHECK:
+                args.age != Age:CHILD
+            // Child items
+            case RG_FAIRY_SLINGSHOT:
+                args.age != Age:ADULT && (events.AmmoCanDrop || logicvals.LOGIC_BUY_SEED) // || SlingshotAsAdult;
+            case RG_BOOMERANG:
+                args.age != Age:ADULT // || BoomerangAsAdult;
+            case RG_KOKIRI_SWORD:
+                args.age != Age:ADULT // || KokiriSwordAsAdult;
+            case RG_NUTS:
+                (events.NutPot || events.NutCrate || events.DekuBabaNuts) &&
+                    events.AmmoCanDrop // RANDOTODO BuyNuts currently mixed in with Nuts, should be seperate as BuyNuts are
+                                    // also a Nuts source
+            case RG_STICKS:
+                args.age != Age:ADULT /* || StickAsAdult;*/ && (StickPot || DekuBabaSticks);
+            case RG_DEKU_SHIELD:
+                args.age != Age:ADULT // || DekuShieldAsAdult;
+            case RG_PROGRESSIVE_BOMB_BAG:
+            case RG_BOMB_BAG:
+                events.AmmoCanDrop || logicvals.LOGIC_BUY_BOMB;
+            case RG_PROGRESSIVE_BOMBCHUS:
+            case RG_BOMBCHU_5:
+            case RG_BOMBCHU_10:
+            case RG_BOMBCHU_20:
+                helper.bombchuRefill() && helper.bombchusEnabled()
+            case RG_WEIRD_EGG:
+            case RG_RUTOS_LETTER:
+                args.age != Age:ADULT
+            case RG_MAGIC_BEAN:
+                args.age != Age:ADULT
+
+            // Songs
+            case RG_ZELDAS_LULLABY:
+            case RG_EPONAS_SONG:
+            case RG_PRELUDE_OF_LIGHT:
+                helper.hasItem(RG_FAIRY_OCARINA) && helper.hasItem(RG_OCARINA_C_LEFT_BUTTON) &&
+                    helper.hasItem(RG_OCARINA_C_RIGHT_BUTTON) && helper.hasItem(RG_OCARINA_C_UP_BUTTON)
+            case RG_SARIAS_SONG:
+                helper.hasItem(RG_FAIRY_OCARINA) && helper.hasItem(RG_OCARINA_C_LEFT_BUTTON) &&
+                    helper.hasItem(RG_OCARINA_C_RIGHT_BUTTON) && helper.hasItem(RG_OCARINA_C_DOWN_BUTTON)
+            case RG_SUNS_SONG:
+                helper.hasItem(RG_FAIRY_OCARINA) && helper.hasItem(RG_OCARINA_C_RIGHT_BUTTON) && helper.hasItem(RG_OCARINA_C_UP_BUTTON) &&
+                    helper.hasItem(RG_OCARINA_C_DOWN_BUTTON)
+            case RG_SONG_OF_TIME:
+            case RG_BOLERO_OF_FIRE:
+            case RG_REQUIEM_OF_SPIRIT:
+                helper.hasItem(RG_FAIRY_OCARINA) && helper.hasItem(RG_OCARINA_A_BUTTON) && helper.hasItem(RG_OCARINA_C_RIGHT_BUTTON) &&
+                    helper.hasItem(RG_OCARINA_C_DOWN_BUTTON)
+            case RG_SONG_OF_STORMS:
+                helper.hasItem(RG_FAIRY_OCARINA) && helper.hasItem(RG_OCARINA_A_BUTTON) && helper.hasItem(RG_OCARINA_C_UP_BUTTON) &&
+                    helper.hasItem(RG_OCARINA_C_DOWN_BUTTON)
+            case RG_MINUET_OF_FOREST:
+                helper.hasItem(RG_FAIRY_OCARINA) && helper.hasItem(RG_OCARINA_A_BUTTON) && helper.hasItem(RG_OCARINA_C_LEFT_BUTTON) &&
+                    helper.hasItem(RG_OCARINA_C_RIGHT_BUTTON) && helper.hasItem(RG_OCARINA_C_UP_BUTTON)
+            case RG_SERENADE_OF_WATER:
+            case RG_NOCTURNE_OF_SHADOW:
+                helper.hasItem(RG_FAIRY_OCARINA) && helper.hasItem(RG_OCARINA_A_BUTTON) && helper.hasItem(RG_OCARINA_C_LEFT_BUTTON) &&
+                    helper.hasItem(RG_OCARINA_C_RIGHT_BUTTON) && helper.hasItem(RG_OCARINA_C_DOWN_BUTTON)
+
+            // Misc. Items
+            case RG_FISHING_POLE:
+                helper.hasItem(RG_CHILD_WALLET); // as long as you have enough rubies
+            case RG_EPONA:
+                args.age != Age:CHILD && helper.canUse(RG_EPONAS_SONG);
+
+            // Bottle Items
+            case RG_BOTTLE_WITH_BUGS:
+                events.BugShrub || events.WanderingBugs || events.BugRock || logivals.LOGIC_BUGS_ACCESS
+            case RG_BOTTLE_WITH_FISH:
+                events.LoneFish || events.FishGroup || logicvals.LOGIC_FISH_ACCESS // is there any need to care about lone vs group?
+            case RG_BOTTLE_WITH_BLUE_FIRE:            // RANDOTODO should probably be better named
+                events.BlueFireAccess || logicvals.LOGIC_BLUE_FIRE_ACCESS
+            case RG_BOTTLE_WITH_FAIRY:
+                events.FairyPot || events.GossipStoneFairy || events.BeanPlantFairy || events.ButterflyFairy || 
+                    events.FreeFairies || events.FairyPond || logicvals.LOGIC_FAIRY_ACCESS
+            default:
+                true
+        }
+    }
+    //do we actually want this? feels more ship-specific the more I look at it. Progressive items don't exist here
+    //I reckon a custom version would be good; something that resolves progressive item checking but doesn't expect to check link's inventory directly
+    helper hasItem(item, age=Age:EITHER):{
+        switch item {
+            case RG_FAIRY_OCARINA:
+                hasItem(ITEM_OCARINA_FAIRY) || hasItem(ITEM_OCARINA_TIME) //return CheckInventory(ITEM_OCARINA_FAIRY, false); 
+                //second CheckInventory parameter is strictness; false just means item is in slot
+            case RG_OCARINA_OF_TIME:
+                hasItem(ITEM_OCARINA_TIME) //return CheckInventory(ITEM_OCARINA_TIME, true);
+            case RG_DINS_FIRE:
+                hasItem(ITEM_DINS_FIRE) //return CheckInventory(ITEM_DINS_FIRE, true);
+            case RG_FARORES_WIND:
+                hasItem(ITEM_FARORES_WIND) //return CheckInventory(ITEM_FARORES_WIND, true);
+            case RG_NAYRUS_LOVE:
+                hasItem(ITEM_NAYRUS_LOVE) //return CheckInventory(ITEM_NAYRUS_LOVE, true);
+            case RG_LENS_OF_TRUTH:
+                hasItem(ITEM_LENS) //return CheckInventory(ITEM_LENS, true);
+            case RG_FAIRY_BOW:
+                hasItem(ITEM_BOW) //return CheckInventory(ITEM_BOW, true);
+            case RG_MEGATON_HAMMER:
+                hasItem(ITEM_HAMMER) //return CheckInventory(ITEM_HAMMER, true);
+            case RG_HOOKSHOT:
+                hasItem(ITEM_HOOKSHOT) || hasItem(ITEM_LONGSHOT) //return CheckInventory(ITEM_HOOKSHOT, false);
+            case RG_LONGSHOT:
+                hasItem(ITEM_LONGSHOT) //return CheckInventory(ITEM_LONGSHOT, true);
+            case RG_PROGRESSIVE_STICK_UPGRADE:
+            case RG_STICKS:
+                return CurrentUpgrade(UPG_STICKS);
+            case RG_FIRE_ARROWS:
+                hasItem(ITEM_ARROW_FIRE) //return CheckInventory(ITEM_ARROW_FIRE, true);
+            case RG_ICE_ARROWS:
+                hasItem(ITEM_ARROW_ICE) //return CheckInventory(ITEM_ARROW_ICE, true);
+            case RG_LIGHT_ARROWS:
+                hasItem(ITEM_ARROW_LIGHT) //return CheckInventory(ITEM_ARROW_LIGHT, true);
+            case RG_PROGRESSIVE_BOMBCHUS:
+            case RG_BOMBCHU_5:
+            case RG_BOMBCHU_10:
+            case RG_BOMBCHU_20:
+                (helper.bombchusEnabled() && (logicval.LOGIC_BUY_BOMBCHUS || events.CouldPlayBowling || events.CarpetMerchant)) ||
+                    hasItem(ITEM_BOMBCHU)
+            case RG_FAIRY_SLINGSHOT:
+                hasItem(ITEM_SLINGSHOT) //return CheckInventory(ITEM_SLINGSHOT, true);
+            case RG_BOOMERANG:
+                hasItem(ITEM_BOOMERANG) //return CheckInventory(ITEM_BOOMERANG, true);
+            case RG_PROGRESSIVE_NUT_UPGRADE:
+            case RG_NUTS:
+                return CurrentUpgrade(UPG_NUTS);
+            // RANDOTODO handle cases where the scarecrow is persistent between age better when OI is added
+            case RG_SCARECROW:
+                return ScarecrowsSong() && CanUse(RG_HOOKSHOT);
+            case RG_DISTANT_SCARECROW:
+                return ScarecrowsSong() && CanUse(RG_LONGSHOT);
+            case RG_MAGIC_BEAN:
+                return GetAmmo(ITEM_BEAN) > 0;
+            case RG_KOKIRI_SWORD:
+            case RG_DEKU_SHIELD:
+            case RG_GORON_TUNIC:
+            case RG_ZORA_TUNIC:
+            case RG_HYLIAN_SHIELD:
+            case RG_MIRROR_SHIELD:
+            case RG_MASTER_SWORD:
+            case RG_BIGGORON_SWORD:
+            case RG_IRON_BOOTS:
+            case RG_HOVER_BOOTS:
+                return CheckEquipment(RandoGetToEquipFlag.at(itemName));
+            case RG_GORONS_BRACELET:
+                return CurrentUpgrade(UPG_STRENGTH);
+            case RG_SILVER_GAUNTLETS:
+                return CurrentUpgrade(UPG_STRENGTH) >= 2;
+            case RG_GOLDEN_GAUNTLETS:
+                return CurrentUpgrade(UPG_STRENGTH) >= 3;
+            case RG_PROGRESSIVE_BOMB_BAG:
+            case RG_BOMB_BAG:
+                return CurrentUpgrade(UPG_BOMB_BAG);
+            case RG_MAGIC_SINGLE:
+                return GetSaveContext()->magicLevel >= 1 || GetSaveContext()->isMagicAcquired;
+                // Songs
+            case RG_ZELDAS_LULLABY:
+            case RG_EPONAS_SONG:
+            case RG_SARIAS_SONG:
+            case RG_SUNS_SONG:
+            case RG_SONG_OF_TIME:
+            case RG_SONG_OF_STORMS:
+            case RG_MINUET_OF_FOREST:
+            case RG_BOLERO_OF_FIRE:
+            case RG_SERENADE_OF_WATER:
+            case RG_REQUIEM_OF_SPIRIT:
+            case RG_NOCTURNE_OF_SHADOW:
+            case RG_PRELUDE_OF_LIGHT:
+                // Dungeon Rewards
+            case RG_KOKIRI_EMERALD:
+            case RG_GORON_RUBY:
+            case RG_ZORA_SAPPHIRE:
+            case RG_FOREST_MEDALLION:
+            case RG_FIRE_MEDALLION:
+            case RG_WATER_MEDALLION:
+            case RG_SPIRIT_MEDALLION:
+            case RG_SHADOW_MEDALLION:
+            case RG_LIGHT_MEDALLION:
+                // Misc Quest Items
+            case RG_STONE_OF_AGONY:
+            case RG_GERUDO_MEMBERSHIP_CARD:
+                return CheckQuestItem(RandoGetToQuestItem.at(itemName));
+            case RG_RUTOS_LETTER:
+                return CheckEventChkInf(EVENTCHKINF_OBTAINED_RUTOS_LETTER);
+            case RG_DOUBLE_DEFENSE:
+                return GetSaveContext()->isDoubleDefenseAcquired;
+            case RG_FISHING_POLE:
+            case RG_ZELDAS_LETTER:
+            case RG_WEIRD_EGG:
+            case RG_GREG_RUPEE:
+                // Ocarina Buttons
+            case RG_OCARINA_A_BUTTON:
+            case RG_OCARINA_C_LEFT_BUTTON:
+            case RG_OCARINA_C_RIGHT_BUTTON:
+            case RG_OCARINA_C_DOWN_BUTTON:
+            case RG_OCARINA_C_UP_BUTTON:
+                // Boss Souls
+            case RG_GOHMA_SOUL:
+            case RG_KING_DODONGO_SOUL:
+            case RG_BARINADE_SOUL:
+            case RG_PHANTOM_GANON_SOUL:
+            case RG_VOLVAGIA_SOUL:
+            case RG_MORPHA_SOUL:
+            case RG_BONGO_BONGO_SOUL:
+            case RG_TWINROVA_SOUL:
+            case RG_GANON_SOUL:
+            case RG_SKELETON_KEY:
+                // Overworld Keys
+            case RG_GUARD_HOUSE_KEY:
+            case RG_MARKET_BAZAAR_KEY:
+            case RG_MARKET_POTION_SHOP_KEY:
+            case RG_MASK_SHOP_KEY:
+            case RG_MARKET_SHOOTING_GALLERY_KEY:
+            case RG_BOMBCHU_BOWLING_KEY:
+            case RG_TREASURE_CHEST_GAME_BUILDING_KEY:
+            case RG_BOMBCHU_SHOP_KEY:
+            case RG_RICHARDS_HOUSE_KEY:
+            case RG_ALLEY_HOUSE_KEY:
+            case RG_KAK_BAZAAR_KEY:
+            case RG_KAK_POTION_SHOP_KEY:
+            case RG_BOSS_HOUSE_KEY:
+            case RG_GRANNYS_POTION_SHOP_KEY:
+            case RG_SKULLTULA_HOUSE_KEY:
+            case RG_IMPAS_HOUSE_KEY:
+            case RG_WINDMILL_KEY:
+            case RG_KAK_SHOOTING_GALLERY_KEY:
+            case RG_DAMPES_HUT_KEY:
+            case RG_TALONS_HOUSE_KEY:
+            case RG_STABLES_KEY:
+            case RG_BACK_TOWER_KEY:
+            case RG_HYLIA_LAB_KEY:
+            case RG_FISHING_HOLE_KEY:
+                return CheckRandoInf(RandoGetToRandInf.at(itemName));
+                // Boss Keys
+            case RG_EPONA:
+                return FreedEpona;
+            case RG_FOREST_TEMPLE_BOSS_KEY:
+            case RG_FIRE_TEMPLE_BOSS_KEY:
+            case RG_WATER_TEMPLE_BOSS_KEY:
+            case RG_SPIRIT_TEMPLE_BOSS_KEY:
+            case RG_SHADOW_TEMPLE_BOSS_KEY:
+            case RG_GANONS_CASTLE_BOSS_KEY:
+                return CheckDungeonItem(DUNGEON_KEY_BOSS, RandoGetToDungeonScene.at(itemName));
+                // Maps
+            case RG_DEKU_TREE_MAP:
+            case RG_DODONGOS_CAVERN_MAP:
+            case RG_JABU_JABUS_BELLY_MAP:
+            case RG_FOREST_TEMPLE_MAP:
+            case RG_FIRE_TEMPLE_MAP:
+            case RG_WATER_TEMPLE_MAP:
+            case RG_SPIRIT_TEMPLE_MAP:
+            case RG_SHADOW_TEMPLE_MAP:
+            case RG_BOTTOM_OF_THE_WELL_MAP:
+            case RG_ICE_CAVERN_MAP:
+                return CheckDungeonItem(DUNGEON_MAP, RandoGetToDungeonScene.at(itemName));
+                // Compasses
+            case RG_DEKU_TREE_COMPASS:
+            case RG_DODONGOS_CAVERN_COMPASS:
+            case RG_JABU_JABUS_BELLY_COMPASS:
+            case RG_FOREST_TEMPLE_COMPASS:
+            case RG_FIRE_TEMPLE_COMPASS:
+            case RG_WATER_TEMPLE_COMPASS:
+            case RG_SPIRIT_TEMPLE_COMPASS:
+            case RG_SHADOW_TEMPLE_COMPASS:
+            case RG_BOTTOM_OF_THE_WELL_COMPASS:
+            case RG_ICE_CAVERN_COMPASS:
+                return CheckDungeonItem(DUNGEON_COMPASS, RandoGetToDungeonScene.at(itemName));
+                // Wallets
+            case RG_CHILD_WALLET:
+                return CheckRandoInf(RAND_INF_HAS_WALLET);
+            case RG_ADULT_WALLET:
+                return CurrentUpgrade(UPG_WALLET) >= 1;
+            case RG_GIANT_WALLET:
+                return CurrentUpgrade(UPG_WALLET) >= 2;
+            case RG_TYCOON_WALLET:
+                return CurrentUpgrade(UPG_WALLET) >= 3;
+                // Scales
+            case RG_BRONZE_SCALE:
+                return CheckRandoInf(RAND_INF_CAN_SWIM);
+            case RG_SILVER_SCALE:
+                return CurrentUpgrade(UPG_SCALE) >= 1;
+            case RG_GOLDEN_SCALE:
+                return CurrentUpgrade(UPG_SCALE) >= 2;
+            case RG_POCKET_EGG:
+                return CheckRandoInf(RAND_INF_ADULT_TRADES_HAS_POCKET_EGG);
+            case RG_COJIRO:
+            case RG_ODD_MUSHROOM:
+            case RG_ODD_POTION:
+            case RG_POACHERS_SAW:
+            case RG_BROKEN_SWORD:
+            case RG_PRESCRIPTION:
+            case RG_EYEBALL_FROG:
+            case RG_EYEDROPS:
+            case RG_CLAIM_CHECK:
+                return CheckRandoInf(itemName - RG_COJIRO + RAND_INF_ADULT_TRADES_HAS_COJIRO);
+            case RG_BOTTLE_WITH_BIG_POE:
+            case RG_BOTTLE_WITH_BLUE_FIRE:
+            case RG_BOTTLE_WITH_BLUE_POTION:
+            case RG_BOTTLE_WITH_BUGS:
+            case RG_BOTTLE_WITH_FAIRY:
+            case RG_BOTTLE_WITH_FISH:
+            case RG_BOTTLE_WITH_GREEN_POTION:
+            case RG_BOTTLE_WITH_MILK:
+            case RG_BOTTLE_WITH_POE:
+            case RG_BOTTLE_WITH_RED_POTION:
+            case RG_EMPTY_BOTTLE:
+                helper.hasBottle();
+            default: false
+        }
+    }
+    helper hasBottle(age=Age:EITHER):{
+
+    }
+    helper bombchuRefill(age=Age:EITHER):{
+
+    }
+    helper bombchusEnabled(age=Age:EITHER):{
+
+    }
+}
+options: {
+    option strings RSK_SHUFFLE_BOSS_SOULS{
+        disabled
+        enabled
+        enabled_except_ganon
+    }
+}
+enum EnemyDistance{
+    CLOSE 
+    SHORT_JUMPSLASH 
+    MASTER_SWORD_JUMPSLASH 
+    LONG_JUMPSLASH 
+    BOMB_THROW 
+    BOOMERANG 
+    HOOKSHOT 
+    LONGSHOT 
+    FAR
+}
+
+enum Enemy{
+    GOLD_SKULLTULA,
+    BIG_SKULLTULA,
+    DODONGO,
+    LIZALFOS,
+    GOHMA_LARVA,
+    KEESE,
+    FIKEESE,
+    MAD_SCRUB,
+    BLUE_BUBBLE,
+    DEAD_HAND,
+    DEKU_BABA,
+    WITHERED_DEKU_BABA,
+    LIKE_LIKE,
+    STALFOS,
+    IRON_KNUCKLE,
+    FLADANCER,
+    WOLFOS,
+    FLOORMASTER,
+    REDEAD,
+    MEG,
+    ARMOS,
+    GREEN_BUBBLE,
+    DINOLFOS,
+    TORCH_SLUG,
+    FREEZARD,
+    SHELL_BLADE,
+    SPIKE,
+    WHITE_WOLFOS,
+    STINGER,
+    BIG_OCTO,
+    GERUDO_WARRIOR,
+    GIBDO,
+    GOHMA,
+    KING_DODONGO,
+    BARINADE,
+    PHANTOM_GANON,
+    VOLVAGIA,
+    MORPHA,
+    BONGO_BONGO,
+    TWINROVA,
+    GANONDORF,
+    GANON,
+    DARK_LINK,
+    ANUBIS,
+    BEAMOS,
+    WALLMASTER,
+    PURPLE_LEEVER,
+    TENTACLE,
+    BARI,
+    SHABOM,
+    OCTOROK,
+}
+enum Age{
+    EITHER
+    CHILD
+    ADULT
+}

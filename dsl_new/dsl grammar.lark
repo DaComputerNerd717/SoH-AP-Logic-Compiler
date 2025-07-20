@@ -1,0 +1,165 @@
+//enum declarations. Enums are defined as values being in increasing order for the purpose of comparison operators
+enum : "enum " ident"{"enum_vals"}"
+enum_vals : (ident ","?)+
+
+//if-else stuff
+if_block: "if" "(" expr ")" "{" expr "}" if_continuation?
+else_block: "else" "{" expr "}"
+elseif_block: "else" "if" "(" expr ")" "{" expr "}" if_continuation?
+?if_continuation: else_block
+                | elseif_block
+
+//switch blocks
+//switch : "switch"expr"{"case+"}"
+switch_expr : "switch" expr is_fallthrough? return_case?"{"case_list"}" //value for return case None if missing
+?is_fallthrough : "fallthrough" //To resolve into true for false for the switch_expr object
+return_case : "yields" bool //To resolve into true or false for switch_expr. This determines for what value we return from the switch_expr, assuming it is fallthrough
+case_list : ((case|default_case))+
+case : "case " value ":" expr -> case_block //ident means an enum value. In this case, we only compare the value name
+default_case : "default" ":" expr
+
+helper_def : "helper " ident "("args")" ":"? "{" expr "}"
+
+//list{val} = "["(val ("," val)*)?"]"
+//dict{val} = "{"(ident":"val (","ident":"val)*)?"}"
+//entry : ident ":" (expr | list{expr} | dict{expr})
+
+quantity_def: "quantity" ":" expr
+logicval_set : /logic_?[vV]al/ ":" ident
+name_def : "name" ":" value
+classification: /useful|junk|trap|skip-balancing|skipBalancing|deprioritized/ //progression is computed based on access rules
+classification_def: "class" ":" classification (/[ ,]/ classification)*
+item_def : "item " ident ":"? "{" (logicval_set | name_def | classification_def | quantity_def)+ "}"
+
+present_when_def: /present_when|presentWhen/ ":" expr
+rule_def: "rule" ":" expr
+dest_def: /destinationId|destination_id|destId|dest_id/ ":" ident
+cant_cross_child: /childCantCross|child_cant_cross/
+cant_cross_adult: /adultCantCross|adult_cant_cross/
+entrance_def : "entrance " ident ":"? "{" (rule_def | dest_def | cant_cross_adult | cant_cross_child | name_def | present_when_def)+ "}"
+//Entrances need: name/id of destination region, name, id, access rule, traversable as child, traversable as adult
+
+loc_class_def : "default"|"priority"|"excluded"
+location_def : "location " ident ":"? "{" (name_def | rule_def | loc_class_def | rule_def | present_when_def)+ "}"
+//Locations need: name, id, access rule, location class
+event_def : "event" ident ":" expr
+region_def : "region " ident ":"? "{" (name_def | location_def | entrance_def | event_def | present_when_def)+ "}"
+logic_def : "logic" ":"? "{" (region_def | item_def | helper_def)+ "}"
+
+
+//For if we have to insert lower-priority operators
+?expr   : expr_tern
+
+?expr_tern  : ternary
+            | expr_or
+
+?expr_or    : or
+            | expr_and
+
+?expr_and   : and
+            | expr_eq
+
+?expr_eq    : eq
+            | ne
+            | expr_comp
+
+?expr_comp  : greater
+            | less
+            | le
+            | ge
+            | expr_shift
+
+?expr_shift : leftshift
+            | rightshift
+            | expr_pm
+
+?expr_pm    : add
+            | sub
+            | expr_md
+
+?expr_md    : mul
+            | div
+            | mod
+            | expr_not
+
+?expr_not   : not
+            | basefunc
+
+
+?basefunc : /[oO]ptions?/("." ident)+ -> option
+          | /[hH}elpers?\./ ident"("args")" -> helper_invoke //helper.name(args)
+          | /[aA]rgs?\./ ident -> arg_access
+          | /[lL]ogic_?[vV]als?\./ ident -> logic_val_access
+          | /[eE]vents?\./ ident -> event_access
+          | /[cC]anReachLocation|can_reach_location/"(" ident ("," age)")" -> location_check
+          | /[cC]anReachEntrance|can_reach_entrance/"(" ident ("," age)")" -> entrance_check
+          | /[cC]anReachRegion|can_reach_region/"(" ident ("," age)")" -> region_check
+          | /[hH]asItem|has_item/"(" ident")" -> has_item
+          | /[cC]ountItem|count_item/"(" ident")" -> count_item
+          | /[iI]sDungeonMQ|is_dungeon_mq/"(" ident")" -> is_dungeon_mq
+          | "floor("expr")" -> floor_op
+          | "ceil("expr")" -> ceil_op
+          | switch_expr
+          | if_block
+          | value
+
+age : "adult" | "child" | "both"
+
+?value  : "("expr")"
+        | bool
+        | SIGNED_NUMBER -> number
+        | ESCAPED_STRING -> string
+        | ident ":" ident -> enum_value
+        | /entrances?\./ ident -> entrance_ref
+        | /regions?\./ ident -> region_ref
+        | /locations?\./ ident -> loc_ref
+        | /items?./ ident -> item_ref
+
+?bool   : "true" -> true
+        | "false" -> false
+
+args: (arg(/, ?/arg)*)?
+arg : (ident"=")?(expr|ident)
+?ident : /[A-Za-z_][A-Za-z0-9_-]*[A-Za-z0-9_]?/
+
+or  : expr_and((" or "|"||")expr_and)+ -> op_or
+and : expr_eq((" and "|"&&")expr_eq)+ -> op_and
+not : ("not "|"!")value -> op_not
+ne: expr_comp"!="expr_comp
+eq: expr_comp"=="expr_comp
+ge : expr_shift">="expr_shift
+le : expr_shift"<="expr_shift
+less: expr_shift"<"expr_shift
+greater: expr_shift">"expr_shift
+add: expr_md("+"expr_md)+
+sub: expr_pm"-"expr_md
+mul: expr_not("*"expr_not)+
+div: expr_md"/"expr_not
+mod: expr_md"%"expr_not
+leftshift: expr_shift"<<"expr_pm
+rightshift: expr_shift">>"expr_pm
+ternary: expr_or"?"expr_or":"expr_or
+
+options_definition: "options" "{" (option_def_strings | option_def_int_range | option_def_int_list | option_def_float_range | option_def_float_list)+ "}"
+option_def_strings: "option strings" ident ":"? "{" ident (","? ident)* "}"
+option_def_int_range: "option ints" ident "{" "min" ":" SIGNED_INT "," "max" ":" SIGNED_INT "}"
+option_def_int_list: "option ints" ident "[" SIGNED_INT ("," SIGNED_INT) "]"
+option_def_float_range: "option floats" ident "{" "min" ":" SIGNED_NUMBER "," "max" SIGNED_NUMBER "}"
+option_def_float_list: "option floats" ident "[" SIGNED_NUMBER ("," SIGNED_NUMBER) "]"
+option_def_bool: "option bool" ident
+
+file: (logic_def | options_definition | enum)+ 
+
+%import common.ESCAPED_STRING
+%import common.SIGNED_NUMBER
+%import common.SIGNED_INT
+%import common.WS
+%ignore WS
+//%ignore /(?<=[\n\{\t,])[\r\n]+/ //newline after newline, ,, :, or {
+%ignore /[\r\n]+/
+%ignore /^ +/
+%ignore / +$/
+%ignore "\t"
+%ignore CPP_COMMENT
+%ignore C_COMMENT
+%ignore SH_COMMENT
