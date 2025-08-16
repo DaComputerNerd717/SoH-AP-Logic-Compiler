@@ -11,8 +11,7 @@ elseif_block: "else" "if" "(" expr ")" "{" expr "}" if_continuation?
 
 //switch blocks
 //switch : "switch"expr"{"case+"}"
-switch_expr : "switch" expr is_fallthrough? return_case?"{"case_list"}" //value for return case None if missing
-?is_fallthrough : "fallthrough" //To resolve into true for false for the switch_expr object
+switch_expr : "switch" expr return_case?"{"case_list"}" //value for return case None if missing
 return_case : "yields" bool //To resolve into true or false for switch_expr. This determines for what value we return from the switch_expr, assuming it is fallthrough
 case_list : ((case|default_case))+
 case : "case " value ":" expr -> case_block //ident means an enum value. In this case, we only compare the value name
@@ -34,8 +33,8 @@ item_def : "item " ident ":"? "{" (logicval_set | name_def | classification_def 
 present_when_def: /present_when|presentWhen/ ":" expr
 rule_def: "rule" ":" expr
 dest_def: /destinationId|destination_id|destId|dest_id/ ":" ident
-cant_cross_child: /childCantCross|child_cant_cross/
-cant_cross_adult: /adultCantCross|adult_cant_cross/
+cant_cross_child: /childCantCross|child_cant_cross/ //No need for an expression, further conditions can just be part of the access rule
+cant_cross_adult: /adultCantCross|adult_cant_cross/ //Using these just simplifies some rules, and may be more efficient than having to check the rule every time
 entrance_def : "entrance " ident ":"? "{" (rule_def | dest_def | cant_cross_adult | cant_cross_child | name_def | present_when_def)+ "}"
 //Entrances need: name/id of destination region, name, id, access rule, traversable as child, traversable as adult
 
@@ -86,7 +85,7 @@ logic_def : "logic" ":"? "{" (region_def | item_def | helper_def)+ "}"
             | basefunc
 
 
-?basefunc : /[oO]ptions?/("." ident)+ -> option
+?basefunc : /[oO]ptions?/"." ident -> option
           | /[hH}elpers?\./ ident"("args")" -> helper_invoke //helper.name(args)
           | /[aA]rgs?\./ ident -> arg_access
           | /[lL]ogic_?[vV]als?\./ ident -> logic_val_access

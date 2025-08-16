@@ -10,7 +10,6 @@ from json import loads, dumps
 class SwitchExprBlock:
     type = "switch_expr"
     expr: Expr
-    is_fallthrough: bool
     cases: List[Case]
     return_case: Optional[bool] = None
 
@@ -57,7 +56,7 @@ class HelperInvocation:
 @dataclass
 class OptionCheck:
     type = "option_get"
-    keywords: List[str]
+    label: str
 
 @dataclass
 class IfBlock:
@@ -206,6 +205,12 @@ type OptionTypes = Union[OptionStringList, OptionIntRange, OptionFloatRange, Opt
 type Case = Union[DefaultCase, ValueCase]
 
 type Expr = Union[Constant, Operation, IfBlock, HelperInvocation, OptionCheck, LogicValCheck, ArgAccess, EventCheck, SwitchExprBlock]#, SwitchBlock]
+expr_types = (Constant, Operation, IfBlock, HelperInvocation, OptionCheck, LogicValCheck, ArgAccess, EventCheck, SwitchExprBlock)
+
+ast_node_types = (SwitchExprBlock, DefaultCase, ValueCase, Operation, Constant, EnumValue, Enum, HelperInvocation, OptionCheck, \
+                     IfBlock, ElseBlock, ElseIfBlock, ArgAccess, EventCheck, LogicValCheck, HelperDefinition, ItemDef, EntranceDef, \
+                    LocationDef, EventSet, RegionDef, LogicDef, OptionsDef, OptionStringList, OptionIntRange, OptionFloatRange, \
+                        OptionIntList, OptionFloatList, OptionBool, CodeFile)
 
 #Build a dataclass based on a given data dict. Any entries in the dict which are not field names are excluded
 def build(struct: type, data: dict):

@@ -21,7 +21,7 @@ logic: {
     }
     helper canPassEnemy(enemy, distance = EnemyDistance:CLOSE, wallOrFloor = true, age=Age:EITHER): {
         helper.canKillEnemy(args.enemy, args.distance, args.wallOrFloor, args.age) ||
-        switch args.enemy fallthrough{
+        switch args.enemy {
             case Enemy:GOLD_SKULLTULA:
             case Enemy:GOHMA_LARVA:
             case Enemy:LIZALFOS:
@@ -67,9 +67,9 @@ logic: {
         }
     }
     helper canKillEnemy(enemy, distance = EnemyDistance:CLOSE, wallOrFloor = true, quantity = 1, timer = false, inWater = false, age=Age:EITHER): {
-        switch args.enemy fallthrough {
+        switch args.enemy {
             case Enemy:GOLD_SKULLTULA:
-                switch args.distance fallthrough yields true {
+                switch args.distance yields true {
                     case EnemyDistance:CLOSE:                   helper.canUse(RG_MEGATON_HAMMER, args.age)
                     case EnemyDistance:SHORT_JUMPSLASH:         helper.canUse(RG_KOKIRI_SWORD, args.age)
                     case EnemyDistance:MASTER_SWORD_JUMPSLASH:  helper.canUse(RG_MASTER_SWORD, args.age)
@@ -85,7 +85,7 @@ logic: {
             case Enemy:DEKU_BABA:
                 helper.canAttack(args.age)
             case Enemy:BIG_SKULLTULA:
-                switch args.distance fallthrough yields true {
+                switch args.distance yields true {
                     case EnemyDistance:CLOSE:
                         // hammer jumpslash cannot damage these, but hammer swing can
                         helper.canUse(RG_MEGATON_HAMMER, args.age)
@@ -115,7 +115,7 @@ logic: {
                 helper.canJumpslash(args.age) || helper.hasExplosives(args.age) || helper.canUse(RG_FAIRY_SLINGSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age)
             case Enemy:KEESE:
             case Enemy:FIRE_KEESE:
-                switch distance fallthrough yields true{
+                switch distance yields true{
                     case EnemyDistance:CLOSE:
                     case EnemyDistance:SHORT_JUMPSLASH:
                         helper.canUse(RG_MEGATON_HAMMER, args.age) || helper.canUse(RG_KOKIRI_SWORD, args.age)
@@ -154,7 +154,7 @@ logic: {
             case Enemy:STALFOS:
                 // RANDOTODO Add trick to kill stalfos with sticks, and a second one for bombs without stunning. Higher ammo
                 // logic for bombs is also plausible
-                switch args.distance fallthrough yields true {
+                switch args.distance yields true {
                     case EnemyDistance:CLOSE:
                     case EnemyDistance:SHORT_JUMPSLASH:
                         helper.canUse(RG_MEGATON_HAMMER, args.age) || helper.canUse(RG_KOKIRI_SWORD, args.age)
@@ -232,7 +232,7 @@ logic: {
                     helper.canUse(RG_STICKS, args.age) || helper.hasExplosives(args.age) || helper.canUse(RG_HOOKSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age) ||
                     helper.canUse(RG_DINS_FIRE, args.age)
             case Enemy:STINGER:
-                switch distance fallthrough yields true {
+                switch distance yields true {
                     case EnemyDistance:CLOSE:
                     case EnemyDistance:SHORT_JUMPSLASH:
                         helper.canUse(RG_MEGATON_HAMMER, args.age) || helper.canUse(RG_KOKIRI_SWORD, args.age)
@@ -381,7 +381,7 @@ logic: {
     }
     helper canUse(item, age=Age:EITHER):{ 
         helper.hasItem(itemName) &&
-        switch itemName fallthrough {
+        switch itemName {
             // Magic items
             case RG_MAGIC_SINGLE:
                 events.AmmoCanDrop || (helper.hasBottle(args.age) && logicvals.LOGIC_BUY_MAGIC_POTION)

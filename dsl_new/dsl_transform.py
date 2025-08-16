@@ -26,19 +26,15 @@ class DSLTransformer(Transformer):
     def switch_expr(self, s):
         expr = s[0]
         del s[0]
-        is_fallthrough = False
-        if s[0] == "fallthrough":
-            is_fallthrough = True
-            del s[0]
         yields = None
         if s[0] is bool:
             yields = s[0]
             del s[0]
-        return SwitchExprBlock(expr=expr, is_fallthrough=is_fallthrough, return_case=yields, cases=s)
+        return SwitchExprBlock(expr=expr, return_case=yields, cases=s)
     return_case = lambda self, s: s[0]
     case_block = v_args(inline=True)(lambda self, key, block = None: ValueCase(key=key, code=block))
     default_case = v_args(inline=True)(lambda self, block: DefaultCase(code=block))
-    option = lambda self, s: OptionCheck(keywords=s)
+    option = v_args(inline=True)(lambda self, s: OptionCheck(label=s))
     helper_invoke = v_args(inline=True)(lambda self, name, args: HelperInvocation(name=name, args=args))
     arg_access = v_args(inline=True)(lambda self, name: ArgAccess(name=name))
     logic_val_access = v_args(inline=True)(lambda self, name: LogicValCheck(name=name))
