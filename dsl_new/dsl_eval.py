@@ -12,6 +12,7 @@ def resolve_options(root, optDict: Dict):
     return root
 
 #Resolves a helper invocation, replacing it with the helper definition with argument values inserted. In the case of recursion, this will infinitely loop. 
+#Note that in the case of arguments of the same name, the values from the deepest call are used
 def resolve_helper_call(logic: LogicDef, helper_call: HelperInvocation):
     name = helper_call.name
     helper = None
@@ -30,11 +31,11 @@ def resolve_helper_call(logic: LogicDef, helper_call: HelperInvocation):
             if isinstance(arg, expr_types):
                 args[unused_names[index]] = arg
                 index = index + 1
-        _resolve_helper_call(logic, helper, args)
+        return _resolve_helper_call(logic, helper, args)
 
-def _resolve_helper_call(logic: LogicDef, node, args: Dict):
-    if isinstance(node, ArgAccess):
-        node = args.get(node.name)
+def _resolve_helper_call(logic: LogicDef, node: AST_Nodes, args: Dict[str, AST_Nodes]):
+    if isinstance(node, ArgAccess) and node.name in args.keys():
+        node = args[node.name]
     if isinstance(node, HelperInvocation):
         return resolve_helper_call(logic, node)
     if isinstance(node, ast_node_types): #All of the nodes are dataclasses
@@ -42,32 +43,6 @@ def _resolve_helper_call(logic: LogicDef, node, args: Dict):
             setattr(node, field.name, _resolve_helper_call(logic, getattr(node, field.name), args))
     return node
 
-"""
-?basefunc : /[oO]ptions?/"." ident -> option
-          | /[hH}elpers?\./ ident"("args")" -> helper_invoke //helper.name(args)
-          | /[aA]rgs?\./ ident -> arg_access
-          | /[lL]ogic_?[vV]als?\./ ident -> logic_val_access
-          | /[eE]vents?\./ ident -> event_access
-          | /[cC]anReachLocation|can_reach_location/"(" ident ("," age)")" -> location_check
-          | /[cC]anReachEntrance|can_reach_entrance/"(" ident ("," age)")" -> entrance_check
-          | /[cC]anReachRegion|can_reach_region/"(" ident ("," age)")" -> region_check
-          | /[hH]asItem|has_item/"(" ident")" -> has_item
-          | /[cC]ountItem|count_item/"(" ident")" -> count_item
-          | /[iI]sDungeonMQ|is_dungeon_mq/"(" ident")" -> is_dungeon_mq
-          | "floor("expr")" -> floor_op
-          | "ceil("expr")" -> ceil_op
-          | switch_expr
-          | if_block
-          | value
-    is_dungeon_mq = lambda self, s: Operation(op="is_dungeon_mq", operands=s)
-    location_check = lambda self, s: Operation(op="can_reach_location", operands=s)
-    region_check = lambda self, s: Operation(op="can_reach_region", operands=s)
-    entrance_check = lambda self, s: Operation(op="can_reach_entrance", operands=s)
-    has_item = lambda self, s: Operation(op="has_item", operands=s)
-    count_item = lambda self, s: Operation(op="count_item", operands=s)
-    floor_op = lambda self, s: Operation(op="floor", operands=s)
-    ceil_op = lambda self, s: Operation(op="ceil", operands=s)
-"""
 #Implement logic val check, event check
 
 #type Expr = Union[Constant, Operation, IfBlock, HelperInvocation, OptionCheck, LogicValCheck, ArgAccess, EventCheck, SwitchExprBlock]
@@ -145,8 +120,9 @@ def evaluate_expr(expr: Expr, logic: LogicDef) -> Any:
         if isinstance(block, ElseBlock):
             return evaluate_expr(block.expr, logic)
     if isinstance(expr, HelperInvocation):
-        resolve_helper_call(logic, expr)
-        return evaluate_expr(expr, logic)
+        resolved = resolve_helper_call(logic, expr)
+        if isinstance(resolved, expr_types): #should always be true, if the resolution worked
+            return evaluate_expr(resolved, logic)
     #OptionCheck won't exist, it will be removed when processing option checks
     if isinstance(expr, LogicValCheck):
         pass

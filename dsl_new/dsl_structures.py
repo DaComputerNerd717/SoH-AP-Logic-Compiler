@@ -211,6 +211,10 @@ ast_node_types = (SwitchExprBlock, DefaultCase, ValueCase, Operation, Constant, 
                      IfBlock, ElseBlock, ElseIfBlock, ArgAccess, EventCheck, LogicValCheck, HelperDefinition, ItemDef, EntranceDef, \
                     LocationDef, EventSet, RegionDef, LogicDef, OptionsDef, OptionStringList, OptionIntRange, OptionFloatRange, \
                         OptionIntList, OptionFloatList, OptionBool, CodeFile)
+type AST_Nodes = Union[SwitchExprBlock, DefaultCase, ValueCase, Operation, Constant, EnumValue, Enum, HelperInvocation, OptionCheck, \
+                     IfBlock, ElseBlock, ElseIfBlock, ArgAccess, EventCheck, LogicValCheck, HelperDefinition, ItemDef, EntranceDef, \
+                    LocationDef, EventSet, RegionDef, LogicDef, OptionsDef, OptionStringList, OptionIntRange, OptionFloatRange, \
+                        OptionIntList, OptionFloatList, OptionBool, CodeFile]
 
 #Build a dataclass based on a given data dict. Any entries in the dict which are not field names are excluded
 def build(struct: type, data: dict):
