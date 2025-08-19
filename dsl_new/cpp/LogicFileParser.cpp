@@ -2,7 +2,7 @@
 // Generated from LogicFileParser.g4 by ANTLR 4.9.3
 
 
-#include "LogicFileParserListener.h"
+#include "LogicFileParserVisitor.h"
 
 #include "LogicFileParser.h"
 
@@ -58,16 +58,12 @@ size_t LogicFileParser::EnumDefContext::getRuleIndex() const {
   return LogicFileParser::RuleEnumDef;
 }
 
-void LogicFileParser::EnumDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterEnumDef(this);
-}
 
-void LogicFileParser::EnumDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitEnumDef(this);
+antlrcpp::Any LogicFileParser::EnumDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitEnumDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::EnumDefContext* LogicFileParser::enumDef() {
@@ -137,16 +133,12 @@ size_t LogicFileParser::EnumValsContext::getRuleIndex() const {
   return LogicFileParser::RuleEnumVals;
 }
 
-void LogicFileParser::EnumValsContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterEnumVals(this);
-}
 
-void LogicFileParser::EnumValsContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitEnumVals(this);
+antlrcpp::Any LogicFileParser::EnumValsContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitEnumVals(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::EnumValsContext* LogicFileParser::enumVals() {
@@ -237,16 +229,12 @@ size_t LogicFileParser::IfBlockContext::getRuleIndex() const {
   return LogicFileParser::RuleIfBlock;
 }
 
-void LogicFileParser::IfBlockContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterIfBlock(this);
-}
 
-void LogicFileParser::IfBlockContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitIfBlock(this);
+antlrcpp::Any LogicFileParser::IfBlockContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitIfBlock(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::IfBlockContext* LogicFileParser::ifBlock() {
@@ -326,16 +314,12 @@ size_t LogicFileParser::IfContinuationContext::getRuleIndex() const {
   return LogicFileParser::RuleIfContinuation;
 }
 
-void LogicFileParser::IfContinuationContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterIfContinuation(this);
-}
 
-void LogicFileParser::IfContinuationContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitIfContinuation(this);
+antlrcpp::Any LogicFileParser::IfContinuationContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitIfContinuation(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::IfContinuationContext* LogicFileParser::ifContinuation() {
@@ -424,16 +408,12 @@ size_t LogicFileParser::ElseIfBlockContext::getRuleIndex() const {
   return LogicFileParser::RuleElseIfBlock;
 }
 
-void LogicFileParser::ElseIfBlockContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterElseIfBlock(this);
-}
 
-void LogicFileParser::ElseIfBlockContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitElseIfBlock(this);
+antlrcpp::Any LogicFileParser::ElseIfBlockContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitElseIfBlock(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::ElseIfBlockContext* LogicFileParser::elseIfBlock() {
@@ -517,16 +497,12 @@ size_t LogicFileParser::ElseBlockContext::getRuleIndex() const {
   return LogicFileParser::RuleElseBlock;
 }
 
-void LogicFileParser::ElseBlockContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterElseBlock(this);
-}
 
-void LogicFileParser::ElseBlockContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitElseBlock(this);
+antlrcpp::Any LogicFileParser::ElseBlockContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitElseBlock(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::ElseBlockContext* LogicFileParser::elseBlock() {
@@ -594,16 +570,12 @@ size_t LogicFileParser::SwitchExprContext::getRuleIndex() const {
   return LogicFileParser::RuleSwitchExpr;
 }
 
-void LogicFileParser::SwitchExprContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterSwitchExpr(this);
-}
 
-void LogicFileParser::SwitchExprContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitSwitchExpr(this);
+antlrcpp::Any LogicFileParser::SwitchExprContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitSwitchExpr(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::SwitchExprContext* LogicFileParser::switchExpr() {
@@ -668,16 +640,12 @@ size_t LogicFileParser::Return_caseContext::getRuleIndex() const {
   return LogicFileParser::RuleReturn_case;
 }
 
-void LogicFileParser::Return_caseContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterReturn_case(this);
-}
 
-void LogicFileParser::Return_caseContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitReturn_case(this);
+antlrcpp::Any LogicFileParser::Return_caseContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitReturn_case(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::Return_caseContext* LogicFileParser::return_case() {
@@ -735,16 +703,12 @@ size_t LogicFileParser::CaseListContext::getRuleIndex() const {
   return LogicFileParser::RuleCaseList;
 }
 
-void LogicFileParser::CaseListContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterCaseList(this);
-}
 
-void LogicFileParser::CaseListContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitCaseList(this);
+antlrcpp::Any LogicFileParser::CaseListContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitCaseList(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::CaseListContext* LogicFileParser::caseList() {
@@ -835,16 +799,12 @@ size_t LogicFileParser::CaseDefContext::getRuleIndex() const {
   return LogicFileParser::RuleCaseDef;
 }
 
-void LogicFileParser::CaseDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterCaseDef(this);
-}
 
-void LogicFileParser::CaseDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitCaseDef(this);
+antlrcpp::Any LogicFileParser::CaseDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitCaseDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::CaseDefContext* LogicFileParser::caseDef() {
@@ -921,16 +881,12 @@ size_t LogicFileParser::DefaultCaseContext::getRuleIndex() const {
   return LogicFileParser::RuleDefaultCase;
 }
 
-void LogicFileParser::DefaultCaseContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterDefaultCase(this);
-}
 
-void LogicFileParser::DefaultCaseContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitDefaultCase(this);
+antlrcpp::Any LogicFileParser::DefaultCaseContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitDefaultCase(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::DefaultCaseContext* LogicFileParser::defaultCase() {
@@ -1009,16 +965,12 @@ size_t LogicFileParser::ArgsContext::getRuleIndex() const {
   return LogicFileParser::RuleArgs;
 }
 
-void LogicFileParser::ArgsContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterArgs(this);
-}
 
-void LogicFileParser::ArgsContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitArgs(this);
+antlrcpp::Any LogicFileParser::ArgsContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitArgs(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::ArgsContext* LogicFileParser::args() {
@@ -1125,16 +1077,12 @@ size_t LogicFileParser::ArgContext::getRuleIndex() const {
   return LogicFileParser::RuleArg;
 }
 
-void LogicFileParser::ArgContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterArg(this);
-}
 
-void LogicFileParser::ArgContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitArg(this);
+antlrcpp::Any LogicFileParser::ArgContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitArg(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::ArgContext* LogicFileParser::arg() {
@@ -1249,16 +1197,12 @@ size_t LogicFileParser::HelperDefContext::getRuleIndex() const {
   return LogicFileParser::RuleHelperDef;
 }
 
-void LogicFileParser::HelperDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterHelperDef(this);
-}
 
-void LogicFileParser::HelperDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitHelperDef(this);
+antlrcpp::Any LogicFileParser::HelperDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitHelperDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::HelperDefContext* LogicFileParser::helperDef() {
@@ -1353,16 +1297,12 @@ size_t LogicFileParser::QuantityDefContext::getRuleIndex() const {
   return LogicFileParser::RuleQuantityDef;
 }
 
-void LogicFileParser::QuantityDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterQuantityDef(this);
-}
 
-void LogicFileParser::QuantityDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitQuantityDef(this);
+antlrcpp::Any LogicFileParser::QuantityDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitQuantityDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::QuantityDefContext* LogicFileParser::quantityDef() {
@@ -1412,16 +1352,12 @@ size_t LogicFileParser::LogicValSetContext::getRuleIndex() const {
   return LogicFileParser::RuleLogicValSet;
 }
 
-void LogicFileParser::LogicValSetContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterLogicValSet(this);
-}
 
-void LogicFileParser::LogicValSetContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitLogicValSet(this);
+antlrcpp::Any LogicFileParser::LogicValSetContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitLogicValSet(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::LogicValSetContext* LogicFileParser::logicValSet() {
@@ -1471,16 +1407,12 @@ size_t LogicFileParser::NameDefContext::getRuleIndex() const {
   return LogicFileParser::RuleNameDef;
 }
 
-void LogicFileParser::NameDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterNameDef(this);
-}
 
-void LogicFileParser::NameDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitNameDef(this);
+antlrcpp::Any LogicFileParser::NameDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitNameDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::NameDefContext* LogicFileParser::nameDef() {
@@ -1530,16 +1462,12 @@ size_t LogicFileParser::ClassificationDefContext::getRuleIndex() const {
   return LogicFileParser::RuleClassificationDef;
 }
 
-void LogicFileParser::ClassificationDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterClassificationDef(this);
-}
 
-void LogicFileParser::ClassificationDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitClassificationDef(this);
+antlrcpp::Any LogicFileParser::ClassificationDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitClassificationDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::ClassificationDefContext* LogicFileParser::classificationDef() {
@@ -1641,16 +1569,12 @@ size_t LogicFileParser::ItemDefContext::getRuleIndex() const {
   return LogicFileParser::RuleItemDef;
 }
 
-void LogicFileParser::ItemDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterItemDef(this);
-}
 
-void LogicFileParser::ItemDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitItemDef(this);
+antlrcpp::Any LogicFileParser::ItemDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitItemDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::ItemDefContext* LogicFileParser::itemDef() {
@@ -1770,16 +1694,12 @@ size_t LogicFileParser::PresentWhenDefContext::getRuleIndex() const {
   return LogicFileParser::RulePresentWhenDef;
 }
 
-void LogicFileParser::PresentWhenDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterPresentWhenDef(this);
-}
 
-void LogicFileParser::PresentWhenDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitPresentWhenDef(this);
+antlrcpp::Any LogicFileParser::PresentWhenDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitPresentWhenDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::PresentWhenDefContext* LogicFileParser::presentWhenDef() {
@@ -1829,16 +1749,12 @@ size_t LogicFileParser::RuleDefContext::getRuleIndex() const {
   return LogicFileParser::RuleRuleDef;
 }
 
-void LogicFileParser::RuleDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterRuleDef(this);
-}
 
-void LogicFileParser::RuleDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitRuleDef(this);
+antlrcpp::Any LogicFileParser::RuleDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitRuleDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::RuleDefContext* LogicFileParser::ruleDef() {
@@ -1888,16 +1804,12 @@ size_t LogicFileParser::DestDefContext::getRuleIndex() const {
   return LogicFileParser::RuleDestDef;
 }
 
-void LogicFileParser::DestDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterDestDef(this);
-}
 
-void LogicFileParser::DestDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitDestDef(this);
+antlrcpp::Any LogicFileParser::DestDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitDestDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::DestDefContext* LogicFileParser::destDef() {
@@ -2007,16 +1919,12 @@ size_t LogicFileParser::EntranceDefContext::getRuleIndex() const {
   return LogicFileParser::RuleEntranceDef;
 }
 
-void LogicFileParser::EntranceDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterEntranceDef(this);
-}
 
-void LogicFileParser::EntranceDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitEntranceDef(this);
+antlrcpp::Any LogicFileParser::EntranceDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitEntranceDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::EntranceDefContext* LogicFileParser::entranceDef() {
@@ -2195,16 +2103,12 @@ size_t LogicFileParser::LocationDefContext::getRuleIndex() const {
   return LogicFileParser::RuleLocationDef;
 }
 
-void LogicFileParser::LocationDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterLocationDef(this);
-}
 
-void LogicFileParser::LocationDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitLocationDef(this);
+antlrcpp::Any LogicFileParser::LocationDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitLocationDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::LocationDefContext* LogicFileParser::locationDef() {
@@ -2346,16 +2250,12 @@ size_t LogicFileParser::EventDefContext::getRuleIndex() const {
   return LogicFileParser::RuleEventDef;
 }
 
-void LogicFileParser::EventDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterEventDef(this);
-}
 
-void LogicFileParser::EventDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitEventDef(this);
+antlrcpp::Any LogicFileParser::EventDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitEventDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::EventDefContext* LogicFileParser::eventDef() {
@@ -2486,16 +2386,12 @@ size_t LogicFileParser::RegionDefContext::getRuleIndex() const {
   return LogicFileParser::RuleRegionDef;
 }
 
-void LogicFileParser::RegionDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterRegionDef(this);
-}
 
-void LogicFileParser::RegionDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitRegionDef(this);
+antlrcpp::Any LogicFileParser::RegionDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitRegionDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::RegionDefContext* LogicFileParser::regionDef() {
@@ -2662,16 +2558,12 @@ size_t LogicFileParser::LogicDefContext::getRuleIndex() const {
   return LogicFileParser::RuleLogicDef;
 }
 
-void LogicFileParser::LogicDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterLogicDef(this);
-}
 
-void LogicFileParser::LogicDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitLogicDef(this);
+antlrcpp::Any LogicFileParser::LogicDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitLogicDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::LogicDefContext* LogicFileParser::logicDef() {
@@ -2854,16 +2746,12 @@ size_t LogicFileParser::OptionsDefContext::getRuleIndex() const {
   return LogicFileParser::RuleOptionsDef;
 }
 
-void LogicFileParser::OptionsDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterOptionsDef(this);
-}
 
-void LogicFileParser::OptionsDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitOptionsDef(this);
+antlrcpp::Any LogicFileParser::OptionsDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitOptionsDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::OptionsDefContext* LogicFileParser::optionsDef() {
@@ -3021,16 +2909,12 @@ size_t LogicFileParser::OptionDefStringsContext::getRuleIndex() const {
   return LogicFileParser::RuleOptionDefStrings;
 }
 
-void LogicFileParser::OptionDefStringsContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterOptionDefStrings(this);
-}
 
-void LogicFileParser::OptionDefStringsContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitOptionDefStrings(this);
+antlrcpp::Any LogicFileParser::OptionDefStringsContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitOptionDefStrings(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::OptionDefStringsContext* LogicFileParser::optionDefStrings() {
@@ -3129,16 +3013,12 @@ size_t LogicFileParser::OptionDefStringContext::getRuleIndex() const {
   return LogicFileParser::RuleOptionDefString;
 }
 
-void LogicFileParser::OptionDefStringContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterOptionDefString(this);
-}
 
-void LogicFileParser::OptionDefStringContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitOptionDefString(this);
+antlrcpp::Any LogicFileParser::OptionDefStringContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitOptionDefString(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::OptionDefStringContext* LogicFileParser::optionDefString() {
@@ -3227,16 +3107,12 @@ size_t LogicFileParser::OptionDefIntListContext::getRuleIndex() const {
   return LogicFileParser::RuleOptionDefIntList;
 }
 
-void LogicFileParser::OptionDefIntListContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterOptionDefIntList(this);
-}
 
-void LogicFileParser::OptionDefIntListContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitOptionDefIntList(this);
+antlrcpp::Any LogicFileParser::OptionDefIntListContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitOptionDefIntList(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::OptionDefIntListContext* LogicFileParser::optionDefIntList() {
@@ -3364,16 +3240,12 @@ size_t LogicFileParser::OptionDefIntRangeContext::getRuleIndex() const {
   return LogicFileParser::RuleOptionDefIntRange;
 }
 
-void LogicFileParser::OptionDefIntRangeContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterOptionDefIntRange(this);
-}
 
-void LogicFileParser::OptionDefIntRangeContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitOptionDefIntRange(this);
+antlrcpp::Any LogicFileParser::OptionDefIntRangeContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitOptionDefIntRange(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::OptionDefIntRangeContext* LogicFileParser::optionDefIntRange() {
@@ -3474,16 +3346,12 @@ size_t LogicFileParser::OptionDefIntContext::getRuleIndex() const {
   return LogicFileParser::RuleOptionDefInt;
 }
 
-void LogicFileParser::OptionDefIntContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterOptionDefInt(this);
-}
 
-void LogicFileParser::OptionDefIntContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitOptionDefInt(this);
+antlrcpp::Any LogicFileParser::OptionDefIntContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitOptionDefInt(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::OptionDefIntContext* LogicFileParser::optionDefInt() {
@@ -3569,16 +3437,12 @@ size_t LogicFileParser::OptionDefFloatListContext::getRuleIndex() const {
   return LogicFileParser::RuleOptionDefFloatList;
 }
 
-void LogicFileParser::OptionDefFloatListContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterOptionDefFloatList(this);
-}
 
-void LogicFileParser::OptionDefFloatListContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitOptionDefFloatList(this);
+antlrcpp::Any LogicFileParser::OptionDefFloatListContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitOptionDefFloatList(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::OptionDefFloatListContext* LogicFileParser::optionDefFloatList() {
@@ -3713,16 +3577,12 @@ size_t LogicFileParser::OptionDefFloatRangeContext::getRuleIndex() const {
   return LogicFileParser::RuleOptionDefFloatRange;
 }
 
-void LogicFileParser::OptionDefFloatRangeContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterOptionDefFloatRange(this);
-}
 
-void LogicFileParser::OptionDefFloatRangeContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitOptionDefFloatRange(this);
+antlrcpp::Any LogicFileParser::OptionDefFloatRangeContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitOptionDefFloatRange(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::OptionDefFloatRangeContext* LogicFileParser::optionDefFloatRange() {
@@ -3823,16 +3683,12 @@ size_t LogicFileParser::OptionDefFloatContext::getRuleIndex() const {
   return LogicFileParser::RuleOptionDefFloat;
 }
 
-void LogicFileParser::OptionDefFloatContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterOptionDefFloat(this);
-}
 
-void LogicFileParser::OptionDefFloatContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitOptionDefFloat(this);
+antlrcpp::Any LogicFileParser::OptionDefFloatContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitOptionDefFloat(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::OptionDefFloatContext* LogicFileParser::optionDefFloat() {
@@ -3894,16 +3750,12 @@ size_t LogicFileParser::OptionDefBoolContext::getRuleIndex() const {
   return LogicFileParser::RuleOptionDefBool;
 }
 
-void LogicFileParser::OptionDefBoolContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterOptionDefBool(this);
-}
 
-void LogicFileParser::OptionDefBoolContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitOptionDefBool(this);
+antlrcpp::Any LogicFileParser::OptionDefBoolContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitOptionDefBool(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::OptionDefBoolContext* LogicFileParser::optionDefBool() {
@@ -3981,16 +3833,12 @@ size_t LogicFileParser::FileDefContext::getRuleIndex() const {
   return LogicFileParser::RuleFileDef;
 }
 
-void LogicFileParser::FileDefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterFileDef(this);
-}
 
-void LogicFileParser::FileDefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitFileDef(this);
+antlrcpp::Any LogicFileParser::FileDefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitFileDef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::FileDefContext* LogicFileParser::fileDef() {
@@ -4091,15 +3939,12 @@ tree::TerminalNode* LogicFileParser::SubOperatorContext::SubSymbol() {
 
 LogicFileParser::SubOperatorContext::SubOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::SubOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterSubOperator(this);
-}
-void LogicFileParser::SubOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitSubOperator(this);
+
+antlrcpp::Any LogicFileParser::SubOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitSubOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- LeftShiftOperatorContext ------------------------------------------------------------------
 
@@ -4117,15 +3962,12 @@ tree::TerminalNode* LogicFileParser::LeftShiftOperatorContext::LSSymbol() {
 
 LogicFileParser::LeftShiftOperatorContext::LeftShiftOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::LeftShiftOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterLeftShiftOperator(this);
-}
-void LogicFileParser::LeftShiftOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitLeftShiftOperator(this);
+
+antlrcpp::Any LogicFileParser::LeftShiftOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitLeftShiftOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- GeqOperatorContext ------------------------------------------------------------------
 
@@ -4143,15 +3985,12 @@ tree::TerminalNode* LogicFileParser::GeqOperatorContext::GeqSymbol() {
 
 LogicFileParser::GeqOperatorContext::GeqOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::GeqOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterGeqOperator(this);
-}
-void LogicFileParser::GeqOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitGeqOperator(this);
+
+antlrcpp::Any LogicFileParser::GeqOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitGeqOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- EqOperatorContext ------------------------------------------------------------------
 
@@ -4169,15 +4008,12 @@ tree::TerminalNode* LogicFileParser::EqOperatorContext::EqSymbol() {
 
 LogicFileParser::EqOperatorContext::EqOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::EqOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterEqOperator(this);
-}
-void LogicFileParser::EqOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitEqOperator(this);
+
+antlrcpp::Any LogicFileParser::EqOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitEqOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- BaseFuncContext ------------------------------------------------------------------
 
@@ -4187,15 +4023,12 @@ LogicFileParser::BasefuncContext* LogicFileParser::BaseFuncContext::basefunc() {
 
 LogicFileParser::BaseFuncContext::BaseFuncContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::BaseFuncContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterBaseFunc(this);
-}
-void LogicFileParser::BaseFuncContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitBaseFunc(this);
+
+antlrcpp::Any LogicFileParser::BaseFuncContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitBaseFunc(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- NeqOperatorContext ------------------------------------------------------------------
 
@@ -4213,15 +4046,12 @@ tree::TerminalNode* LogicFileParser::NeqOperatorContext::NeqSymbol() {
 
 LogicFileParser::NeqOperatorContext::NeqOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::NeqOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterNeqOperator(this);
-}
-void LogicFileParser::NeqOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitNeqOperator(this);
+
+antlrcpp::Any LogicFileParser::NeqOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitNeqOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- TernaryOperatorContext ------------------------------------------------------------------
 
@@ -4243,15 +4073,12 @@ tree::TerminalNode* LogicFileParser::TernaryOperatorContext::Question() {
 
 LogicFileParser::TernaryOperatorContext::TernaryOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::TernaryOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterTernaryOperator(this);
-}
-void LogicFileParser::TernaryOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitTernaryOperator(this);
+
+antlrcpp::Any LogicFileParser::TernaryOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitTernaryOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- AndOperatorContext ------------------------------------------------------------------
 
@@ -4269,15 +4096,12 @@ tree::TerminalNode* LogicFileParser::AndOperatorContext::AndSymbol() {
 
 LogicFileParser::AndOperatorContext::AndOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::AndOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterAndOperator(this);
-}
-void LogicFileParser::AndOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitAndOperator(this);
+
+antlrcpp::Any LogicFileParser::AndOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitAndOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- DivOperatorContext ------------------------------------------------------------------
 
@@ -4295,15 +4119,12 @@ tree::TerminalNode* LogicFileParser::DivOperatorContext::DivSymbol() {
 
 LogicFileParser::DivOperatorContext::DivOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::DivOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterDivOperator(this);
-}
-void LogicFileParser::DivOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitDivOperator(this);
+
+antlrcpp::Any LogicFileParser::DivOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitDivOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- OrOperatorContext ------------------------------------------------------------------
 
@@ -4321,15 +4142,12 @@ tree::TerminalNode* LogicFileParser::OrOperatorContext::OrSymbol() {
 
 LogicFileParser::OrOperatorContext::OrOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::OrOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterOrOperator(this);
-}
-void LogicFileParser::OrOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitOrOperator(this);
+
+antlrcpp::Any LogicFileParser::OrOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitOrOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- AddOperatorContext ------------------------------------------------------------------
 
@@ -4347,15 +4165,12 @@ tree::TerminalNode* LogicFileParser::AddOperatorContext::AddSymbol() {
 
 LogicFileParser::AddOperatorContext::AddOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::AddOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterAddOperator(this);
-}
-void LogicFileParser::AddOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitAddOperator(this);
+
+antlrcpp::Any LogicFileParser::AddOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitAddOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- GeOperatorContext ------------------------------------------------------------------
 
@@ -4373,15 +4188,12 @@ tree::TerminalNode* LogicFileParser::GeOperatorContext::GeSymbol() {
 
 LogicFileParser::GeOperatorContext::GeOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::GeOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterGeOperator(this);
-}
-void LogicFileParser::GeOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitGeOperator(this);
+
+antlrcpp::Any LogicFileParser::GeOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitGeOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- LeqOperatorContext ------------------------------------------------------------------
 
@@ -4399,15 +4211,12 @@ tree::TerminalNode* LogicFileParser::LeqOperatorContext::LeqSymbol() {
 
 LogicFileParser::LeqOperatorContext::LeqOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::LeqOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterLeqOperator(this);
-}
-void LogicFileParser::LeqOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitLeqOperator(this);
+
+antlrcpp::Any LogicFileParser::LeqOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitLeqOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- NotOperatorContext ------------------------------------------------------------------
 
@@ -4421,15 +4230,12 @@ tree::TerminalNode* LogicFileParser::NotOperatorContext::NotSymbol() {
 
 LogicFileParser::NotOperatorContext::NotOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::NotOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterNotOperator(this);
-}
-void LogicFileParser::NotOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitNotOperator(this);
+
+antlrcpp::Any LogicFileParser::NotOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitNotOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- RightShiftOperatorContext ------------------------------------------------------------------
 
@@ -4447,15 +4253,12 @@ tree::TerminalNode* LogicFileParser::RightShiftOperatorContext::RSSymbol() {
 
 LogicFileParser::RightShiftOperatorContext::RightShiftOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::RightShiftOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterRightShiftOperator(this);
-}
-void LogicFileParser::RightShiftOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitRightShiftOperator(this);
+
+antlrcpp::Any LogicFileParser::RightShiftOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitRightShiftOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- MulOperatorContext ------------------------------------------------------------------
 
@@ -4473,15 +4276,12 @@ tree::TerminalNode* LogicFileParser::MulOperatorContext::MulSymbol() {
 
 LogicFileParser::MulOperatorContext::MulOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::MulOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterMulOperator(this);
-}
-void LogicFileParser::MulOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitMulOperator(this);
+
+antlrcpp::Any LogicFileParser::MulOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitMulOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- LeOperatorContext ------------------------------------------------------------------
 
@@ -4499,15 +4299,12 @@ tree::TerminalNode* LogicFileParser::LeOperatorContext::LeSymbol() {
 
 LogicFileParser::LeOperatorContext::LeOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::LeOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterLeOperator(this);
-}
-void LogicFileParser::LeOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitLeOperator(this);
+
+antlrcpp::Any LogicFileParser::LeOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitLeOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 //----------------- ModOperatorContext ------------------------------------------------------------------
 
@@ -4525,15 +4322,12 @@ tree::TerminalNode* LogicFileParser::ModOperatorContext::ModSymbol() {
 
 LogicFileParser::ModOperatorContext::ModOperatorContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void LogicFileParser::ModOperatorContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterModOperator(this);
-}
-void LogicFileParser::ModOperatorContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitModOperator(this);
+
+antlrcpp::Any LogicFileParser::ModOperatorContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitModOperator(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::ExprContext* LogicFileParser::expr() {
@@ -4958,16 +4752,12 @@ size_t LogicFileParser::BasefuncContext::getRuleIndex() const {
   return LogicFileParser::RuleBasefunc;
 }
 
-void LogicFileParser::BasefuncContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterBasefunc(this);
-}
 
-void LogicFileParser::BasefuncContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitBasefunc(this);
+antlrcpp::Any LogicFileParser::BasefuncContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitBasefunc(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::BasefuncContext* LogicFileParser::basefunc() {
@@ -5137,16 +4927,12 @@ size_t LogicFileParser::OptionCheckContext::getRuleIndex() const {
   return LogicFileParser::RuleOptionCheck;
 }
 
-void LogicFileParser::OptionCheckContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterOptionCheck(this);
-}
 
-void LogicFileParser::OptionCheckContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitOptionCheck(this);
+antlrcpp::Any LogicFileParser::OptionCheckContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitOptionCheck(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::OptionCheckContext* LogicFileParser::optionCheck() {
@@ -5196,16 +4982,12 @@ size_t LogicFileParser::HelperCallContext::getRuleIndex() const {
   return LogicFileParser::RuleHelperCall;
 }
 
-void LogicFileParser::HelperCallContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterHelperCall(this);
-}
 
-void LogicFileParser::HelperCallContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitHelperCall(this);
+antlrcpp::Any LogicFileParser::HelperCallContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitHelperCall(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::HelperCallContext* LogicFileParser::helperCall() {
@@ -5255,16 +5037,12 @@ size_t LogicFileParser::ArgCheckContext::getRuleIndex() const {
   return LogicFileParser::RuleArgCheck;
 }
 
-void LogicFileParser::ArgCheckContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterArgCheck(this);
-}
 
-void LogicFileParser::ArgCheckContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitArgCheck(this);
+antlrcpp::Any LogicFileParser::ArgCheckContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitArgCheck(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::ArgCheckContext* LogicFileParser::argCheck() {
@@ -5314,16 +5092,12 @@ size_t LogicFileParser::LogicValCheckContext::getRuleIndex() const {
   return LogicFileParser::RuleLogicValCheck;
 }
 
-void LogicFileParser::LogicValCheckContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterLogicValCheck(this);
-}
 
-void LogicFileParser::LogicValCheckContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitLogicValCheck(this);
+antlrcpp::Any LogicFileParser::LogicValCheckContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitLogicValCheck(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::LogicValCheckContext* LogicFileParser::logicValCheck() {
@@ -5373,16 +5147,12 @@ size_t LogicFileParser::EventCheckContext::getRuleIndex() const {
   return LogicFileParser::RuleEventCheck;
 }
 
-void LogicFileParser::EventCheckContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterEventCheck(this);
-}
 
-void LogicFileParser::EventCheckContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitEventCheck(this);
+antlrcpp::Any LogicFileParser::EventCheckContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitEventCheck(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::EventCheckContext* LogicFileParser::eventCheck() {
@@ -5452,16 +5222,12 @@ size_t LogicFileParser::CanReachLocCallContext::getRuleIndex() const {
   return LogicFileParser::RuleCanReachLocCall;
 }
 
-void LogicFileParser::CanReachLocCallContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterCanReachLocCall(this);
-}
 
-void LogicFileParser::CanReachLocCallContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitCanReachLocCall(this);
+antlrcpp::Any LogicFileParser::CanReachLocCallContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitCanReachLocCall(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::CanReachLocCallContext* LogicFileParser::canReachLocCall() {
@@ -5554,16 +5320,12 @@ size_t LogicFileParser::CanReachEntranceCallContext::getRuleIndex() const {
   return LogicFileParser::RuleCanReachEntranceCall;
 }
 
-void LogicFileParser::CanReachEntranceCallContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterCanReachEntranceCall(this);
-}
 
-void LogicFileParser::CanReachEntranceCallContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitCanReachEntranceCall(this);
+antlrcpp::Any LogicFileParser::CanReachEntranceCallContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitCanReachEntranceCall(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::CanReachEntranceCallContext* LogicFileParser::canReachEntranceCall() {
@@ -5656,16 +5418,12 @@ size_t LogicFileParser::CanReachRegionCallContext::getRuleIndex() const {
   return LogicFileParser::RuleCanReachRegionCall;
 }
 
-void LogicFileParser::CanReachRegionCallContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterCanReachRegionCall(this);
-}
 
-void LogicFileParser::CanReachRegionCallContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitCanReachRegionCall(this);
+antlrcpp::Any LogicFileParser::CanReachRegionCallContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitCanReachRegionCall(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::CanReachRegionCallContext* LogicFileParser::canReachRegionCall() {
@@ -5746,16 +5504,12 @@ size_t LogicFileParser::HasItemCallContext::getRuleIndex() const {
   return LogicFileParser::RuleHasItemCall;
 }
 
-void LogicFileParser::HasItemCallContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterHasItemCall(this);
-}
 
-void LogicFileParser::HasItemCallContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitHasItemCall(this);
+antlrcpp::Any LogicFileParser::HasItemCallContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitHasItemCall(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::HasItemCallContext* LogicFileParser::hasItemCall() {
@@ -5817,16 +5571,12 @@ size_t LogicFileParser::CountItemCallContext::getRuleIndex() const {
   return LogicFileParser::RuleCountItemCall;
 }
 
-void LogicFileParser::CountItemCallContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterCountItemCall(this);
-}
 
-void LogicFileParser::CountItemCallContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitCountItemCall(this);
+antlrcpp::Any LogicFileParser::CountItemCallContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitCountItemCall(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::CountItemCallContext* LogicFileParser::countItemCall() {
@@ -5888,16 +5638,12 @@ size_t LogicFileParser::IsDungeonMqCallContext::getRuleIndex() const {
   return LogicFileParser::RuleIsDungeonMqCall;
 }
 
-void LogicFileParser::IsDungeonMqCallContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterIsDungeonMqCall(this);
-}
 
-void LogicFileParser::IsDungeonMqCallContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitIsDungeonMqCall(this);
+antlrcpp::Any LogicFileParser::IsDungeonMqCallContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitIsDungeonMqCall(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::IsDungeonMqCallContext* LogicFileParser::isDungeonMqCall() {
@@ -5959,16 +5705,12 @@ size_t LogicFileParser::FloorCallContext::getRuleIndex() const {
   return LogicFileParser::RuleFloorCall;
 }
 
-void LogicFileParser::FloorCallContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterFloorCall(this);
-}
 
-void LogicFileParser::FloorCallContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitFloorCall(this);
+antlrcpp::Any LogicFileParser::FloorCallContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitFloorCall(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::FloorCallContext* LogicFileParser::floorCall() {
@@ -6030,16 +5772,12 @@ size_t LogicFileParser::CeilCallContext::getRuleIndex() const {
   return LogicFileParser::RuleCeilCall;
 }
 
-void LogicFileParser::CeilCallContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterCeilCall(this);
-}
 
-void LogicFileParser::CeilCallContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitCeilCall(this);
+antlrcpp::Any LogicFileParser::CeilCallContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitCeilCall(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::CeilCallContext* LogicFileParser::ceilCall() {
@@ -6117,16 +5855,12 @@ size_t LogicFileParser::ValueContext::getRuleIndex() const {
   return LogicFileParser::RuleValue;
 }
 
-void LogicFileParser::ValueContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterValue(this);
-}
 
-void LogicFileParser::ValueContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitValue(this);
+antlrcpp::Any LogicFileParser::ValueContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitValue(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::ValueContext* LogicFileParser::value() {
@@ -6237,16 +5971,12 @@ size_t LogicFileParser::ParenExprContext::getRuleIndex() const {
   return LogicFileParser::RuleParenExpr;
 }
 
-void LogicFileParser::ParenExprContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterParenExpr(this);
-}
 
-void LogicFileParser::ParenExprContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitParenExpr(this);
+antlrcpp::Any LogicFileParser::ParenExprContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitParenExpr(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::ParenExprContext* LogicFileParser::parenExpr() {
@@ -6302,16 +6032,12 @@ size_t LogicFileParser::EnumValueRefContext::getRuleIndex() const {
   return LogicFileParser::RuleEnumValueRef;
 }
 
-void LogicFileParser::EnumValueRefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterEnumValueRef(this);
-}
 
-void LogicFileParser::EnumValueRefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitEnumValueRef(this);
+antlrcpp::Any LogicFileParser::EnumValueRefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitEnumValueRef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::EnumValueRefContext* LogicFileParser::enumValueRef() {
@@ -6363,16 +6089,12 @@ size_t LogicFileParser::EntranceRefContext::getRuleIndex() const {
   return LogicFileParser::RuleEntranceRef;
 }
 
-void LogicFileParser::EntranceRefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterEntranceRef(this);
-}
 
-void LogicFileParser::EntranceRefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitEntranceRef(this);
+antlrcpp::Any LogicFileParser::EntranceRefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitEntranceRef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::EntranceRefContext* LogicFileParser::entranceRef() {
@@ -6422,16 +6144,12 @@ size_t LogicFileParser::RegionRefContext::getRuleIndex() const {
   return LogicFileParser::RuleRegionRef;
 }
 
-void LogicFileParser::RegionRefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterRegionRef(this);
-}
 
-void LogicFileParser::RegionRefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitRegionRef(this);
+antlrcpp::Any LogicFileParser::RegionRefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitRegionRef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::RegionRefContext* LogicFileParser::regionRef() {
@@ -6481,16 +6199,12 @@ size_t LogicFileParser::LocRefContext::getRuleIndex() const {
   return LogicFileParser::RuleLocRef;
 }
 
-void LogicFileParser::LocRefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterLocRef(this);
-}
 
-void LogicFileParser::LocRefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitLocRef(this);
+antlrcpp::Any LogicFileParser::LocRefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitLocRef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::LocRefContext* LogicFileParser::locRef() {
@@ -6540,16 +6254,12 @@ size_t LogicFileParser::ItemRefContext::getRuleIndex() const {
   return LogicFileParser::RuleItemRef;
 }
 
-void LogicFileParser::ItemRefContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterItemRef(this);
-}
 
-void LogicFileParser::ItemRefContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<LogicFileParserListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitItemRef(this);
+antlrcpp::Any LogicFileParser::ItemRefContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<LogicFileParserVisitor*>(visitor))
+    return parserVisitor->visitItemRef(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 LogicFileParser::ItemRefContext* LogicFileParser::itemRef() {
