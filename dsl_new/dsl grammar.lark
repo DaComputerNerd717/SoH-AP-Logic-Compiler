@@ -25,7 +25,7 @@ helper_def : "helper " ident "("args")" ":"? "{" expr "}"
 
 quantity_def: "quantity" ":" expr
 logicval_set : /logic_?[vV]al/ ":" ident
-name_def : "name" ":" value
+name_def : "name" ":" ESCAPED_STRING
 classification: /useful|junk|trap|skip-balancing|skipBalancing|deprioritized/ //progression is computed based on access rules
 classification_def: "class" ":" classification (/[ ,]/ classification)*
 item_def : "item " ident ":"? "{" (logicval_set | name_def | classification_def | quantity_def)+ "}"
@@ -41,7 +41,7 @@ entrance_def : "entrance " ident ":"? "{" (rule_def | dest_def | cant_cross_adul
 loc_class_def : "default"|"priority"|"excluded"
 location_def : "location " ident ":"? "{" (name_def | rule_def | loc_class_def | rule_def | present_when_def)+ "}"
 //Locations need: name, id, access rule, location class
-event_def : "event" ident ":" expr
+event_def : "event " ident ":" expr
 region_def : "region " ident ":"? "{" (name_def | location_def | entrance_def | event_def | present_when_def)+ "}"
 logic_def : "logic" ":"? "{" (region_def | item_def | helper_def)+ "}"
 
@@ -139,13 +139,16 @@ leftshift: expr_shift"<<"expr_pm
 rightshift: expr_shift">>"expr_pm
 ternary: expr_or"?"expr_or":"expr_or
 
-options_definition: "options" "{" (option_def_strings | option_def_int_range | option_def_int_list | option_def_float_range | option_def_float_list)+ "}"
-option_def_strings: "option strings" ident ":"? "{" ident (","? ident)* "}"
-option_def_int_range: "option ints" ident "{" "min" ":" SIGNED_INT "," "max" ":" SIGNED_INT "}"
-option_def_int_list: "option ints" ident "[" SIGNED_INT ("," SIGNED_INT) "]"
+options_definition: "options" "{" (option_def_strings | option_def_int_range | option_def_int_list | option_def_float_range | option_def_float_list | option_def_int | option_def_float | option_def_string)+ "}"
+option_def_strings: "option strings" ident ":"? "{" (ESCAPED_STRING (","? ESCAPED_STRING)*)? "}"
+option_def_string: "option string" ident ":" ESCAPED_STRING
+option_def_int_range: "option ints" ident ":"? "{" "min" ":" SIGNED_INT "," "max" ":" SIGNED_INT "}"
+option_def_int_list: "option ints" ident ":"? "[" (SIGNED_INT ("," SIGNED_INT)*)? "]"
+option_def_int: "option int" ident ":" SIGNED_INT
 option_def_float_range: "option floats" ident "{" "min" ":" SIGNED_NUMBER "," "max" SIGNED_NUMBER "}"
-option_def_float_list: "option floats" ident "[" SIGNED_NUMBER ("," SIGNED_NUMBER) "]"
-option_def_bool: "option bool" ident
+option_def_float_list: "option floats" ident "[" (SIGNED_NUMBER ("," SIGNED_NUMBER)*)? "]"
+option_float_list: "option float" ident ":" SIGNED_NUMBER
+option_def_bool: "option bool" ident ":" bool
 
 file: (logic_def | options_definition | enum)+ 
 

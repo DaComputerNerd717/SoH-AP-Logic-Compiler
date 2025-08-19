@@ -190,9 +190,28 @@ class OptionFloatList:
     values: List[float]
 
 @dataclass
+class OptionString:
+    type = 'opt_string'
+    name: str
+    val: str
+
+@dataclass
+class OptionInt:
+    type = 'opt_int'
+    name: str
+    val: int
+
+@dataclass
+class OptionFloat:
+    type = 'opt_float'
+    name: str
+    val: float
+
+@dataclass
 class OptionBool:
     type = "opt_bool"
     name: str
+    val: bool
 
 @dataclass
 class CodeFile:

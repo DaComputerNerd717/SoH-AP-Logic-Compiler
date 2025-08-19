@@ -190,11 +190,14 @@ class DSLTransformer(Transformer):
     
     options_definition = lambda self, s: OptionsDef(s)
     option_def_strings = v_args(inline=True)(lambda self, name, *vals: OptionStringList(name, cast(List[str], vals)))
+    option_def_string = v_args(inline=True)(lambda self, name, val: OptionString(name, str(val)))
     option_def_int_range = v_args(inline=True)(lambda self, name, min, max: OptionIntRange(name, min, max))
     option_def_int_list = v_args(inline=True)(lambda self, name, *vals: OptionIntList(name, cast(List[int], vals)))
+    option_def_int = v_args(inline=True)(lambda self, name, val: OptionInt(name, int(val)))
     option_def_float_range = v_args(inline=True)(lambda self, name, min, max: OptionFloatRange(name, min, max))
-    option_def_float_list  = v_args(inline=True)(lambda self, name, *vals: OptionFloatList(name, cast(List[float], vals)))
-    option_def_bool = v_args(inline=True)(lambda self, name: OptionBool(name))
+    option_def_float_list = v_args(inline=True)(lambda self, name, *vals: OptionFloatList(name, cast(List[float], vals)))
+    option_def_float = v_args(inline=True)(lambda self, name, val: OptionFloat(name, float(val)))
+    option_def_bool = v_args(inline=True)(lambda self, name, val: OptionBool(name, val))
 
     entrance_ref = v_args(inline=True)(lambda self, s: Constant(str(s)))
     location_ref = v_args(inline=True)(lambda self, s: Constant(str(s)))
