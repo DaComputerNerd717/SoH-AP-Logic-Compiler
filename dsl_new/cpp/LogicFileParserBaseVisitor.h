@@ -1,5 +1,5 @@
 
-// Generated from LogicFileParser.g4 by ANTLR 4.9.3
+// Generated from D:\Games\SoH Archipelago\SoH AP Logic Translation Tool\SoH-AP-Logic-Compiler\dsl_new\cpp\LogicFileParser.g4 by ANTLR 4.9.3
 
 #pragma once
 
@@ -14,6 +14,10 @@
  */
 class  LogicFileParserBaseVisitor : public LogicFileParserVisitor {
 public:
+
+  virtual antlrcpp::Any visitFileDef(LogicFileParser::FileDefContext *ctx) override {
+    return visitChildren(ctx);
+  }
 
   virtual antlrcpp::Any visitEnumDef(LogicFileParser::EnumDefContext *ctx) override {
     return visitChildren(ctx);
@@ -163,10 +167,6 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitFileDef(LogicFileParser::FileDefContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
   virtual antlrcpp::Any visitSubOperator(LogicFileParser::SubOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
@@ -240,6 +240,14 @@ public:
   }
 
   virtual antlrcpp::Any visitBasefunc(LogicFileParser::BasefuncContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitArg_pass(LogicFileParser::Arg_passContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitArgs_pass(LogicFileParser::Args_passContext *ctx) override {
     return visitChildren(ctx);
   }
 

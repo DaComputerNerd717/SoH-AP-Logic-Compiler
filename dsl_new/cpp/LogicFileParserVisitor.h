@@ -1,5 +1,5 @@
 
-// Generated from LogicFileParser.g4 by ANTLR 4.9.3
+// Generated from D:\Games\SoH Archipelago\SoH AP Logic Translation Tool\SoH-AP-Logic-Compiler\dsl_new\cpp\LogicFileParser.g4 by ANTLR 4.9.3
 
 #pragma once
 
@@ -19,6 +19,8 @@ public:
   /**
    * Visit parse trees produced by LogicFileParser.
    */
+    virtual antlrcpp::Any visitFileDef(LogicFileParser::FileDefContext *context) = 0;
+
     virtual antlrcpp::Any visitEnumDef(LogicFileParser::EnumDefContext *context) = 0;
 
     virtual antlrcpp::Any visitEnumVals(LogicFileParser::EnumValsContext *context) = 0;
@@ -93,8 +95,6 @@ public:
 
     virtual antlrcpp::Any visitOptionDefBool(LogicFileParser::OptionDefBoolContext *context) = 0;
 
-    virtual antlrcpp::Any visitFileDef(LogicFileParser::FileDefContext *context) = 0;
-
     virtual antlrcpp::Any visitSubOperator(LogicFileParser::SubOperatorContext *context) = 0;
 
     virtual antlrcpp::Any visitLeftShiftOperator(LogicFileParser::LeftShiftOperatorContext *context) = 0;
@@ -132,6 +132,10 @@ public:
     virtual antlrcpp::Any visitModOperator(LogicFileParser::ModOperatorContext *context) = 0;
 
     virtual antlrcpp::Any visitBasefunc(LogicFileParser::BasefuncContext *context) = 0;
+
+    virtual antlrcpp::Any visitArg_pass(LogicFileParser::Arg_passContext *context) = 0;
+
+    virtual antlrcpp::Any visitArgs_pass(LogicFileParser::Args_passContext *context) = 0;
 
     virtual antlrcpp::Any visitOptionCheck(LogicFileParser::OptionCheckContext *context) = 0;
 

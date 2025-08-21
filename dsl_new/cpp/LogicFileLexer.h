@@ -1,5 +1,5 @@
 
-// Generated from LogicFileLexer.g4 by ANTLR 4.9.3
+// Generated from D:\Games\SoH Archipelago\SoH AP Logic Translation Tool\SoH-AP-Logic-Compiler\dsl_new\cpp\LogicFileLexer.g4 by ANTLR 4.9.3
 
 #pragma once
 
@@ -12,26 +12,26 @@
 class  LogicFileLexer : public antlr4::Lexer {
 public:
   enum {
-    Ident = 1, Bool = 2, Age = 3, SignedNumber = 4, SignedInt = 5, EscapedString = 6, 
-    EnumDecPrefix = 7, OBkt = 8, CBkt = 9, OPar = 10, CPar = 11, Comma = 12, 
-    EOL = 13, OrSymbol = 14, AndSymbol = 15, NotSymbol = 16, NeqSymbol = 17, 
-    EqSymbol = 18, GeqSymbol = 19, LeqSymbol = 20, LeSymbol = 21, GeSymbol = 22, 
-    AddSymbol = 23, SubSymbol = 24, MulSymbol = 25, DivSymbol = 26, ModSymbol = 27, 
-    RSSymbol = 28, LSSymbol = 29, Question = 30, Colon = 31, ColonNoSpace = 32, 
-    ArgAssign = 33, OptionCheckKW = 34, HelperCallKW = 35, ArgCheckKW = 36, 
-    LogicValCheckKW = 37, EventCheckKW = 38, CanReachLocKW = 39, CanReachEntranceKW = 40, 
-    CanReachRegionKW = 41, HasItemKW = 42, CountItemKW = 43, IsMQDungeonKW = 44, 
-    FloorKW = 45, CeilKW = 46, EntranceRefKW = 47, RegionRefKW = 48, LocRefKW = 49, 
-    ItemRefKW = 50, IfPrefix = 51, ElseIfPrefix = 52, ElsePrefix = 53, SwitchPrefix = 54, 
-    SwitchCaseKW = 55, SwitchDefaultKW = 56, SwitchReturnsKW = 57, WS = 58, 
-    D = 59, AnyWS = 60, HelperPrefix = 61, QuantityPrefix = 62, LogicValSetPrefix = 63, 
-    NamePrefix = 64, ClassPrefix = 65, Classification = 66, ItemDefPrefix = 67, 
-    PresentWhenPrefix = 68, RulePrefix = 69, DestPrefix = 70, CantCrossChild = 71, 
-    CantCrossAdult = 72, EntranceDefPrefix = 73, LocClassDef = 74, LocationPrefix = 75, 
-    EventDefPrefix = 76, RegionDefPrefix = 77, LogicPrefix = 78, OptionsDefPrefix = 79, 
-    OptionStringsPrefix = 80, OptionStringPrefix = 81, OptionIntsPrefix = 82, 
-    OptionIntPrefix = 83, OptionFloatsPrefix = 84, OptionFloatPrefix = 85, 
-    OptionBoolPrefix = 86, MinKW = 87, MaxKW = 88, ListSeparator = 89
+    Comment = 1, MLComment = 2, Bool = 3, Age = 4, Dot = 5, SignedNumber = 6, 
+    SignedInt = 7, EscapedString = 8, EnumDecPrefix = 9, OBkt = 10, CBkt = 11, 
+    OPar = 12, CPar = 13, Comma = 14, OrSymbol = 15, AndSymbol = 16, NotSymbol = 17, 
+    NeqSymbol = 18, EqSymbol = 19, GeqSymbol = 20, LeqSymbol = 21, LeSymbol = 22, 
+    GeSymbol = 23, AddSymbol = 24, SubSymbol = 25, MulSymbol = 26, DivSymbol = 27, 
+    ModSymbol = 28, RSSymbol = 29, LSSymbol = 30, Question = 31, ArgAssign = 32, 
+    OptionCheckKW = 33, HelperCallKW = 34, ArgCheckKW = 35, LogicValCheckKW = 36, 
+    EventCheckKW = 37, CanReachLocKW = 38, CanReachEntranceKW = 39, CanReachRegionKW = 40, 
+    HasItemKW = 41, CountItemKW = 42, IsMQDungeonKW = 43, FloorKW = 44, 
+    CeilKW = 45, EntranceRefKW = 46, RegionRefKW = 47, LocRefKW = 48, ItemRefKW = 49, 
+    IfPrefix = 50, ElseIfPrefix = 51, ElsePrefix = 52, SwitchPrefix = 53, 
+    SwitchCaseKW = 54, SwitchDefaultKW = 55, SwitchReturnsKW = 56, EOL = 57, 
+    WS = 58, HelperPrefix = 59, QuantityPrefix = 60, LogicValSetPrefix = 61, 
+    NamePrefix = 62, ClassPrefix = 63, Classification = 64, ItemDefPrefix = 65, 
+    PresentWhenPrefix = 66, RulePrefix = 67, DestPrefix = 68, CantCrossChild = 69, 
+    CantCrossAdult = 70, EntranceDefPrefix = 71, LocClassDef = 72, LocationPrefix = 73, 
+    EventDefPrefix = 74, RegionDefPrefix = 75, LogicPrefix = 76, OptionsDefPrefix = 77, 
+    OptionPrefix = 78, StringsPrefix = 79, StringPrefix = 80, IntsPrefix = 81, 
+    IntPrefix = 82, FloatsPrefix = 83, FloatPrefix = 84, BoolPrefix = 85, 
+    MinKW = 86, MaxKW = 87, ListSeparator = 88, Ident = 89, Colon = 90
   };
 
   explicit LogicFileLexer(antlr4::CharStream *input);

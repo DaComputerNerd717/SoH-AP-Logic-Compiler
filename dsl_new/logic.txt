@@ -115,7 +115,7 @@ logic: {
                 helper.canJumpslash(args.age) || helper.hasExplosives(args.age) || helper.canUse(RG_FAIRY_SLINGSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age)
             case Enemy:KEESE:
             case Enemy:FIRE_KEESE:
-                switch distance yields true{
+                switch args.distance yields true{
                     case EnemyDistance:CLOSE:
                     case EnemyDistance:SHORT_JUMPSLASH:
                         helper.canUse(RG_MEGATON_HAMMER, args.age) || helper.canUse(RG_KOKIRI_SWORD, args.age)
@@ -131,7 +131,7 @@ logic: {
                         helper.canUse(RG_BOOMERANG, args.age)
                     case EnemyDistance:HOOKSHOT:
                         // RANDOTODO test dins, bomb and chu range in a practical example
-                        helper.canUse(RG_HOOKSHOT, args.age) || (wallOrFloor && helper.canUse(RG_BOMBCHU_5, args.age))
+                        helper.canUse(RG_HOOKSHOT, args.age) || (args.wallOrFloor && helper.canUse(RG_BOMBCHU_5, args.age))
                     case EnemyDistance:LONGSHOT:
                         helper.canUse(RG_LONGSHOT, args.age)
                     case EnemyDistance:FAR:
@@ -221,7 +221,7 @@ logic: {
             case Enemy:TORCH_SLUG:
                 helper.canJumpslash(args.age) || helper.hasExplosives(args.age) || helper.canUse(RG_FAIRY_BOW, args.age)
             case Enemy:FREEZARD:
-                canUse(RG_MASTER_SWORD) || helper.canUse(RG_BIGGORON_SWORD, args.age) || helper.canUse(RG_MEGATON_HAMMER, args.age) ||
+                helper.canUse(RG_MASTER_SWORD) || helper.canUse(RG_BIGGORON_SWORD, args.age) || helper.canUse(RG_MEGATON_HAMMER, args.age) ||
                     helper.canUse(RG_STICKS, args.age) || helper.hasExplosives(args.age) || helper.canUse(RG_HOOKSHOT, args.age) || helper.canUse(RG_DINS_FIRE, args.age) ||
                     helper.canUse(RG_FIRE_ARROWS, args.age)
             case Enemy:SHELL_BLADE:
@@ -232,7 +232,7 @@ logic: {
                     helper.canUse(RG_STICKS, args.age) || helper.hasExplosives(args.age) || helper.canUse(RG_HOOKSHOT, args.age) || helper.canUse(RG_FAIRY_BOW, args.age) ||
                     helper.canUse(RG_DINS_FIRE, args.age)
             case Enemy:STINGER:
-                switch distance yields true {
+                switch args.distance yields true {
                     case EnemyDistance:CLOSE:
                     case EnemyDistance:SHORT_JUMPSLASH:
                         helper.canUse(RG_MEGATON_HAMMER, args.age) || helper.canUse(RG_KOKIRI_SWORD, args.age)
@@ -287,7 +287,7 @@ logic: {
                 // for killing ganondorf and all of those can reflect the energy ball
                 // This will not be the case once ammo logic in taken into account as
                 // sticks are limited and using a bottle might become a requirement in that case
-                return helper.hasBossSoul(RG_GANON_SOUL, args.age) && helper.canUse(RG_LIGHT_ARROWS, args.age) && helper.canUseSword(args.age)
+                helper.hasBossSoul(RG_GANON_SOUL, args.age) && helper.canUse(RG_LIGHT_ARROWS, args.age) && helper.canUseSword(args.age)
             case Enemy:GANON:
                 helper.hasBossSoul(RG_GANON_SOUL, args.age) && helper.canUse(RG_MASTER_SWORD, args.age)
             case Enemy:DARK_LINK:
@@ -366,7 +366,7 @@ logic: {
                 case RG_MORPHA_SOUL:
                 case RG_BONGO_BONGO_SOUL:
                 case RG_TWINROVA_SOUL:
-                    return helper.hasItem(itemName);
+                    return helper.hasItem(itemName)
                 case RG_GANON_SOUL:
                     return option.RSK_SHUFFLE_BOSS_SOULS == "enabled" ? helper.hasItem(RG_GANON_SOUL, args.age) : true
                 default:
@@ -725,7 +725,7 @@ logic: {
             case RG_EYEBALL_FROG:
             case RG_EYEDROPS:
             case RG_CLAIM_CHECK:
-                return CheckRandoInf(itemName - RG_COJIRO + RAND_INF_ADULT_TRADES_HAS_COJIRO);
+                return CheckRandoInf(itemName - RG_COJIRO + RAND_INF_ADULT_TRADES_HAS_COJIRO)
             case RG_BOTTLE_WITH_BIG_POE:
             case RG_BOTTLE_WITH_BLUE_FIRE:
             case RG_BOTTLE_WITH_BLUE_POTION:
@@ -737,7 +737,7 @@ logic: {
             case RG_BOTTLE_WITH_POE:
             case RG_BOTTLE_WITH_RED_POTION:
             case RG_EMPTY_BOTTLE:
-                helper.hasBottle();
+                helper.hasBottle()
             default: false
         }
     }

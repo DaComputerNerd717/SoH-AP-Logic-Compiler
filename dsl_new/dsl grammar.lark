@@ -164,4 +164,3 @@ file: (logic_def | options_definition | enum)+
 %ignore "\t"
 %ignore CPP_COMMENT
 %ignore C_COMMENT
-%ignore SH_COMMENT
