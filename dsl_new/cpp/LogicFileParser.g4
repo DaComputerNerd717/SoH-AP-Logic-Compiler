@@ -4,10 +4,10 @@ options{
     tokenVocab=LogicFileLexer;
 }
 
-fileDef: (logicDef | optionsDef | enumDef | EOL+)+;
+fileDef: (logicDef | optionsDef | enumDef | EOL+)+ EOF;
 
-enumDef: EnumDecPrefix Ident OBkt EOL* enumVals+ CBkt;
-enumVals: (Ident Comma? EOL+)+;
+enumDef: EnumDecPrefix Ident OBkt EOL* enumVals+ EOL* CBkt EOL*;
+enumVals: Ident (listSeparator Ident)*;
 
 ifBlock: IfPrefix OPar expr CPar EOL* OBkt EOL* expr EOL* CBkt EOL* ifContinuation?;
 ifContinuation: EOL* (elseBlock | elseIfBlock);
@@ -17,8 +17,8 @@ elseBlock: ElsePrefix EOL* OBkt EOL* expr EOL* CBkt EOL*;
 switchExpr: SwitchPrefix expr return_case? EOL* OBkt EOL* caseList EOL* CBkt EOL*;
 return_case: SwitchReturnsKW Bool;
 caseList: (caseDef | defaultCase)+;
-caseDef: SwitchCaseKW value Colon EOL* (expr EOL+)?;
-defaultCase:  SwitchDefaultKW Colon EOL* expr EOL+;
+caseDef: SwitchCaseKW (value|Ident) Colon EOL+ (expr EOL+)?;
+defaultCase:  SwitchDefaultKW Colon EOL+ expr EOL+;
 
 args: (arg (Comma arg EOL*)*)?;
 arg: (Ident ArgAssign)? (expr | Ident);
@@ -43,18 +43,19 @@ regionDef: RegionDefPrefix Ident Colon? EOL* OBkt EOL* ((nameDef | locationDef |
 
 logicDef: LogicPrefix Colon? EOL* OBkt EOL* ((regionDef | itemDef | helperDef) EOL+)+ CBkt;
 
-optionsDef: OptionsDefPrefix EOL* OBkt EOL* ((optionDefStrings | optionDefIntRange | optionDefIntList | optionDefFloatRange | optionDefFloatList | optionDefInt | optionDefFloat | optionDefString) EOL+)+ CBkt;
-optionDefStrings: OptionPrefix StringsPrefix Ident Colon?  OBkt (EscapedString (ListSeparator EscapedString)*)? CBkt;
-optionDefString: OptionPrefix StringPrefix Ident Colon? EscapedString;
-optionDefIntList: OptionPrefix IntsPrefix Ident Colon?  OBkt (SignedInt (ListSeparator SignedInt))? CBkt;
-optionDefIntRange: OptionPrefix IntsPrefix Ident Colon?  OBkt MinKW Colon SignedInt ListSeparator MaxKW Colon SignedInt  CBkt;
-optionDefInt: OptionPrefix IntPrefix Ident Colon SignedInt;
-optionDefFloatList: OptionPrefix FloatsPrefix Ident Colon?  OBkt (SignedNumber (ListSeparator SignedNumber)*)? CBkt;
-optionDefFloatRange: OptionPrefix FloatsPrefix Ident Colon?  OBkt MinKW Colon SignedNumber ListSeparator MaxKW Colon SignedNumber CBkt;
-optionDefFloat: OptionPrefix FloatPrefix Ident Colon SignedNumber;
-optionDefBool: OptionPrefix BoolPrefix Ident Colon Bool; //should I put the space back in these, since it's strictly required
+optionsDef: OptionsDefPrefix Colon? EOL* OBkt EOL* ((optionDefStrings | optionDefIntRange | optionDefIntList | optionDefFloatRange | optionDefFloatList | optionDefInt | optionDefFloat | optionDefString | optionDefBool) EOL+)+ CBkt;
+optionDefStrings: OptionPrefix StringsPrefix Ident Colon? EOL* OBkt EOL* (EscapedString (listSeparator EscapedString)*)? EOL* CBkt;
+optionDefString: OptionPrefix StringPrefix Ident Colon? EOL* EscapedString;
+optionDefIntList: OptionPrefix IntsPrefix Ident Colon? EOL* OBkt EOL* (SignedInt (listSeparator SignedInt))? EOL* CBkt;
+optionDefIntRange: OptionPrefix IntsPrefix Ident Colon? EOL* OBkt EOL* MinKW Colon SignedInt listSeparator MaxKW Colon SignedInt EOL* CBkt;
+optionDefInt: OptionPrefix IntPrefix Ident Colon EOL* SignedInt;
+optionDefFloatList: OptionPrefix FloatsPrefix Ident Colon? EOL* OBkt EOL* (SignedNumber (listSeparator SignedNumber)*)? EOL* CBkt;
+optionDefFloatRange: OptionPrefix FloatsPrefix Ident Colon? EOL* OBkt EOL* MinKW Colon SignedNumber listSeparator MaxKW Colon SignedNumber CBkt;
+optionDefFloat: OptionPrefix FloatPrefix Ident Colon EOL* SignedNumber;
+optionDefBool: OptionPrefix BoolPrefix Ident Colon EOL* Bool; //should I put the space back in these, since it's strictly required
 
 expr: basefunc #baseFunc
+    | EOL expr #lineSkip
     | prefix = NotSymbol expr #notOperator
     | <assoc=left> left = expr op = MulSymbol right = expr #mulOperator
     | <assoc=left> left = expr op = DivSymbol right = expr #divOperator
@@ -73,22 +74,23 @@ expr: basefunc #baseFunc
     | <assoc=left> left = expr op = AndSymbol right = expr #andOperator
     | <assoc=right> left = expr op = Question right = expr Colon expr #ternaryOperator;
 
-basefunc: optionCheck | helperCall | argCheck | logicValCheck | eventCheck | canReachLocCall | canReachEntranceCall | canReachRegionCall | hasItemCall | countItemCall | isDungeonMqCall | floorCall | ceilCall | switchExpr | ifBlock | value;
+basefunc: optionCheck | helperCall | argCheck | logicValCheck | eventCheck | canReachLocCall | canReachEntranceCall |
+        canReachRegionCall | hasItemCall | countItemCall | isDungeonMqCall | floorCall | ceilCall | switchExpr | ifBlock | value;
 arg_pass: (Ident EqSymbol)? (expr | Ident);
-args_pass: arg_pass (Comma arg_pass)*;
+args_pass: (arg_pass (Comma arg_pass)*)?;
 optionCheck: OptionCheckKW Ident;
 helperCall: HelperCallKW Ident OPar args_pass CPar;
 argCheck: ArgCheckKW Ident;
-logicValCheck: LogicValCheckKW Ident;
+logicValCheck: LogicValCheckKW Dot Ident;
 eventCheck: EventCheckKW Ident;
 canReachLocCall: CanReachLocKW OPar Ident (Comma Age)? CPar;
 canReachEntranceCall: CanReachEntranceKW OPar Ident (Comma Age)? CPar;
 canReachRegionCall: CanReachRegionKW OPar Ident (Comma Age)?CPar;
-hasItemCall: HasItemKW OPar Ident CPar;
+hasItemCall: HasItemKW OPar Ident (Comma expr)? CPar;
 countItemCall: CountItemKW OPar Ident CPar;
 isDungeonMqCall: IsMQDungeonKW OPar Ident CPar;
-floorCall: FloorKW OPar Ident CPar;
-ceilCall: CeilKW OPar Ident CPar;
+floorCall: FloorKW OPar expr CPar;
+ceilCall: CeilKW OPar expr CPar;
 
 value: parenExpr | Bool | SignedNumber | enumValueRef | entranceRef | regionRef | locRef | itemRef | EscapedString;
 parenExpr: OPar expr CPar;
@@ -97,3 +99,5 @@ entranceRef: EntranceRefKW Ident;
 regionRef: RegionRefKW Ident;
 locRef: LocRefKW Ident;
 itemRef: ItemRefKW Ident;
+
+listSeparator: Comma | (Comma? EOL+);

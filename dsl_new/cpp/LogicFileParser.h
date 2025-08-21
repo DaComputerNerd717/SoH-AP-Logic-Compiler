@@ -1,5 +1,5 @@
 
-// Generated from D:\Games\SoH Archipelago\SoH AP Logic Translation Tool\SoH-AP-Logic-Compiler\dsl_new\cpp\LogicFileParser.g4 by ANTLR 4.9.3
+// Generated from LogicFileParser.g4 by ANTLR 4.9.3
 
 #pragma once
 
@@ -12,13 +12,13 @@
 class  LogicFileParser : public antlr4::Parser {
 public:
   enum {
-    Comment = 1, MLComment = 2, Bool = 3, Age = 4, Dot = 5, SignedNumber = 6, 
-    SignedInt = 7, EscapedString = 8, EnumDecPrefix = 9, OBkt = 10, CBkt = 11, 
-    OPar = 12, CPar = 13, Comma = 14, OrSymbol = 15, AndSymbol = 16, NotSymbol = 17, 
-    NeqSymbol = 18, EqSymbol = 19, GeqSymbol = 20, LeqSymbol = 21, LeSymbol = 22, 
-    GeSymbol = 23, AddSymbol = 24, SubSymbol = 25, MulSymbol = 26, DivSymbol = 27, 
-    ModSymbol = 28, RSSymbol = 29, LSSymbol = 30, Question = 31, ArgAssign = 32, 
-    OptionCheckKW = 33, HelperCallKW = 34, ArgCheckKW = 35, LogicValCheckKW = 36, 
+    Comment = 1, MLComment = 2, Bool = 3, Age = 4, SignedNumber = 5, SignedInt = 6, 
+    EscapedString = 7, EnumDecPrefix = 8, OBkt = 9, CBkt = 10, OPar = 11, 
+    CPar = 12, Comma = 13, OrSymbol = 14, AndSymbol = 15, NotSymbol = 16, 
+    NeqSymbol = 17, EqSymbol = 18, GeqSymbol = 19, LeqSymbol = 20, LeSymbol = 21, 
+    GeSymbol = 22, AddSymbol = 23, SubSymbol = 24, MulSymbol = 25, DivSymbol = 26, 
+    ModSymbol = 27, RSSymbol = 28, LSSymbol = 29, Question = 30, ArgAssign = 31, 
+    Dot = 32, OptionCheckKW = 33, HelperCallKW = 34, ArgCheckKW = 35, LogicValCheckKW = 36, 
     EventCheckKW = 37, CanReachLocKW = 38, CanReachEntranceKW = 39, CanReachRegionKW = 40, 
     HasItemKW = 41, CountItemKW = 42, IsMQDungeonKW = 43, FloorKW = 44, 
     CeilKW = 45, EntranceRefKW = 46, RegionRefKW = 47, LocRefKW = 48, ItemRefKW = 49, 
@@ -31,7 +31,7 @@ public:
     EventDefPrefix = 74, RegionDefPrefix = 75, LogicPrefix = 76, OptionsDefPrefix = 77, 
     OptionPrefix = 78, StringsPrefix = 79, StringPrefix = 80, IntsPrefix = 81, 
     IntPrefix = 82, FloatsPrefix = 83, FloatPrefix = 84, BoolPrefix = 85, 
-    MinKW = 86, MaxKW = 87, ListSeparator = 88, Ident = 89, Colon = 90
+    MinKW = 86, MaxKW = 87, Ident = 88, Colon = 89
   };
 
   enum {
@@ -51,7 +51,8 @@ public:
     RuleCanReachEntranceCall = 48, RuleCanReachRegionCall = 49, RuleHasItemCall = 50, 
     RuleCountItemCall = 51, RuleIsDungeonMqCall = 52, RuleFloorCall = 53, 
     RuleCeilCall = 54, RuleValue = 55, RuleParenExpr = 56, RuleEnumValueRef = 57, 
-    RuleEntranceRef = 58, RuleRegionRef = 59, RuleLocRef = 60, RuleItemRef = 61
+    RuleEntranceRef = 58, RuleRegionRef = 59, RuleLocRef = 60, RuleItemRef = 61, 
+    RuleListSeparator = 62
   };
 
   explicit LogicFileParser(antlr4::TokenStream *input);
@@ -125,12 +126,14 @@ public:
   class EntranceRefContext;
   class RegionRefContext;
   class LocRefContext;
-  class ItemRefContext; 
+  class ItemRefContext;
+  class ListSeparatorContext; 
 
   class  FileDefContext : public antlr4::ParserRuleContext {
   public:
     FileDefContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *EOF();
     std::vector<LogicDefContext *> logicDef();
     LogicDefContext* logicDef(size_t i);
     std::vector<OptionsDefContext *> optionsDef();
@@ -173,10 +176,8 @@ public:
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> Ident();
     antlr4::tree::TerminalNode* Ident(size_t i);
-    std::vector<antlr4::tree::TerminalNode *> Comma();
-    antlr4::tree::TerminalNode* Comma(size_t i);
-    std::vector<antlr4::tree::TerminalNode *> EOL();
-    antlr4::tree::TerminalNode* EOL(size_t i);
+    std::vector<ListSeparatorContext *> listSeparator();
+    ListSeparatorContext* listSeparator(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -318,8 +319,9 @@ public:
     CaseDefContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *SwitchCaseKW();
-    ValueContext *value();
     antlr4::tree::TerminalNode *Colon();
+    ValueContext *value();
+    antlr4::tree::TerminalNode *Ident();
     std::vector<antlr4::tree::TerminalNode *> EOL();
     antlr4::tree::TerminalNode* EOL(size_t i);
     ExprContext *expr();
@@ -662,6 +664,7 @@ public:
     antlr4::tree::TerminalNode *OptionsDefPrefix();
     antlr4::tree::TerminalNode *OBkt();
     antlr4::tree::TerminalNode *CBkt();
+    antlr4::tree::TerminalNode *Colon();
     std::vector<antlr4::tree::TerminalNode *> EOL();
     antlr4::tree::TerminalNode* EOL(size_t i);
     std::vector<OptionDefStringsContext *> optionDefStrings();
@@ -680,6 +683,8 @@ public:
     OptionDefFloatContext* optionDefFloat(size_t i);
     std::vector<OptionDefStringContext *> optionDefString();
     OptionDefStringContext* optionDefString(size_t i);
+    std::vector<OptionDefBoolContext *> optionDefBool();
+    OptionDefBoolContext* optionDefBool(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -698,10 +703,12 @@ public:
     antlr4::tree::TerminalNode *OBkt();
     antlr4::tree::TerminalNode *CBkt();
     antlr4::tree::TerminalNode *Colon();
+    std::vector<antlr4::tree::TerminalNode *> EOL();
+    antlr4::tree::TerminalNode* EOL(size_t i);
     std::vector<antlr4::tree::TerminalNode *> EscapedString();
     antlr4::tree::TerminalNode* EscapedString(size_t i);
-    std::vector<antlr4::tree::TerminalNode *> ListSeparator();
-    antlr4::tree::TerminalNode* ListSeparator(size_t i);
+    std::vector<ListSeparatorContext *> listSeparator();
+    ListSeparatorContext* listSeparator(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -719,6 +726,8 @@ public:
     antlr4::tree::TerminalNode *Ident();
     antlr4::tree::TerminalNode *EscapedString();
     antlr4::tree::TerminalNode *Colon();
+    std::vector<antlr4::tree::TerminalNode *> EOL();
+    antlr4::tree::TerminalNode* EOL(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -737,9 +746,11 @@ public:
     antlr4::tree::TerminalNode *OBkt();
     antlr4::tree::TerminalNode *CBkt();
     antlr4::tree::TerminalNode *Colon();
+    std::vector<antlr4::tree::TerminalNode *> EOL();
+    antlr4::tree::TerminalNode* EOL(size_t i);
     std::vector<antlr4::tree::TerminalNode *> SignedInt();
     antlr4::tree::TerminalNode* SignedInt(size_t i);
-    antlr4::tree::TerminalNode *ListSeparator();
+    ListSeparatorContext *listSeparator();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -761,9 +772,11 @@ public:
     antlr4::tree::TerminalNode* Colon(size_t i);
     std::vector<antlr4::tree::TerminalNode *> SignedInt();
     antlr4::tree::TerminalNode* SignedInt(size_t i);
-    antlr4::tree::TerminalNode *ListSeparator();
+    ListSeparatorContext *listSeparator();
     antlr4::tree::TerminalNode *MaxKW();
     antlr4::tree::TerminalNode *CBkt();
+    std::vector<antlr4::tree::TerminalNode *> EOL();
+    antlr4::tree::TerminalNode* EOL(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -781,6 +794,8 @@ public:
     antlr4::tree::TerminalNode *Ident();
     antlr4::tree::TerminalNode *Colon();
     antlr4::tree::TerminalNode *SignedInt();
+    std::vector<antlr4::tree::TerminalNode *> EOL();
+    antlr4::tree::TerminalNode* EOL(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -799,10 +814,12 @@ public:
     antlr4::tree::TerminalNode *OBkt();
     antlr4::tree::TerminalNode *CBkt();
     antlr4::tree::TerminalNode *Colon();
+    std::vector<antlr4::tree::TerminalNode *> EOL();
+    antlr4::tree::TerminalNode* EOL(size_t i);
     std::vector<antlr4::tree::TerminalNode *> SignedNumber();
     antlr4::tree::TerminalNode* SignedNumber(size_t i);
-    std::vector<antlr4::tree::TerminalNode *> ListSeparator();
-    antlr4::tree::TerminalNode* ListSeparator(size_t i);
+    std::vector<ListSeparatorContext *> listSeparator();
+    ListSeparatorContext* listSeparator(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -824,9 +841,11 @@ public:
     antlr4::tree::TerminalNode* Colon(size_t i);
     std::vector<antlr4::tree::TerminalNode *> SignedNumber();
     antlr4::tree::TerminalNode* SignedNumber(size_t i);
-    antlr4::tree::TerminalNode *ListSeparator();
+    ListSeparatorContext *listSeparator();
     antlr4::tree::TerminalNode *MaxKW();
     antlr4::tree::TerminalNode *CBkt();
+    std::vector<antlr4::tree::TerminalNode *> EOL();
+    antlr4::tree::TerminalNode* EOL(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -844,6 +863,8 @@ public:
     antlr4::tree::TerminalNode *Ident();
     antlr4::tree::TerminalNode *Colon();
     antlr4::tree::TerminalNode *SignedNumber();
+    std::vector<antlr4::tree::TerminalNode *> EOL();
+    antlr4::tree::TerminalNode* EOL(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -861,6 +882,8 @@ public:
     antlr4::tree::TerminalNode *Ident();
     antlr4::tree::TerminalNode *Colon();
     antlr4::tree::TerminalNode *Bool();
+    std::vector<antlr4::tree::TerminalNode *> EOL();
+    antlr4::tree::TerminalNode* EOL(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -957,6 +980,16 @@ public:
     std::vector<ExprContext *> expr();
     ExprContext* expr(size_t i);
     antlr4::tree::TerminalNode *NeqSymbol();
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+  };
+
+  class  LineSkipContext : public ExprContext {
+  public:
+    LineSkipContext(ExprContext *ctx);
+
+    antlr4::tree::TerminalNode *EOL();
+    ExprContext *expr();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
   };
@@ -1239,6 +1272,7 @@ public:
     LogicValCheckContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *LogicValCheckKW();
+    antlr4::tree::TerminalNode *Dot();
     antlr4::tree::TerminalNode *Ident();
 
 
@@ -1324,6 +1358,8 @@ public:
     antlr4::tree::TerminalNode *OPar();
     antlr4::tree::TerminalNode *Ident();
     antlr4::tree::TerminalNode *CPar();
+    antlr4::tree::TerminalNode *Comma();
+    ExprContext *expr();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -1370,7 +1406,7 @@ public:
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *FloorKW();
     antlr4::tree::TerminalNode *OPar();
-    antlr4::tree::TerminalNode *Ident();
+    ExprContext *expr();
     antlr4::tree::TerminalNode *CPar();
 
 
@@ -1386,7 +1422,7 @@ public:
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *CeilKW();
     antlr4::tree::TerminalNode *OPar();
-    antlr4::tree::TerminalNode *Ident();
+    ExprContext *expr();
     antlr4::tree::TerminalNode *CPar();
 
 
@@ -1502,6 +1538,21 @@ public:
   };
 
   ItemRefContext* itemRef();
+
+  class  ListSeparatorContext : public antlr4::ParserRuleContext {
+  public:
+    ListSeparatorContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *Comma();
+    std::vector<antlr4::tree::TerminalNode *> EOL();
+    antlr4::tree::TerminalNode* EOL(size_t i);
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  ListSeparatorContext* listSeparator();
 
 
   virtual bool sempred(antlr4::RuleContext *_localctx, size_t ruleIndex, size_t predicateIndex) override;

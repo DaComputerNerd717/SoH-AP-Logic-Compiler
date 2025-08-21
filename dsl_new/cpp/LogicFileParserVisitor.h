@@ -1,5 +1,5 @@
 
-// Generated from D:\Games\SoH Archipelago\SoH AP Logic Translation Tool\SoH-AP-Logic-Compiler\dsl_new\cpp\LogicFileParser.g4 by ANTLR 4.9.3
+// Generated from LogicFileParser.g4 by ANTLR 4.9.3
 
 #pragma once
 
@@ -107,6 +107,8 @@ public:
 
     virtual antlrcpp::Any visitNeqOperator(LogicFileParser::NeqOperatorContext *context) = 0;
 
+    virtual antlrcpp::Any visitLineSkip(LogicFileParser::LineSkipContext *context) = 0;
+
     virtual antlrcpp::Any visitTernaryOperator(LogicFileParser::TernaryOperatorContext *context) = 0;
 
     virtual antlrcpp::Any visitAndOperator(LogicFileParser::AndOperatorContext *context) = 0;
@@ -176,6 +178,8 @@ public:
     virtual antlrcpp::Any visitLocRef(LogicFileParser::LocRefContext *context) = 0;
 
     virtual antlrcpp::Any visitItemRef(LogicFileParser::ItemRefContext *context) = 0;
+
+    virtual antlrcpp::Any visitListSeparator(LogicFileParser::ListSeparatorContext *context) = 0;
 
 
 };

@@ -6,7 +6,6 @@ MLComment: '/*' .*? '*/' -> skip;
 
 Bool: 'true' | 'false';
 Age: 'adult' | 'child' | 'both';
-Dot: '.';
 SignedNumber: '-'? [0-9]* Dot? [0-9]+;
 SignedInt: ('-'? [0-9]* [1-9]) | '-'? '0';
 EscapedString: '"' ('\\"' | ~'"')* '"';
@@ -20,9 +19,9 @@ CPar: ')';
 Comma: ',';
 
 
-OrSymbol: ' or ' | '||';
-AndSymbol: ' and ' | '&&';
-NotSymbol: 'not ' | '!';
+OrSymbol: 'or' | '||';
+AndSymbol: 'and' | '&&';
+NotSymbol: 'not' | '!';
 NeqSymbol: '!=';
 EqSymbol: '==';
 GeqSymbol: '>=';
@@ -41,10 +40,11 @@ Question: '?';
 
 ArgAssign: '=';
 
+Dot: '.';
 OptionCheckKW: [oO]'ption' 's'? '.';
 HelperCallKW: [hH]'elper' 's'? '.';
 ArgCheckKW: [aA]'rg' 's'? '.';
-LogicValCheckKW: [lL]'ogic' '_'? [vV]'al' 's'? '.';
+LogicValCheckKW: [lL]'ogic' '_'? [vV]'al' 's'?;
 EventCheckKW: [eE]'vent' 's'? '.';
 CanReachLocKW: [cC]'anReachLocation' | 'can_reach_location';
 CanReachEntranceKW:
@@ -119,7 +119,6 @@ FloatPrefix: 'float';
 BoolPrefix: 'bool';
 MinKW: 'min';
 MaxKW: 'max';
-ListSeparator: Comma | (Comma? EOL);
 
-Ident: [A-Za-z_][A-Za-z0-9_-]* [A-Za-z0-9_]?;
+Ident: [A-Za-z_][A-Za-z0-9_]+;
 Colon: ':';
