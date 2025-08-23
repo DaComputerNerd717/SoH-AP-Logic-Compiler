@@ -1,5 +1,5 @@
 
-// Generated from LogicFileParser.g4 by ANTLR 4.9.3
+// Generated from ../cpp/LogicFileParser.g4 by ANTLR 4.13.2
 
 #pragma once
 
@@ -15,327 +15,327 @@
 class  LogicFileParserBaseVisitor : public LogicFileParserVisitor {
 public:
 
-  virtual antlrcpp::Any visitFileDef(LogicFileParser::FileDefContext *ctx) override {
+  virtual std::any visitFileDef(LogicFileParser::FileDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitEnumDef(LogicFileParser::EnumDefContext *ctx) override {
+  virtual std::any visitEnumDef(LogicFileParser::EnumDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitEnumVals(LogicFileParser::EnumValsContext *ctx) override {
+  virtual std::any visitEnumVals(LogicFileParser::EnumValsContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitIfBlock(LogicFileParser::IfBlockContext *ctx) override {
+  virtual std::any visitIfBlock(LogicFileParser::IfBlockContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitIfContinuation(LogicFileParser::IfContinuationContext *ctx) override {
+  virtual std::any visitIfContinuation(LogicFileParser::IfContinuationContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitElseIfBlock(LogicFileParser::ElseIfBlockContext *ctx) override {
+  virtual std::any visitElseIfBlock(LogicFileParser::ElseIfBlockContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitElseBlock(LogicFileParser::ElseBlockContext *ctx) override {
+  virtual std::any visitElseBlock(LogicFileParser::ElseBlockContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitSwitchExpr(LogicFileParser::SwitchExprContext *ctx) override {
+  virtual std::any visitSwitchExpr(LogicFileParser::SwitchExprContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitReturn_case(LogicFileParser::Return_caseContext *ctx) override {
+  virtual std::any visitReturn_case(LogicFileParser::Return_caseContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCaseList(LogicFileParser::CaseListContext *ctx) override {
+  virtual std::any visitCaseList(LogicFileParser::CaseListContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCaseDef(LogicFileParser::CaseDefContext *ctx) override {
+  virtual std::any visitCaseDef(LogicFileParser::CaseDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitDefaultCase(LogicFileParser::DefaultCaseContext *ctx) override {
+  virtual std::any visitDefaultCase(LogicFileParser::DefaultCaseContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitArgs(LogicFileParser::ArgsContext *ctx) override {
+  virtual std::any visitArgs(LogicFileParser::ArgsContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitArg(LogicFileParser::ArgContext *ctx) override {
+  virtual std::any visitArg(LogicFileParser::ArgContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitHelperDef(LogicFileParser::HelperDefContext *ctx) override {
+  virtual std::any visitHelperDef(LogicFileParser::HelperDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitQuantityDef(LogicFileParser::QuantityDefContext *ctx) override {
+  virtual std::any visitQuantityDef(LogicFileParser::QuantityDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitLogicValSet(LogicFileParser::LogicValSetContext *ctx) override {
+  virtual std::any visitLogicValSet(LogicFileParser::LogicValSetContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitNameDef(LogicFileParser::NameDefContext *ctx) override {
+  virtual std::any visitNameDef(LogicFileParser::NameDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitClassificationDef(LogicFileParser::ClassificationDefContext *ctx) override {
+  virtual std::any visitClassificationDef(LogicFileParser::ClassificationDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitItemDef(LogicFileParser::ItemDefContext *ctx) override {
+  virtual std::any visitItemDef(LogicFileParser::ItemDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitPresentWhenDef(LogicFileParser::PresentWhenDefContext *ctx) override {
+  virtual std::any visitPresentWhenDef(LogicFileParser::PresentWhenDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitRuleDef(LogicFileParser::RuleDefContext *ctx) override {
+  virtual std::any visitRuleDef(LogicFileParser::RuleDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitDestDef(LogicFileParser::DestDefContext *ctx) override {
+  virtual std::any visitDestDef(LogicFileParser::DestDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitEntranceDef(LogicFileParser::EntranceDefContext *ctx) override {
+  virtual std::any visitEntranceDef(LogicFileParser::EntranceDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitLocationDef(LogicFileParser::LocationDefContext *ctx) override {
+  virtual std::any visitLocationDef(LogicFileParser::LocationDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitEventDef(LogicFileParser::EventDefContext *ctx) override {
+  virtual std::any visitEventDef(LogicFileParser::EventDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitRegionDef(LogicFileParser::RegionDefContext *ctx) override {
+  virtual std::any visitRegionDef(LogicFileParser::RegionDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitLogicDef(LogicFileParser::LogicDefContext *ctx) override {
+  virtual std::any visitLogicDef(LogicFileParser::LogicDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOptionsDef(LogicFileParser::OptionsDefContext *ctx) override {
+  virtual std::any visitOptionsDef(LogicFileParser::OptionsDefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOptionDefStrings(LogicFileParser::OptionDefStringsContext *ctx) override {
+  virtual std::any visitOptionDefStrings(LogicFileParser::OptionDefStringsContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOptionDefString(LogicFileParser::OptionDefStringContext *ctx) override {
+  virtual std::any visitOptionDefString(LogicFileParser::OptionDefStringContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOptionDefIntList(LogicFileParser::OptionDefIntListContext *ctx) override {
+  virtual std::any visitOptionDefIntList(LogicFileParser::OptionDefIntListContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOptionDefIntRange(LogicFileParser::OptionDefIntRangeContext *ctx) override {
+  virtual std::any visitOptionDefIntRange(LogicFileParser::OptionDefIntRangeContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOptionDefInt(LogicFileParser::OptionDefIntContext *ctx) override {
+  virtual std::any visitOptionDefInt(LogicFileParser::OptionDefIntContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOptionDefFloatList(LogicFileParser::OptionDefFloatListContext *ctx) override {
+  virtual std::any visitOptionDefFloatList(LogicFileParser::OptionDefFloatListContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOptionDefFloatRange(LogicFileParser::OptionDefFloatRangeContext *ctx) override {
+  virtual std::any visitOptionDefFloatRange(LogicFileParser::OptionDefFloatRangeContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOptionDefFloat(LogicFileParser::OptionDefFloatContext *ctx) override {
+  virtual std::any visitOptionDefFloat(LogicFileParser::OptionDefFloatContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOptionDefBool(LogicFileParser::OptionDefBoolContext *ctx) override {
+  virtual std::any visitOptionDefBool(LogicFileParser::OptionDefBoolContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitSubOperator(LogicFileParser::SubOperatorContext *ctx) override {
+  virtual std::any visitSubOperator(LogicFileParser::SubOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitLeftShiftOperator(LogicFileParser::LeftShiftOperatorContext *ctx) override {
+  virtual std::any visitLeftShiftOperator(LogicFileParser::LeftShiftOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitGeqOperator(LogicFileParser::GeqOperatorContext *ctx) override {
+  virtual std::any visitGeqOperator(LogicFileParser::GeqOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitEqOperator(LogicFileParser::EqOperatorContext *ctx) override {
+  virtual std::any visitEqOperator(LogicFileParser::EqOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitBaseFunc(LogicFileParser::BaseFuncContext *ctx) override {
+  virtual std::any visitGrOperator(LogicFileParser::GrOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitNeqOperator(LogicFileParser::NeqOperatorContext *ctx) override {
+  virtual std::any visitBaseFunc(LogicFileParser::BaseFuncContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitLineSkip(LogicFileParser::LineSkipContext *ctx) override {
+  virtual std::any visitNeqOperator(LogicFileParser::NeqOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitTernaryOperator(LogicFileParser::TernaryOperatorContext *ctx) override {
+  virtual std::any visitLineSkip(LogicFileParser::LineSkipContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitAndOperator(LogicFileParser::AndOperatorContext *ctx) override {
+  virtual std::any visitTernaryOperator(LogicFileParser::TernaryOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitDivOperator(LogicFileParser::DivOperatorContext *ctx) override {
+  virtual std::any visitAndOperator(LogicFileParser::AndOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOrOperator(LogicFileParser::OrOperatorContext *ctx) override {
+  virtual std::any visitDivOperator(LogicFileParser::DivOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitAddOperator(LogicFileParser::AddOperatorContext *ctx) override {
+  virtual std::any visitOrOperator(LogicFileParser::OrOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitGeOperator(LogicFileParser::GeOperatorContext *ctx) override {
+  virtual std::any visitAddOperator(LogicFileParser::AddOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitLeqOperator(LogicFileParser::LeqOperatorContext *ctx) override {
+  virtual std::any visitLeqOperator(LogicFileParser::LeqOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitNotOperator(LogicFileParser::NotOperatorContext *ctx) override {
+  virtual std::any visitNotOperator(LogicFileParser::NotOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitRightShiftOperator(LogicFileParser::RightShiftOperatorContext *ctx) override {
+  virtual std::any visitRightShiftOperator(LogicFileParser::RightShiftOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitMulOperator(LogicFileParser::MulOperatorContext *ctx) override {
+  virtual std::any visitMulOperator(LogicFileParser::MulOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitLeOperator(LogicFileParser::LeOperatorContext *ctx) override {
+  virtual std::any visitLeOperator(LogicFileParser::LeOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitModOperator(LogicFileParser::ModOperatorContext *ctx) override {
+  virtual std::any visitModOperator(LogicFileParser::ModOperatorContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitBasefunc(LogicFileParser::BasefuncContext *ctx) override {
+  virtual std::any visitBasefunc(LogicFileParser::BasefuncContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitArg_pass(LogicFileParser::Arg_passContext *ctx) override {
+  virtual std::any visitArg_pass(LogicFileParser::Arg_passContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitArgs_pass(LogicFileParser::Args_passContext *ctx) override {
+  virtual std::any visitArgs_pass(LogicFileParser::Args_passContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOptionCheck(LogicFileParser::OptionCheckContext *ctx) override {
+  virtual std::any visitOptionCheck(LogicFileParser::OptionCheckContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitHelperCall(LogicFileParser::HelperCallContext *ctx) override {
+  virtual std::any visitHelperCall(LogicFileParser::HelperCallContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitArgCheck(LogicFileParser::ArgCheckContext *ctx) override {
+  virtual std::any visitArgCheck(LogicFileParser::ArgCheckContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitLogicValCheck(LogicFileParser::LogicValCheckContext *ctx) override {
+  virtual std::any visitLogicValCheck(LogicFileParser::LogicValCheckContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitEventCheck(LogicFileParser::EventCheckContext *ctx) override {
+  virtual std::any visitEventCheck(LogicFileParser::EventCheckContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCanReachLocCall(LogicFileParser::CanReachLocCallContext *ctx) override {
+  virtual std::any visitCanReachLocCall(LogicFileParser::CanReachLocCallContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCanReachEntranceCall(LogicFileParser::CanReachEntranceCallContext *ctx) override {
+  virtual std::any visitCanReachEntranceCall(LogicFileParser::CanReachEntranceCallContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCanReachRegionCall(LogicFileParser::CanReachRegionCallContext *ctx) override {
+  virtual std::any visitCanReachRegionCall(LogicFileParser::CanReachRegionCallContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitHasItemCall(LogicFileParser::HasItemCallContext *ctx) override {
+  virtual std::any visitHasItemCall(LogicFileParser::HasItemCallContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCountItemCall(LogicFileParser::CountItemCallContext *ctx) override {
+  virtual std::any visitCountItemCall(LogicFileParser::CountItemCallContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitIsDungeonMqCall(LogicFileParser::IsDungeonMqCallContext *ctx) override {
+  virtual std::any visitIsDungeonMqCall(LogicFileParser::IsDungeonMqCallContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitFloorCall(LogicFileParser::FloorCallContext *ctx) override {
+  virtual std::any visitFloorCall(LogicFileParser::FloorCallContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCeilCall(LogicFileParser::CeilCallContext *ctx) override {
+  virtual std::any visitCeilCall(LogicFileParser::CeilCallContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitValue(LogicFileParser::ValueContext *ctx) override {
+  virtual std::any visitValue(LogicFileParser::ValueContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitParenExpr(LogicFileParser::ParenExprContext *ctx) override {
+  virtual std::any visitParenExpr(LogicFileParser::ParenExprContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitEnumValueRef(LogicFileParser::EnumValueRefContext *ctx) override {
+  virtual std::any visitEnumValueRef(LogicFileParser::EnumValueRefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitEntranceRef(LogicFileParser::EntranceRefContext *ctx) override {
+  virtual std::any visitEntranceRef(LogicFileParser::EntranceRefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitRegionRef(LogicFileParser::RegionRefContext *ctx) override {
+  virtual std::any visitRegionRef(LogicFileParser::RegionRefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitLocRef(LogicFileParser::LocRefContext *ctx) override {
+  virtual std::any visitLocRef(LogicFileParser::LocRefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitItemRef(LogicFileParser::ItemRefContext *ctx) override {
+  virtual std::any visitItemRef(LogicFileParser::ItemRefContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitListSeparator(LogicFileParser::ListSeparatorContext *ctx) override {
+  virtual std::any visitListSeparator(LogicFileParser::ListSeparatorContext *ctx) override {
     return visitChildren(ctx);
   }
 

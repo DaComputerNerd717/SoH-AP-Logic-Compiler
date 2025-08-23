@@ -6,7 +6,7 @@ options{
 
 fileDef: (logicDef | optionsDef | enumDef | EOL+)+ EOF;
 
-enumDef: EnumDecPrefix Ident OBkt EOL* enumVals EOL* CBkt EOL*; //should that be enumVals+? the enumVals itself covers multiple values
+enumDef: EnumDecPrefix Ident OBkt EOL* enumVals EOL* CBkt EOL*;
 enumVals: Ident (listSeparator Ident)*;
 
 ifBlock: IfPrefix OPar expr CPar EOL* OBkt EOL* expr EOL* CBkt EOL* ifContinuation?;
@@ -51,7 +51,7 @@ optionDefIntRange: OptionPrefix IntsPrefix Ident Colon? EOL* OBkt EOL* MinKW Col
 optionDefInt: OptionPrefix IntPrefix Ident;
 optionDefFloatList: OptionPrefix FloatsPrefix Ident Colon? EOL* OBkt EOL* (SignedNumber (listSeparator SignedNumber)*)? EOL* CBkt;
 optionDefFloatRange: OptionPrefix FloatsPrefix Ident Colon? EOL* OBkt EOL* MinKW Colon SignedNumber listSeparator MaxKW Colon SignedNumber CBkt;
-optionDefFloat: OptionPrefix FloatPrefix Ident Colon EOL* SignedNumber;
+optionDefFloat: OptionPrefix FloatPrefix Ident;
 optionDefBool: OptionPrefix BoolPrefix Ident; //should I put the space back in these, since it's strictly required
 
 expr: basefunc #baseFunc

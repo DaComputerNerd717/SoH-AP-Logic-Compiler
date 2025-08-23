@@ -98,7 +98,7 @@ class HelperDefinition:
     name: str
     definition: Expr
     arg_names: List[str] = []
-    arg_defaults: dict[str, Constant] = {}
+    arg_defaults: dict[str, Expr] = {}
 
 @dataclass
 class ItemDef:
@@ -193,31 +193,28 @@ class OptionFloatList:
 class OptionString:
     type = 'opt_string'
     name: str
-    val: str
 
 @dataclass
 class OptionInt:
     type = 'opt_int'
     name: str
-    val: int
 
 @dataclass
 class OptionFloat:
     type = 'opt_float'
     name: str
-    val: float
 
 @dataclass
 class OptionBool:
     type = "opt_bool"
     name: str
-    val: bool
 
 @dataclass
 class CodeFile:
     type = "file"
-    logic: LogicDef
-    options: OptionsDef
+    logic: Optional[LogicDef]
+    options: Optional[OptionsDef]
+    enums: List[Enum]
 
 type OptionTypes = Union[OptionStringList, OptionIntRange, OptionFloatRange, OptionFloatList, OptionIntList, OptionBool]
 

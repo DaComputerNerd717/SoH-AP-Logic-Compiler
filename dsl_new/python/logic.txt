@@ -394,7 +394,7 @@ logic: {
         switch args.itemName {
             // Magic items
             case RG_MAGIC_SINGLE:
-                events.AmmoCanDrop || (helper.hasBottle(args.age) && logicvals.LOGIC_BUY_MAGIC_POTION)
+                events.AmmoCanDrop || (helper.hasBottle() && logicvals.LOGIC_BUY_MAGIC_POTION)
             case RG_DINS_FIRE:
             case RG_FARORES_WIND:
             case RG_NAYRUS_LOVE:
@@ -520,14 +520,20 @@ logic: {
                 true
         }
     }
-    helper hasBottle(age=Age:EITHER):{
-
+    helper hasBottle():{
+        helper.bottleCount() >= 1
+    }
+    helper bottleCount():{
+        (events.DeliverLetter ? countItem(RG_RUTOS_LETTER) : 0) + (events.CanEmptyBigPoes ? countItem(RG_BOTTLE_WITH_BIG_POE) : 0) + 
+            countItem(RG_BOTTLE_WITH_MILK) + countItem(RG_BOTTLE_WITH_RED_POTION) + countItem(RG_BOTTLE_WITH_GREEN_POTION) + 
+            countItem(RG_BOTTLE_WITH_BLUE_POTION) + countItem(RG_BOTTLE_WITH_FAIRY) + countItem(RG_BOTTLE_WITH_FISH) + 
+            countItem(RG_BOTTLE_WITH_BLUE_FIRE) + countItem(RG_BOTTLE_WITH_BUGS) + countItem(RG_BOTTLE_WITH_POE)
     }
     helper bombchuRefill(age=Age:EITHER):{
-
+        logicvals.LOGIC_BUY_BOMBCHUS || events.CouldPlayBowling || events.CarpetMerchant || options.enableBombchuDrops == "Ammo Drops On"
     }
     helper bombchusEnabled(age=Age:EITHER):{
-
+        options.bombchuBag ? hasItem(RG_BOMBCHU_BAG) : hasItem(RG_BOMB_BAG)
     }
 }
 options: {

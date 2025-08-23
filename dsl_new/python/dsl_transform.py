@@ -204,9 +204,19 @@ class DSLTransformer(Transformer):
 
 
     def file(self, s):
-        logic = s[0] if s[0] is LogicDef else s[1]
-        options = s[1] if s[0] is LogicDef else s[0]
-        return CodeFile(logic, options)
+        logic = None
+        options = None
+        enums: List[Enum] = []
+        for val in s:
+            if isinstance(val, LogicDef):
+                logic = val
+            elif isinstance(val, OptionsDef):
+                options = val
+            elif isinstance(val, Enum):
+                enums.append(cast(Enum, val))
+        logic = cast(LogicDef, logic)
+        options = cast(OptionsDef, options)
+        return CodeFile(logic, options, enums)
 
 rule_grammar = None
 with open("dsl grammar.lark", "rt") as fp:

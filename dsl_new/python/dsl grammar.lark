@@ -13,7 +13,7 @@ elseif_block: "else" "if" "(" expr ")" "{" expr "}" if_continuation?
 //switch : "switch"expr"{"case+"}"
 switch_expr : "switch" expr return_case?"{"case_list"}" //value for return case None if missing
 return_case : "yields" bool //To resolve into true or false for switch_expr. This determines for what value we return from the switch_expr, assuming it is fallthrough
-case_list : ((case|default_case))+
+case_list : (case|default_case)+
 case : "case " value ":" expr -> case_block //ident means an enum value. In this case, we only compare the value name
 default_case : "default" ":" expr
 
@@ -86,23 +86,23 @@ logic_def : "logic" ":"? "{" (region_def | item_def | helper_def)+ "}"
 
 
 ?basefunc : /[oO]ptions?/"." ident -> option
-          | /[hH}elpers?\./ ident"("args")" -> helper_invoke //helper.name(args)
+          | /[hH]elpers?\./ ident"("args")" -> helper_invoke //helper.name(args)
           | /[aA]rgs?\./ ident -> arg_access
           | /[lL]ogic_?[vV]als?\./ ident -> logic_val_access
           | /[eE]vents?\./ ident -> event_access
-          | /[cC]anReachLocation|can_reach_location/"(" ident ("," age)")" -> location_check
-          | /[cC]anReachEntrance|can_reach_entrance/"(" ident ("," age)")" -> entrance_check
-          | /[cC]anReachRegion|can_reach_region/"(" ident ("," age)")" -> region_check
-          | /[hH]asItem|has_item/"(" ident")" -> has_item
-          | /[cC]ountItem|count_item/"(" ident")" -> count_item
-          | /[iI]sDungeonMQ|is_dungeon_mq/"(" ident")" -> is_dungeon_mq
+          | /[cC]anReachLocation|can_reach_location/ "(" ident ("," age)")" -> location_check
+          | /[cC]anReachEntrance|can_reach_entrance/ "(" ident ("," age)")" -> entrance_check
+          | /[cC]anReachRegion|can_reach_region/ "(" ident ("," age)")" -> region_check
+          | /[hH]asItem|has_item/ "(" ident")" -> has_item
+          | /[cC]ountItem|count_item/ "(" ident")" -> count_item
+          | /[iI]sDungeonMQ|is_dungeon_mq/ "(" ident ")" -> is_dungeon_mq
           | "floor("expr")" -> floor_op
           | "ceil("expr")" -> ceil_op
           | switch_expr
           | if_block
           | value
 
-age : "adult" | "child" | "both"
+age : "adult" | "child" | "both" | "either"
 
 ?value  : "("expr")"
         | bool
@@ -119,11 +119,11 @@ age : "adult" | "child" | "both"
 
 args: (arg(/, ?/arg)*)?
 arg : (ident"=")?(expr|ident)
-?ident : /[A-Za-z_][A-Za-z0-9_-]*[A-Za-z0-9_]?/
+?ident : /[A-Za-z_][A-Za-z0-9_]+/
 
 or  : expr_and((" or "|"||")expr_and)+ -> op_or
 and : expr_eq((" and "|"&&")expr_eq)+ -> op_and
-not : ("not "|"!")value -> op_not
+not : ("not "|"!")basefunc -> op_not
 ne: expr_comp"!="expr_comp
 eq: expr_comp"=="expr_comp
 ge : expr_shift">="expr_shift
@@ -147,7 +147,7 @@ option_def_int_list: "option ints" ident ":"? "[" (SIGNED_INT ("," SIGNED_INT)*)
 option_def_int: "option int" ident ":" SIGNED_INT
 option_def_float_range: "option floats" ident "{" "min" ":" SIGNED_NUMBER "," "max" SIGNED_NUMBER "}"
 option_def_float_list: "option floats" ident "[" (SIGNED_NUMBER ("," SIGNED_NUMBER)*)? "]"
-option_float_list: "option float" ident ":" SIGNED_NUMBER
+option_def_float: "option float" ident ":" SIGNED_NUMBER
 option_def_bool: "option bool" ident ":" bool
 
 file: (logic_def | options_definition | enum)+ 
@@ -156,6 +156,8 @@ file: (logic_def | options_definition | enum)+
 %import common.SIGNED_NUMBER
 %import common.SIGNED_INT
 %import common.WS
+%import common.CPP_COMMENT
+%import common.C_COMMENT
 %ignore WS
 //%ignore /(?<=[\n\{\t,])[\r\n]+/ //newline after newline, ,, :, or {
 %ignore /[\r\n]+/
